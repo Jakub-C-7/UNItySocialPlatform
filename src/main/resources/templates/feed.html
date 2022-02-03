@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" >
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Main Feed</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="unity.css" type="text/css"/>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/feed">Feed</a>
+            <a href="/personalprofile">Profile</a>
+            <a href="/messageinbox">Messages</a>
+            <a href="/logout">Log out</a>
+        </nav>
+    </header>
+    <main>
+        <input type="search" class="feedSearchBar" placeholder="Search for users...">
+
+        <h1>News Feed</h1>
+
+        <div th:if="${param.postsuccess}">
+            <div class="alert alert-info">Post created successfully!</div>
+        </div>
+        <div th:if="${param.postempty}">
+            <div class="alert alert-danger">Post cannot be empty!</div>
+        </div>
+
+        <form action="/feed" method="post">
+            <input class="createPost" type="text" id="postContent" name="postContent" placeholder="What would you like to post?"><br><br>
+            <button class="postButton" type="submit">Post</button><br>
+        </form>
+
+        <p class="alert alert-danger" th:unless="${posts} and ${posts.size()}"> There are currently no posts available</p>
+        <ol>
+            <th:block th:each="post : ${posts}">
+                <li class="aPost">
+                    <b><h2 th:text="${post.postAuthorName}"></h2></b>
+                    <p th:text="|${post.postContent}|"></p>
+                    <p th:text="|${post.getPostDateTime}|"></p>
+                </li>
+            </th:block>
+        </ol>
+
+    </main>
+</body>
+</html>

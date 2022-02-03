@@ -1,0 +1,138 @@
+package com.example.demo.appuser;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
+import javax.persistence.*;
+
+/**
+ * AppUser Class is an entity of an application user.
+ *
+ * Extends the UserDetails Interface and contains user detail fields such as ID, first name, last name, email, password,
+ * appUserRoles, locked, enabled, and relevant getter and setter methods.
+ */
+@Entity
+@Table
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+public class AppUser implements UserDetails {
+
+    /**
+     * Unique ID for each user that is incrementally generated.
+     */
+    @Id
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
+    private Long id;
+
+    //The first name of the user.
+    private String firstName;
+
+    //The last name of the user.
+    private String lastName;
+
+    //The email of the user. Unique identifier also used as the username.
+    private String email;
+
+    //The password of the user.
+    private String password;
+
+    //The ENUM role of the user.
+    @Enumerated(EnumType.STRING)
+    private AppUserRole appUserRole;
+
+    //True if a user's account has been locked, or false if it's unlocked.
+    private Boolean locked = false;
+
+    //True if a user's account is enabled, false if it has been disabled.
+    private Boolean enabled = true;
+
+    /**
+     * An Instance of an AppUser
+     * @param firstName First name string.
+     * @param lastName Last name string.
+     * @param email Email string.
+     * @param password Password string.
+     * @param appUserRole Roles in an appUserRole instance.
+     */
+    public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.appUserRole = appUserRole;
+    }
+
+    /**
+     * Function for getting a user's granted authorities.
+     * @return Returns a list of authorities.
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
+        return Collections.singletonList(authority);
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsername() {
+        return email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFullName(){
+        return this.getFirstName() + " " + this.getLastName();
+    }
+
+    public void setFirstName(String firstName){this.firstName = firstName;}
+
+    public void setLastName(String lastName){this.lastName = lastName;}
+
+    public void setEmail(String email){this.email = email;}
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !locked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+}

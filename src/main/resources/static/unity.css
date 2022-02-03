@@ -1,0 +1,179 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body, main {
+    color: white;
+    background-color: #3e3e3e;
+    /*background-image: url('white.jpg');*/
+    font-family: sans-serif;
+    font-size: medium;
+    text-align: center;
+    padding: 0;
+}
+
+/***********************************************/
+/* Link styles                                    */
+/***********************************************/
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    flex-shrink: 0;
+    background-color: rgb(58, 52, 128);
+    overflow: auto;
+}
+
+nav a {
+    flex-shrink: 0;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+
+    padding: 0.5em 1.5em;
+    margin: 0.75em 2em;
+    border-radius: 1em;
+
+    transition: background-color 2s;
+}
+
+nav a:hover {
+    background-color: #3e3e3e;
+    color: white;
+}
+
+/***********************************************/
+/* Division styles                             */
+/***********************************************/
+
+#left-div {
+    float: left;
+    width: 20%;
+}
+
+#right-div {
+    float: right;
+    width: 80%;
+}
+
+/***********************************************/
+/* Paragraph styles                            */
+/***********************************************/
+/*.center {*/
+/*    padding: 20px 0;*/
+/*    text-align: center;*/
+/*    border: 5px black;*/
+/*}*/
+
+/***********************************************/
+/* Horizontal line styles                      */
+/***********************************************/
+/*hl {*/
+/*    width: 100%;*/
+/*    height: 1px;*/
+/*}*/
+
+/*.deepline {*/
+/*    width: 100%;*/
+/*    height: 7px;*/
+/*    color: #0000FE;*/
+/*    background-color: #000000;*/
+/*}*/
+
+/***********************************************/
+/* H tag styles                                */
+/***********************************************/
+h1 {
+    margin-top: 2rem;
+    margin-bottom: 1em;
+    padding: 1em;
+    text-align: center;
+    background: rgb(58, 52, 128);
+    color: white;
+    font-size: xxx-large;
+    font-weight: Bold;
+}
+
+/***********************************************/
+/* Button styles                               */
+/***********************************************/
+.postButton {
+    width: 10em;
+    height: 3em;
+    font-weight: bold;
+    color: rgb(58, 52, 128);
+    border-radius: 1em;
+    text-align: center;
+    transition: background-color 0.3s;
+    border: black;
+}
+
+.postButton:hover {
+    background-color: rgb(58, 52, 128);
+    color: white;
+}
+
+/***********************************************/
+/* Special Classes                              */
+/***********************************************/
+
+.aPost {
+    border: 1px solid #000;
+    margin: 1em;
+    list-style: none;
+}
+
+.createPost {
+    width: 75vw;
+    height: 5vw;
+}
+
+.feedSearchBar {
+    display: flex;
+    margin: 1em;
+    width: 20vw;
+}
+
+/***********************************************/
+/* Sign-in styles                           */
+/***********************************************/
+/*body {*/
+/*    padding-top: 40px;*/
+/*    padding-bottom: 40px;*/
+/*    background-color: #eee;*/
+/*}*/
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-signin .checkbox {
+    font-weight: 400;
+}
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
