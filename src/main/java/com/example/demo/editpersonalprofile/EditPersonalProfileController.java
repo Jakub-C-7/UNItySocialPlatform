@@ -30,7 +30,13 @@ public class EditPersonalProfileController {
         // If firstname, lastname, and email changes all succeed
         if(firstNameResult || lastNameResult || emailResult){
 
-            //TODO: Refresh the principal to reflect changes made straight away
+
+            // TODO: Refresh the principal to reflect changes made straight away
+            // Could achieve this by following the same pattern that FeedController uses
+            // in it's GetMapping annotation to retrieve posts.
+
+            // AKA: Make the user's personal profile pull data from the database.
+
             redirectView.setUrl("editpersonalprofile?success");
 
         } else {

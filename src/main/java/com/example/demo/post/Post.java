@@ -1,11 +1,9 @@
 package com.example.demo.post;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,7 +17,7 @@ import java.time.LocalDateTime;
 public class Post {
 
     /**
-     * Unique ID for each user that is incrementally generated.
+     * Unique ID for each post which is incrementally generated in a sequence.
      */
     @Id
     @SequenceGenerator(
