@@ -9,10 +9,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- * AppUserService class contains methods to sign up new users.
+ * AppUserService Class contains methods to create new users.
  *
- * Contains business logic to load users by username(email) and store users in the database with a Bcrypt hashed
- * password if they do not already exist.
+ * Checks to see if the input data contains an email for a user that already exists and if not, hashes the input
+ * password using Bcrypt, and stores the user as a new record in the database.
+ *
+ * @author jakub
  */
 @Service
 @AllArgsConstructor
@@ -44,6 +46,8 @@ public class AppUserService implements UserDetailsService {
         //Hash password
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
         appUser.setPassword(encodedPassword);
+
+        appUser.setProfilePicture("https://avatars.dicebear.com/api/avataaars/" + appUser.getFullName() + ".svg");
 
         //Register a new user
         appUserRepository.save(appUser);

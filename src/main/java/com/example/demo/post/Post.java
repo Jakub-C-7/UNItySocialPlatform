@@ -8,6 +8,11 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Post Class represents an instance of a feed post and a post entity.
+ *
+ * @author jakub
+ */
 @Entity
 @Table
 @Getter

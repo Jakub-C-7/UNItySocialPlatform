@@ -5,6 +5,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.*;
 
+/**
+ * Registration Controller Class routes to the registration page.
+ *
+ * Upon the detection of a POST request, takes user inputs and creates a new RegistrationRequest instance,
+ * checks to see if a user with the entered email already exists, displays an error message to the user if they do or
+ * proceeds with calling the registrationService to register the user.
+ *
+ * @author jakub
+ */
 @RestController
 @RequestMapping("register")
 @AllArgsConstructor
@@ -14,20 +23,20 @@ public class RegistrationController {
     private final AppUserRepository appUserRepository;
 
     @PostMapping
-    public RedirectView register(RegistrationRequest request){ //REMOVED THE REQUEST MAPPING ANNOTATION
+    public RedirectView register(RegistrationRequest request){
         RedirectView redirectView = new RedirectView();
 
         boolean userExists = appUserRepository.findByEmail(request.getEmail()).isPresent();
-        if(!userExists){
+        if (!userExists){
             registrationService.register(request);
-            redirectView.setUrl("register?success"); // Redirects to success view
+            redirectView.setUrl("register?success");
 
-            return redirectView;
         } else {
-            redirectView.setUrl("register?error"); // Redirects to error view
+            redirectView.setUrl("register?error");
 
-            return redirectView;
         }
+
+        return redirectView;
     }
 
 //    @GetMapping(path = "confirm")

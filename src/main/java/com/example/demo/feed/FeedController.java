@@ -13,7 +13,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//@RestController
+/**
+ * FeedController Class provides routing to the feed page.
+ *
+ * Upon entering the feed page (GET request) the PostService to retrieve all valid user posts and populates
+ * the feed page in order from newest to oldest. When a user attempts to create a new post (POST request),
+ * the PostService is called to validate user input, create a new post, add it to the database as a new post,
+ * and display it on the feed.
+ *
+ * @author jakub
+ */
 @Controller
 @RequestMapping("feed")
 @AllArgsConstructor

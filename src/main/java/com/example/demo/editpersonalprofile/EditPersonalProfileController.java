@@ -1,16 +1,18 @@
 package com.example.demo.editpersonalprofile;
 
-import com.example.demo.appuser.AppUserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 
 /**
- * EditPersonalProfileController Class initiates methods to edit the personal profile upon data input and submission.
+ * EditPersonalProfileController Class provides routing to the editpersonalprofile page.
+ *
+ * Initiates methods to edit the personal profile on a POST request which takes user input and calls the
+ * EditPersonalProfileService class in an attempt to edit a user's database record.
+ *
+ * @author jakub
  */
 @RestController
 @RequestMapping("editpersonalprofile")

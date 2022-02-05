@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * PostRepository Interface performs Post queries between the application and the database.
+ */
 @Repository
 @Transactional(readOnly = true)
 public interface PostRepository extends JpaRepository<Post, Long> {
