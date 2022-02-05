@@ -5,6 +5,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+/**
+ * EditProfileRequest class represents the data request that is formed when a user attempts to edit their
+ * personal profile.
+ *
+ * @author jakub
+ */
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode

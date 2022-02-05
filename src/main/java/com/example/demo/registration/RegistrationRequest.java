@@ -2,6 +2,12 @@ package com.example.demo.registration;
 
 import lombok.*;
 
+/**
+ * RegistrationRequest class represents the data request that is formed when a user attempts to register and create
+ * a new account using the registration page.
+ *
+ * @author jakub
+ */
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode
