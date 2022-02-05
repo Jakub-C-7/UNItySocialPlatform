@@ -6,6 +6,13 @@ import com.example.demo.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+/**
+ * RegistrationService Class calls upon the AppUserService class to register users.
+ *
+ * Deconstructs the user's input parameters and calls the signUpUser function to create a new user in the database.
+ *
+ * @author jakub
+ */
 @Service
 @AllArgsConstructor
 public class RegistrationService {

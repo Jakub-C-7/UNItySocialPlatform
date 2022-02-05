@@ -10,9 +10,19 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+/**
+ * WebSecurityConfig Class contains the web security configuration settings.
+ *
+ * Extends the WebSecurityConfigurerAdapter and overrides the configure method to create security settings.
+ * The class determines which user roles can access which routes and which routes can be accessed by authenticated
+ * and not authenticated users.
+ * Configures the default success URL for login, logout, and which settings are cleared upon a successful logout
+ * attempt (JSESSION Cookie, invalidation of HTTP session etc.).
+ *
+ * @author jakub
+ */
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity

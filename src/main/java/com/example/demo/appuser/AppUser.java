@@ -13,10 +13,12 @@ import java.util.Collections;
 import javax.persistence.*;
 
 /**
- * AppUser Class is an entity of an application user.
+ * AppUser Class represents an instance of an application user and an entity in the database.
  *
  * Extends the UserDetails Interface and contains user detail fields such as ID, first name, last name, email, password,
  * appUserRoles, locked, enabled, and relevant getter and setter methods.
+ *
+ * @author jakub
  */
 @Entity
 @Table

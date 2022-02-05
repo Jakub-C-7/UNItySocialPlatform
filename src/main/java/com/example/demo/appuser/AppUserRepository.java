@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 /**
- * AppUserRepository Interface performs queries between the application and the database.
+ * AppUserRepository Interface performs AppUser queries between the application and the database.
+ *
+ * @author jakub
  */
 @Repository
 @Transactional(readOnly = true)

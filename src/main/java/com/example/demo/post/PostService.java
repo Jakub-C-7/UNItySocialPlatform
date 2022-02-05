@@ -11,6 +11,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * PostService Class contains methods to create new posts.
+ *
+ * Takes user input to create new posts and save them in the database. Each post is assigned the author's email,
+ * full name, and datetime of creation. Contains method to retrieve all posts from the database in descending
+ * order from newest to oldest.
+ *
+ * @author jakub
+ */
 @Service
 @AllArgsConstructor
 public class PostService {
