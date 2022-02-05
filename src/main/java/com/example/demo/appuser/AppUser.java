@@ -43,30 +43,44 @@ public class AppUser implements UserDetails {
     )
     private Long id;
 
-    //The first name of the user.
+    /**
+     * User's first name string.
+     */
     private String firstName;
 
-    //The last name of the user.
+    /**
+     * User's last name string.
+     */
     private String lastName;
 
-    //The email of the user. Unique identifier also used as the username.
+    /**
+     * The email string of the user. Unique identifier also used as the username.
+     */
     private String email;
 
-    //The password of the user.
+    /**
+     * The password string of the user.
+     */
     private String password;
 
-    //The ENUM role of the user.
+    /**
+     * The ENUM role of the user.
+     */
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
-    //True if a user's account has been locked, or false if it's unlocked.
+    /**
+     * True if a user's account has been locked, or false if it's unlocked.
+     */
     private Boolean locked = false;
 
-    //True if a user's account is enabled, false if it has been disabled.
+    /**
+     * True if a user's account is enabled, false if it has been disabled.
+     */
     private Boolean enabled = true;
 
     /**
-     * An Instance of an AppUser
+     * An Instance of an AppUser.
      * @param firstName First name string.
      * @param lastName Last name string.
      * @param email Email string.
