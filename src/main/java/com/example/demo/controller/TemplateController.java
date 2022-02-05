@@ -29,9 +29,6 @@ public class TemplateController {
         return "register";
     }
 
-    @GetMapping("personalprofile")
-    public String getPersonalProfileView(){return "personalprofile";}
-
     @GetMapping("editpersonalprofile")
     public String getEditPersonalProfileView(){return "editpersonalprofile";}
 

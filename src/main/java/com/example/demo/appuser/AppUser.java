@@ -64,6 +64,11 @@ public class AppUser implements UserDetails {
     private String password;
 
     /**
+     * String containing the path to the user's profile picture.
+     */
+    private String profilePicture;
+
+    /**
      * The ENUM role of the user.
      */
     @Enumerated(EnumType.STRING)

@@ -34,6 +34,7 @@
                 <label>Email: [[${#request.userPrincipal.principal.username}]]</label> <br>
                 <label>Role: [[${#request.userPrincipal.principal.getAuthorities}]]</label>
             </p>
+            <img th:src="${user.getProfilePicture}" class="profile-picture">
         </form>
 
         <form method="get" action="/editpersonalprofile">
