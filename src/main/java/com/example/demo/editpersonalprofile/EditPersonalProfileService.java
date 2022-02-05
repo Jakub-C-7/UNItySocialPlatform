@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
- * EditPersonalProfileService Class performs functions to edit user profile details.
+ * EditPersonalProfileService Class provides functions to edit a user's profile details.
  *
- * Class contains business logic to take user input and edit an email, first name, and last name in the database.
+ * Contains business logic for taking user input and allow users to edit their email, first name,
+ * and last name in the database.
+ *
+ * @author jakub
  */
 @Service
 @AllArgsConstructor
