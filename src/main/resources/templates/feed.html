@@ -40,6 +40,7 @@
             <div class="alert alert-danger">Post cannot be empty!</div>
         </div>
 
+        <!-- Form to create a new post on the feed -->
         <form class="newPostBox" action="/feed" method="post">
             <input class="createPost" type="text" id="postContent" name="postContent"
                    placeholder="What would you like to post?" maxlength="255" required>
@@ -48,6 +49,7 @@
 
         <p class="alert alert-danger" th:unless="${posts} and ${posts.size()}"> There are currently no posts available</p>
 
+        <!-- Ordered list of posts on the feed -->
         <ol>
             <th:block th:each="post : ${posts}">
                 <li class="aPost">
