@@ -1,5 +1,6 @@
 package com.example.demo.post;
 
+import com.example.demo.appuser.AppUser;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,18 +37,26 @@ public class Post {
     )
     private Long id;
 
+    /**
+     * String containing the text content of the post.
+     */
     private String postContent;
 
-    private String postAuthorEmail;
+    /**
+     * Pointer to the AppUser who authored the post (uses user ID).
+     */
+    @ManyToOne
+    @JoinColumn(name = "post_user_id")
+    private AppUser postUser;
 
-    private String postAuthorName;
-
+    /**
+     * DateTime of when the post was created.
+     */
     private LocalDateTime postDateTime;
 
-    public Post(String postContent, String postAuthorEmail, String postAuthorName, LocalDateTime postDateTime) {
+    public Post(String postContent, AppUser postUser, LocalDateTime postDateTime) {
         this.postContent = postContent;
-        this.postAuthorEmail = postAuthorEmail;
-        this.postAuthorName = postAuthorName;
+        this.postUser = postUser;
         this.postDateTime = postDateTime;
     }
 }

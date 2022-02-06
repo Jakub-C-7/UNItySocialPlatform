@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<!-- Navigation Bar-->
+
     <header>
         <nav>
             <a class="active" href="/">Home</a>
@@ -28,8 +28,7 @@
         </nav>
     </header>
 
-<!-- HTML registration form -->
-    <div class="container">
+    <main>
         <form class="form-signin" method="post" action="/register">
 
             <!-- success and failure messages -->
@@ -72,12 +71,14 @@
                        title="Password must contain at least one number, one uppercase and one lowercase letter, and at least 6 or more characters"
                        maxlength="255">
             </p>
-            <!-- submission button-->
+
             <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-            <!-- Link to log-in page-->
+
             <p>Already have an account? <a href="/login">Sign-in</a></p>
         </form>
-    </div>
+    </main>
+
+    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
 </body>
 </html>
 
