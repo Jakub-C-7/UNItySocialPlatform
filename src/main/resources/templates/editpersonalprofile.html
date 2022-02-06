@@ -12,58 +12,61 @@
     <link rel="stylesheet" href="unity.css" type="text/css"/>
 </head>
 <body>
-<header>
-    <nav>
-        <a href="/feed">Feed</a>
-        <a href="/personalprofile">Profile</a>
-        <a href="/logout">Log out</a>
-    </nav>
-</header>
-<div class="container">
-    <h1>Edit Personal Profile</h1>
-    <h2>[[${#request.userPrincipal.principal.fullName}]]</h2>
-    <p>Edit your personal profile below </p>
-    <form method="post" action="/editpersonalprofile">
-        <p>
-            <!-- success and failure messages -->
-        <div th:if="${param.error}">
-            <div class="alert alert-info">Oops, there has been an error editing your profile</div>
-        </div>
-        <div th:if="${param.success}">
-            <div class="alert alert-info">Success! Please log out and log back in to view changes</div>
-        </div>
+    <header>
+        <nav>
+            <a href="/feed">Feed</a>
+            <a href="/personalprofile">Profile</a>
+            <a href="/logout">Log out</a>
+        </nav>
+    </header>
 
-        <p>
-            <label for="firstName" class="sr-only">First Name</label>
-            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First Name"
-                   maxlength="50" pattern="[A-Za-z].{0,}"
-                   title="Please enter a valid first name"
-                   autofocus="">
-        </p>
-        <p>
-            <label for="lastName" class="sr-only">Last Name</label>
-            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last Name"
-                   maxlength="50" pattern="[A-Za-z].{0,}"
-                   title="Please enter a valid last name"
-                   autofocus="">
-        </p>
-        <p>
-            <label for="email" class="sr-only">Email</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="Email"
-                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                   title="Please enter a valid email"
-                   maxlength="100"
-                   autofocus="">
-        </p>
-        </p>
-        <button class="btn btn-primary btn-block" type="submit">Submit Changes</button>
-    </form> <br>
-    <form method="get" action="/personalprofile">
-        <button class="btn btn-primary btn-block" type="submit">Back to Profile</button>
-    </form><br>
-    <form method="get" action="/feed">
-        <button class="postButton" type="submit">Back to feed</button>
-    </form> <br>
-</div>
+    <div class="container">
+        <h1>Edit Personal Profile</h1>
+        <h2>[[${#request.userPrincipal.principal.fullName}]]</h2>
+        <p>Edit your personal profile below </p>
+        <form method="post" action="/editpersonalprofile">
+            <p>
+                <!-- success and failure messages -->
+            <div th:if="${param.error}">
+                <div class="alert alert-info">Oops, there has been an error editing your profile</div>
+            </div>
+            <div th:if="${param.success}">
+                <div class="alert alert-info">Success! Please log out and log back in to view changes</div>
+            </div>
+
+            <p>
+                <label for="firstName" class="sr-only">First Name</label>
+                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First Name"
+                       maxlength="50" pattern="[A-Za-z].{0,}"
+                       title="Please enter a valid first name"
+                       autofocus="">
+            </p>
+            <p>
+                <label for="lastName" class="sr-only">Last Name</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last Name"
+                       maxlength="50" pattern="[A-Za-z].{0,}"
+                       title="Please enter a valid last name"
+                       autofocus="">
+            </p>
+            <p>
+                <label for="email" class="sr-only">Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email"
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                       title="Please enter a valid email"
+                       maxlength="100"
+                       autofocus="">
+            </p>
+            </p>
+            <button class="btn btn-primary btn-block" type="submit">Submit Changes</button>
+        </form> <br>
+        <form method="get" action="/personalprofile">
+            <button class="btn btn-primary btn-block" type="submit">Back to Profile</button>
+        </form><br>
+        <form method="get" action="/feed">
+            <button class="postButton" type="submit">Back to feed</button>
+        </form> <br>
+    </div>
+
+    <footer>&copy; Jakub Chamera</footer>
 </body>
 </html>
