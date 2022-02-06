@@ -22,15 +22,16 @@
             <a href="/messageinbox">Messages</a>
             <a href="/logout">Log out</a>
         </nav>
+
+        <!--        <form action="feed">-->
+        <input type="search" class="feedSearchBar" placeholder="Search for users...">
+        <!--            <button type="submit"><i class="fa fa-search"></i></button>-->
+        <!--        </form>-->
+
+        <h1>News Feed</h1>
     </header>
 
     <main>
-<!--        <form action="feed">-->
-            <input type="search" class="feedSearchBar" placeholder="Search for users...">
-<!--            <button type="submit"><i class="fa fa-search"></i></button>-->
-<!--        </form>-->
-
-        <h1>News Feed</h1>
 
         <div th:if="${param.postsuccess}">
             <div class="alert alert-info">Post created successfully!</div>
@@ -39,22 +40,28 @@
             <div class="alert alert-danger">Post cannot be empty!</div>
         </div>
 
-        <form action="/feed" method="post">
-            <input class="createPost" type="text" id="postContent" name="postContent" placeholder="What would you like to post?"><br><br>
-            <button class="postButton" type="submit">Post</button><br>
+        <form class="newPostBox" action="/feed" method="post">
+            <input class="createPost" type="text" id="postContent" name="postContent"
+                   placeholder="What would you like to post?" maxlength="255" required>
+            <button class="postButton" type="submit">Post</button>
         </form>
 
         <p class="alert alert-danger" th:unless="${posts} and ${posts.size()}"> There are currently no posts available</p>
+
         <ol>
             <th:block th:each="post : ${posts}">
                 <li class="aPost">
-                    <img th:src="${post.postUser.getProfilePicture()}" class="profile-picture">
-                    <b><h2 th:text="${post.postUser.getFullName()}"></h2></b>
-                    <p th:text="|${post.postContent}|"></p>
-                    <p th:text="|${post.getPostDateTime}|"></p>
+                    <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
+                    <article class="postText">
+                        <em><h2 th:text="${post.postUser.getFullName()}"></h2></em>
+                        <p th:text="|${post.postContent}|"></p>
+                        <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
+                    </article>
                 </li>
             </th:block>
         </ol>
+
+        <footer>&copy;Copyright 2022 Jakub Chamera</footer>
 
     </main>
 
