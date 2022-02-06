@@ -16,7 +16,7 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     //SELECT * FROM post WHERE postAuthor = PARSED postAuthor
-    @Query("SELECT p FROM Post p WHERE p.postAuthorEmail = ?1")
+    @Query("SELECT p FROM Post p WHERE p.postUser.email = ?1")
     Optional<Post> findByEmail(String postAuthorEmail);
 
     //SELECT * FROM post ORDER BY postDateTime in DESCENDING order

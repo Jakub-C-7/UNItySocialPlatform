@@ -48,7 +48,8 @@
         <ol>
             <th:block th:each="post : ${posts}">
                 <li class="aPost">
-                    <b><h2 th:text="${post.postAuthorName}"></h2></b>
+                    <img th:src="${post.postUser.getProfilePicture()}" class="profile-picture">
+                    <b><h2 th:text="${post.postUser.getFullName()}"></h2></b>
                     <p th:text="|${post.postContent}|"></p>
                     <p th:text="|${post.getPostDateTime}|"></p>
                 </li>

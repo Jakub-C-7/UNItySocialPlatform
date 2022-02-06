@@ -27,22 +27,24 @@ public class PostService {
     private final PostRepository postRepository;
     private final AppUserRepository appUserRepository;
 
-    //Function for creating new posts
+    /**
+     * Function for creating new posts.
+     */
     public void createNewPost(Post post, Principal principal, LocalDateTime dateTime){
 
         Optional<AppUser> currentAppUser = appUserRepository.findByEmail(principal.getName());
 
 //        var formattedCurrentDateTime = dateTime.format(DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy"));
 
-        post.setPostAuthorEmail(principal.getName());
-        post.setPostAuthorName(currentAppUser.get().getFullName());
-//        post.setPostDateTime(formattedCurrentDateTime);
         post.setPostDateTime(dateTime);
+        post.setPostUser(currentAppUser.get());
 
         postRepository.save(post);
     }
 
-    //Function for retrieving all posts in order by date
+    /**
+     * Function for retrieving all posts in descending order by date.
+     */
     public List<Post> getPosts() {
         return postRepository.findAllByDate();
     }
