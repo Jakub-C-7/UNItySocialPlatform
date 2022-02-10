@@ -19,13 +19,10 @@ footer {
     color: gray;
 }
 
-/***********************************************/
-/* Link styles                                    */
-/***********************************************/
 nav {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     text-align: center;
     flex-shrink: 0;
     background-color: rgb(58, 52, 128);
@@ -48,6 +45,28 @@ nav a {
 nav a:hover {
     background-color: #3e3e3e;
     color: white;
+}
+
+nav .search-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search-bar {
+    width: 15vw;
+    height: 3em;
+}
+
+nav button {
+    border-left: none;
+    width: 3em;
+    height: 3em;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background: #ccc;
 }
 
 /***********************************************/
@@ -122,16 +141,9 @@ h1 {
     height: 5vw;
 }
 
-.feedSearchBar {
-    display: flex;
-    margin: 1em;
-    width: 20vw;
-}
-
 .profile-picture {
     max-width: 200px;
 }
-
 
 /***********************************************/
 /* Sign-in styles                           */
