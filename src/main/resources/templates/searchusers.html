@@ -11,7 +11,7 @@
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="unity.css" type="text/css"/>
+    <link rel="stylesheet" href="../unity.css" type="text/css"/>
 </head>
 
 <body>
@@ -19,8 +19,8 @@
 <header>
     <nav>
 
-        <form class="search-container" action="searchusers" method="get">
-            <input type="search" class="search-bar" placeholder="Search for users...">
+        <form class="search-container" th:action="@{/searchusers}" method="get">
+            <input type="search" name="keyword" th:value="${keyword}" class="search-bar" placeholder="Search for users...">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
 
@@ -35,7 +35,14 @@
 
 <main>
 
-    <p class="alert alert-danger" th:unless="${users} and ${users.size()}"> There are currently no users available</p>
+    <div th:if="${param.searchusers}">
+        <p class="alert alert-danger" th:unless="${users} and ${users.size()}"> There are currently no users available!</p>
+    </div>
+
+    <div th:if="${param.searchusers+'/'}">
+        <p class="alert alert-danger" th:unless="${users} and ${users.size()}"> Oops, nobody matched your search criteria!</p>
+    </div>
+
 
     <!-- Ordered list of users -->
     <ol>

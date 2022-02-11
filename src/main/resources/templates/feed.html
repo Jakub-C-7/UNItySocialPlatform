@@ -20,8 +20,8 @@
     <header>
         <nav>
 
-            <form class="search-container" action="searchusers" method="get">
-                <input type="search" class="search-bar" placeholder="Search for users...">
+            <form class="search-container" th:action="@{/searchusers}" method="get">
+                <input type="search" name="keyword" th:value="${keyword}" class="search-bar" placeholder="Search for users...">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
 
