@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * FeedController Class provides routing to the feed page.
  *
- * Upon entering the feed page (GET request) the PostService to retrieve all valid user posts and populates
+ * Upon entering the feed page (GET request) the PostService is used to retrieve all valid user posts and populates
  * the feed page in order from newest to oldest. When a user attempts to create a new post (POST request),
  * the PostService is called to validate user input, create a new post, add it to the database as a new post,
  * and display it on the feed.
