@@ -47,7 +47,9 @@ public class AppUserService implements UserDetailsService {
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
         appUser.setPassword(encodedPassword);
 
-        appUser.setProfilePicture("https://avatars.dicebear.com/api/avataaars/" + appUser.getFullName() + ".svg");
+        //Set the user's profile avatar
+        int rand = (int) (Math.random() * 1000);
+        appUser.setProfilePicture("https://avatars.dicebear.com/api/avataaars/" + appUser.getFullName() + rand +".svg");
 
         //Register a new user
         appUserRepository.save(appUser);
