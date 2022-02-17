@@ -55,21 +55,20 @@ public class FeedController {
     }
 
     @GetMapping
-    public String getAllPosts(Model model) {
+    public String getAllPosts(Model model, Principal principal) {
         List<Post> posts = postService.getPosts();
         model.addAttribute("posts", posts);
+
+        model.addAttribute("principal", principal);
 
         return "feed";
     }
 
-    @PostMapping(path = "/feed/deletepost/{id}")
-    public String deletePost(@PathVariable Long id){
-        //grab the ID of the post that is being deleted
-
-        //Delete that post by ID and return the feed again
+    @PostMapping(path = "/deletepost/{id}")
+    public String deletePost(@PathVariable Long id) {
         postService.deletePost(id);
 
-        return "feed";
+        return "redirect:/feed";
     }
 
 }
