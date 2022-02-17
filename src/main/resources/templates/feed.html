@@ -53,6 +53,7 @@
         <p class="alert alert-danger" th:unless="${posts} and ${posts.size()}"> There are currently no posts available</p>
 
         <!-- Ordered list of posts on the feed -->
+
         <ol>
             <th:block th:each="post : ${posts}">
                 <li class="aPost">
@@ -61,6 +62,19 @@
                         <em><h2 th:text="${post.postUser.getFullName()}"></h2></em>
                         <p th:text="|${post.postContent}|"></p>
                         <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
+
+<!--                        <form th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" th:method="delete">-->
+<!--                            <input type="hidden" name="_method" value="delete" />-->
+<!--                            <button type="submit" id="submitButton"></button>-->
+<!--                        </form>-->
+
+                        <div th:if="${post.postUser.getEmail() == principal.getName()}">
+                            <form th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button type="submit" value="delete"></button>
+                            </form>
+                        </div>
+
                     </article>
                 </li>
             </th:block>

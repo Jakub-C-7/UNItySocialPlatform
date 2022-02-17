@@ -23,8 +23,4 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p ORDER BY p.postDateTime DESC")
     List<Post> findAllByDate();
 
-//    //DELETE post WHERE postID = PARSED postID
-//    @Query("DELETE FROM Post p WHERE p.id = ?1")
-//    Optional<Post> deleteById(String postId);
-
 }
