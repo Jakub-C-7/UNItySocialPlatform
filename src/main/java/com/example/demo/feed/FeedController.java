@@ -1,6 +1,7 @@
 package com.example.demo.feed;
 
 import com.example.demo.post.Post;
+import com.example.demo.post.PostRepository;
 import com.example.demo.post.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ import java.util.List;
 public class FeedController {
 
     private final PostService postService;
+    private final PostRepository postRepository;
 
     private static List<Post> posts = new ArrayList<>();
 
@@ -56,6 +58,16 @@ public class FeedController {
     public String getAllPosts(Model model) {
         List<Post> posts = postService.getPosts();
         model.addAttribute("posts", posts);
+
+        return "feed";
+    }
+
+    @PostMapping(path = "/feed/deletepost/{id}")
+    public String deletePost(@PathVariable Long id){
+        //grab the ID of the post that is being deleted
+
+        //Delete that post by ID and return the feed again
+        postService.deletePost(id);
 
         return "feed";
     }
