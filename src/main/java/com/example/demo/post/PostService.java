@@ -49,4 +49,16 @@ public class PostService {
         return postRepository.findAllByDate();
     }
 
+    /**
+     * Function for deleting a post from the database using a post ID.
+     * @param postId
+     */
+    public void deletePost(Long postId) {
+        boolean exists = postRepository.existsById(postId);
+        if (!exists){
+            throw new IllegalStateException("post with id " + postId + " does not exist");
+        }
+        postRepository.deleteById(postId);
+    }
+
 }
