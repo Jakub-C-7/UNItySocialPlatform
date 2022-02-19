@@ -50,7 +50,8 @@
             <li class="aPost">
                 <img th:src="${user.getProfilePicture()}" class="post-profile-picture">
                 <article class="postText">
-                    <em><a th:href="@{profile+'/'+${user.getId()}}" th:text="${user.getFullName()}"></a></em>
+                    <em><a class="user-search-link" th:href="@{profile+'/'+${user.getId()}}" th:text="${user.getFullName()}"></a></em>
+                    <p th:text="${user.getProfileBio()}"></p>
                 </article>
             </li>
         </th:block>
