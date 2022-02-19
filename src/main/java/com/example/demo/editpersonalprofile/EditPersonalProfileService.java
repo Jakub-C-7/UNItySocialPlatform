@@ -83,4 +83,19 @@ public class EditPersonalProfileService {
         return false;
     }
 
+    /**
+     * Function for editing a user's personal academic course to a string entered and parsed through the request.
+     * @param request The request body.
+     * @param email Current email string of the user attempting to edit their profile bio.
+     * @return True on success or False on failure.
+     */
+    public boolean editAcademicCourse(EditProfileRequest request, String email){
+
+        if (request.getAcademicCourse() != ""){
+            appUserRepository.updateAcademicCourse(email, request.getAcademicCourse());
+            return true;
+        }
+        return false;
+    }
+
 }

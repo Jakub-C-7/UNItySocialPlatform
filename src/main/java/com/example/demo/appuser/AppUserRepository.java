@@ -47,4 +47,9 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     @Modifying
     @Query("UPDATE AppUser a " + "SET a.profileBio = :profileBio WHERE a.email = :email" )
     void updateProfileBio(String email, @Param("profileBio") String profileBio);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE AppUser a " + "SET a.academicCourse = :academicCourse WHERE a.email = :email" )
+    void updateAcademicCourse(String email, @Param("academicCourse") String academicCourse);
 }
