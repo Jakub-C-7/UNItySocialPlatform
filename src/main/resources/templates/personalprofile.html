@@ -40,6 +40,28 @@
         <form method="get" action="/editpersonalprofile">
             <button class="postButton" type="submit">Edit Profile</button>
         </form>
+
+        <h2>Your Posts: </h2>
+
+        <ol>
+            <th:block th:each="post : ${posts}">
+                <li class="aPost">
+                    <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
+                    <article class="postText">
+                        <em><h2 th:text="${post.postUser.getFullName()}"></h2></em>
+                        <p th:text="|${post.postContent}|"></p>
+                        <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
+                    </article>
+                    <div class="div-delete-button" th:if="${post.postUser.getEmail() == principal.getName()}">
+                        <form th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button class="delete-button" type="submit" value="delete">X</button>
+                        </form>
+                    </div>
+                </li>
+            </th:block>
+        </ol>
+
     </main>
 
 

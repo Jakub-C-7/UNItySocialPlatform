@@ -2,6 +2,8 @@ package com.example.demo.personalprofile;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
+import com.example.demo.post.Post;
+import com.example.demo.post.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 /**
  * PersonalProfileController Class provides routing to the personalprofile page.
@@ -24,6 +27,7 @@ import java.security.Principal;
 public class PersonalProfileController {
 
     private final AppUserRepository appUserRepository;
+    private final PostService postService;
 
     @GetMapping
     public String getPersonalProfileView(Principal principal, Model model){
@@ -31,6 +35,10 @@ public class PersonalProfileController {
         AppUser loggedInUser = appUserRepository.findByEmail(principal.getName()).get();
 
         model.addAttribute("user", loggedInUser);
+
+        List<Post> posts = postService.getPostsByUserId(loggedInUser.getId());
+        model.addAttribute("posts", posts);
+        model.addAttribute("principal", principal);
 
         return "personalprofile";
     }

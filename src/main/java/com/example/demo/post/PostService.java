@@ -50,6 +50,13 @@ public class PostService {
     }
 
     /**
+     * Function for retrieving all posts that are authored by a specific user using that user's id.
+     */
+    public List<Post> getPostsByUserId(Long userId) {
+        return postRepository.findAllByAuthorIdSortedByDate(userId);
+    }
+
+    /**
      * Function for deleting a post from the database using a post ID.
      * @param postId
      */
