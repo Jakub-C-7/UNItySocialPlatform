@@ -34,7 +34,8 @@
 
         <p>
             <label>Email: [[${#request.userPrincipal.principal.username}]]</label> <br>
-            <label>Role: [[${#request.userPrincipal.principal.getAuthorities}]]</label>
+            <label>Role: [[${#request.userPrincipal.principal.getAuthorities}]]</label> <br>
+            <label>Profile Bio: [[${#request.userPrincipal.principal.getProfileBio}]]</label>
         </p>
 
         <form method="get" action="/editpersonalprofile">
