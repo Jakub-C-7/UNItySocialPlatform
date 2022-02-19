@@ -68,14 +68,15 @@
 <!--                            <button type="submit" id="submitButton"></button>-->
 <!--                        </form>-->
 
-                        <div th:if="${post.postUser.getEmail() == principal.getName()}">
-                            <form th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">
-                                <input type="hidden" name="_method" value="DELETE" />
-                                <button type="submit" value="delete"></button>
-                            </form>
-                        </div>
+
 
                     </article>
+                    <div class="div-delete-button" th:if="${post.postUser.getEmail() == principal.getName()}">
+                        <form th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button class="delete-button" type="submit" value="delete">X</button>
+                        </form>
+                    </div>
                 </li>
             </th:block>
         </ol>
