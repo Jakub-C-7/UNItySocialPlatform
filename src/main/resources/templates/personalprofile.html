@@ -29,13 +29,11 @@
             <h1>[[${#request.userPrincipal.principal.fullName}]]</h1>
         </div>
 
-        <p>Hi there! <b>[[${#request.userPrincipal.principal.fullName}]]</b>! This is your profile which you can
-            personalise and fine-tune to your liking!</p> <br>
+        <label>[[${#request.userPrincipal.principal.getProfileBio}]]</label><br><br>
 
         <p>
             <label>Email: [[${#request.userPrincipal.principal.username}]]</label> <br>
             <label>Role: [[${#request.userPrincipal.principal.getAuthorities}]]</label> <br>
-            <label>Profile Bio: [[${#request.userPrincipal.principal.getProfileBio}]]</label>
         </p>
 
         <form method="get" action="/editpersonalprofile">
