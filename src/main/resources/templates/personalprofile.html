@@ -29,7 +29,8 @@
             <h1>[[${#request.userPrincipal.principal.fullName}]]</h1>
         </div>
 
-        <label>[[${#request.userPrincipal.principal.getProfileBio}]]</label><br><br>
+        <label>[[${#request.userPrincipal.principal.getProfileBio}]]</label><br>
+        <label>[[${#request.userPrincipal.principal.getAcademicCourse}]]</label><br><br>
 
         <p>
             <label>Email: [[${#request.userPrincipal.principal.username}]]</label> <br>
