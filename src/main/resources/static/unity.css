@@ -158,6 +158,19 @@ ol {
     max-width: 200px;
 }
 
+/***********************************************/
+/* Personal Profile Page                        */
+/***********************************************/
+
+.profile-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background: rgb(58, 52, 128);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
 
 /***********************************************/
 /* Sign-in styles                           */

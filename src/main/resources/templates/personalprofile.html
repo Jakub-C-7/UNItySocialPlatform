@@ -24,18 +24,18 @@
     </header>
 
     <main>
-        <h1>Personal Profile</h1>
+        <div class="profile-header">
+            <img th:src="${user.getProfilePicture}" class="profile-picture">
+            <h1>[[${#request.userPrincipal.principal.fullName}]]</h1>
+        </div>
 
         <p>Hi there! <b>[[${#request.userPrincipal.principal.fullName}]]</b>! This is your profile which you can
             personalise and fine-tune to your liking!</p> <br>
 
-        <form>
-            <p>
-                <label>Email: [[${#request.userPrincipal.principal.username}]]</label> <br>
-                <label>Role: [[${#request.userPrincipal.principal.getAuthorities}]]</label>
-            </p>
-            <img th:src="${user.getProfilePicture}" class="profile-picture">
-        </form>
+        <p>
+            <label>Email: [[${#request.userPrincipal.principal.username}]]</label> <br>
+            <label>Role: [[${#request.userPrincipal.principal.getAuthorities}]]</label>
+        </p>
 
         <form method="get" action="/editpersonalprofile">
             <button class="postButton" type="submit">Edit Profile</button>
