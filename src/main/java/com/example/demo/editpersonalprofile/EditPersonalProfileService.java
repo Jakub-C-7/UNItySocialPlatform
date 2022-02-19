@@ -68,4 +68,19 @@ public class EditPersonalProfileService {
         return false;
     }
 
+    /**
+     * Function for editing a user's personal profile bio to a string entered and parsed through the request.
+     * @param request The request body.
+     * @param email Current email string of the user attempting to edit their profile bio.
+     * @return True on success or False on failure.
+     */
+    public boolean editProfileBio(EditProfileRequest request, String email){
+
+        if (request.getProfileBio() != ""){
+            appUserRepository.updateProfileBio(email, request.getProfileBio());
+            return true;
+        }
+        return false;
+    }
+
 }
