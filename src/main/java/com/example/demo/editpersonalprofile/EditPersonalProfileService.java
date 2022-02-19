@@ -28,7 +28,7 @@ public class EditPersonalProfileService {
     public boolean editEmail(EditProfileRequest request, String email){
         boolean emailAlreadyExists = appUserRepository.findByEmail(request.getEmail()).isPresent();
 
-        if (request.getEmail() != null){
+        if (request.getEmail() != ""){
             if (!emailAlreadyExists) {
                 appUserRepository.updateEmail(email, request.getEmail());
                 return true;
@@ -45,7 +45,7 @@ public class EditPersonalProfileService {
      */
     public boolean editFirstName(EditProfileRequest request, String email){
 
-        if (request.getFirstName() != null){
+        if (request.getFirstName() != ""){
             appUserRepository.updateFirstName(email, request.getFirstName());
             return true;
         }
@@ -61,7 +61,7 @@ public class EditPersonalProfileService {
      */
     public boolean editLastName(EditProfileRequest request, String email){
 
-        if (request.getLastName() != null){
+        if (request.getLastName() != ""){
             appUserRepository.updateLastName(email, request.getLastName());
             return true;
         }
