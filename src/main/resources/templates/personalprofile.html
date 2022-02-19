@@ -24,22 +24,44 @@
     </header>
 
     <main>
-        <h1>Personal Profile</h1>
-
-        <p>Hi there! <b>[[${#request.userPrincipal.principal.fullName}]]</b>! This is your profile which you can
-            personalise and fine-tune to your liking!</p> <br>
-
-        <form>
-            <p>
-                <label>Email: [[${#request.userPrincipal.principal.username}]]</label> <br>
-                <label>Role: [[${#request.userPrincipal.principal.getAuthorities}]]</label>
-            </p>
+        <div class="profile-header">
             <img th:src="${user.getProfilePicture}" class="profile-picture">
-        </form>
+            <h1>[[${#request.userPrincipal.principal.fullName}]]</h1>
+        </div>
+
+        <label>[[${#request.userPrincipal.principal.getProfileBio}]]</label><br>
+        <label>[[${#request.userPrincipal.principal.getAcademicCourse}]]</label><br><br>
+
+        <p>
+            <label>Email: [[${#request.userPrincipal.principal.username}]]</label> <br>
+            <label>Role: [[${#request.userPrincipal.principal.getAuthorities}]]</label> <br>
+        </p>
 
         <form method="get" action="/editpersonalprofile">
             <button class="postButton" type="submit">Edit Profile</button>
         </form>
+
+        <h2>Your Posts: </h2>
+
+        <ol>
+            <th:block th:each="post : ${posts}">
+                <li class="aPost">
+                    <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
+                    <article class="postText">
+                        <em><h2 th:text="${post.postUser.getFullName()}"></h2></em>
+                        <p th:text="|${post.postContent}|"></p>
+                        <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
+                    </article>
+                    <div class="div-delete-button" th:if="${post.postUser.getEmail() == principal.getName()}">
+                        <form th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button class="delete-button" type="submit" value="delete">X</button>
+                        </form>
+                    </div>
+                </li>
+            </th:block>
+        </ol>
+
     </main>
 
 

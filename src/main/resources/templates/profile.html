@@ -23,13 +23,28 @@
     </header>
 
     <main>
-
-        <h1>Profile</h1>
-
-        <th:block>
-            <b><h2 th:text="${user.getFullName()}"></h2></b>
+        <div class="profile-header">
             <img th:src="${user.getProfilePicture}" class="profile-picture">
-        </th:block>
+            <b><h1 th:text="${user.getFullName()}"></h1></b>
+        </div>
+
+        <p th:text="${user.getProfileBio()}"></p>
+        <p th:text="${user.getAcademicCourse()}"></p>
+
+        <h2>User's Posts: </h2>
+
+        <ol>
+            <th:block th:each="post : ${posts}">
+                <li class="aPost">
+                    <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
+                    <article class="postText">
+                        <em><h2 th:text="${post.postUser.getFullName()}"></h2></em>
+                        <p th:text="|${post.postContent}|"></p>
+                        <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
+                    </article>
+                </li>
+            </th:block>
+        </ol>
     </main>
 
     <footer>&copy;Copyright 2022 Jakub Chamera</footer>

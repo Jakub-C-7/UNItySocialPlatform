@@ -19,4 +19,6 @@ public class EditProfileRequest {
     private final String firstName;
     private final String lastName;
     private final String email;
+    private final String profileBio;
+    private final String academicCourse;
 }

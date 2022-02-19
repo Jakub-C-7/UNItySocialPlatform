@@ -2,6 +2,8 @@ package com.example.demo.profile;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
+import com.example.demo.post.Post;
+import com.example.demo.post.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.EntityNotFoundException;
 import java.security.Principal;
+import java.util.List;
 
 /**
  * ProfileController class provides routing to user profiles via user ID.
@@ -30,6 +33,7 @@ import java.security.Principal;
 public class ProfileController {
 
     private final AppUserRepository appUserRepository;
+    private final PostService postService;
 
     @GetMapping
     public String defaultRoute (){
@@ -53,6 +57,9 @@ public class ProfileController {
         }
 
         model.addAttribute("user", user);
+
+        List<Post> posts = postService.getPostsByUserId(userId);
+        model.addAttribute("posts", posts);
 
         return "profile";
     }

@@ -69,6 +69,16 @@ public class AppUser implements UserDetails {
     private String profilePicture;
 
     /**
+     * String containing the user's personal profile bio.
+     */
+    private String profileBio;
+
+    /**
+     * String containing the user's academic course.
+     */
+    private String academicCourse;
+
+    /**
      * The ENUM role of the user.
      */
     @Enumerated(EnumType.STRING)

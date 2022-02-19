@@ -28,9 +28,15 @@ public class EditPersonalProfileController {
         boolean firstNameResult = editPersonalProfileService.editFirstName(request, principal.getName());
         boolean lastNameResult = editPersonalProfileService.editLastName(request, principal.getName());
         boolean emailResult = editPersonalProfileService.editEmail(request, principal.getName());
+        boolean profileBioResult = editPersonalProfileService.editProfileBio(request, principal.getName());
+        boolean academicCourseResult = editPersonalProfileService.editAcademicCourse(request, principal.getName());
 
-        // If firstname, lastname, and email changes all succeed
-        if(firstNameResult || lastNameResult || emailResult){
+        // If one of the updates succeeds.
+        if (firstNameResult ||
+                lastNameResult ||
+                emailResult ||
+                profileBioResult ||
+                academicCourseResult){
 
 
             // TODO: Refresh the principal to reflect changes made straight away
