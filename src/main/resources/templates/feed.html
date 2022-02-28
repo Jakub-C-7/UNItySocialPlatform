@@ -51,7 +51,7 @@
         <form class="newPostBox" action="/feed" method="post">
             <input class="createPost" type="text" id="postContent" name="postContent"
                    placeholder="What would you like to post?" maxlength="255" required>
-            <button class="postButton" type="submit">Post</button>
+            <button class="postButton" type="submit"><i class="material-icons">post_add</i></button>
         </form>
 
         <p class="alert alert-danger" th:unless="${posts} and ${posts.size()}"> There are currently no posts available</p>
