@@ -23,9 +23,8 @@
     </header>
 
     <main>
-        <h1>Messages</h1>
-        <p>This is your message inbox which will contain any messages that are sent to you and will allow you to reply and
-        send messages back to other UNIty users!</p>
+        <h1>Chats</h1>
+        <p>Your existing chats are listed below</p>
 
         <p class="alert alert-danger" th:unless="${chats} and ${chats.size()}"> There are currently no chats available</p>
         <ol>
@@ -37,6 +36,7 @@
                         <em><h2 th:text="${chat.participantOne.getFullName()}"></h2></em>
                         <em><h2 th:text="${chat.participantTwo.getFullName()}"></h2></em>
                     </article>
+                    <a th:href="@{chat +'/' + ${chat.getId()}}">View Messages</a>
                 </li>
             </th:block>
         </ol>
