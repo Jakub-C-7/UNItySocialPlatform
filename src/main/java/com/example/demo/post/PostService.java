@@ -68,4 +68,19 @@ public class PostService {
         postRepository.deleteById(postId);
     }
 
+    /**
+     * Function for editing a post from the database using a post ID.
+     * @param postId
+     */
+    public void editPost(Long postId, String postContent) {
+        boolean exists = postRepository.existsById(postId);
+        if (!exists){
+            throw new IllegalStateException("post with id " + postId + " does not exist");
+        }
+
+        Post post = postRepository.findById(postId).get();
+        post.setPostContent(postContent);
+        postRepository.save(post);
+    }
+
 }

@@ -70,5 +70,4 @@ public class FeedController {
 
         return "redirect:/feed";
     }
-
 }
