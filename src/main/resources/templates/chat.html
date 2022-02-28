@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Messages</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+  <link rel="stylesheet" href="../unity.css" type="text/css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+<header>
+  <nav>
+    <a href="/feed">Feed</a>
+    <a href="/personalprofile">Profile</a>
+    <a href="/messageinbox">Messages</a>
+    <a href="/logout">Log out</a>
+  </nav>
+</header>
+
+<main>
+  <h1 class="chatName" th:text="${chat.getParticipantOne().getFirstName()} + '\'s and '
+  + ${chat.getParticipantTwo().getFirstName()} + '\'s chat'"></h1>
+
+  <p class="alert alert-danger" th:unless="${messages} and ${messages.size()}"> There are currently no messages available</p>
+  <div class="chatWrapper">
+    <ol >
+      <th:block th:each="message : ${messages}">
+        <li class="aMessage">
+          <img th:src="${message.getAuthor().getProfilePicture()}" class="post-profile-picture">
+          <article class="messageText">
+            <em><h2 th:text="${message.getAuthor().getFullName()}"></h2></em>
+            <p th:text="${message.getMessageContent()}"></p>
+            <p class="postDate" th:text="|${message.getMessageDateTime}|"></p>
+          </article>
+        </li>
+      </th:block>
+    </ol>
+  </div>
+
+  <!-- Form to create and send a new message -->
+  <form class="createMessageWrapper" th:action="@{'/createnewchatmessage/{id}'(id=${chat.getId()})}" method="post">
+    <input class="createMessage" type="text" id="messageContent" name="messageContent"
+           placeholder="Message content..." maxlength="255" required>
+    <button class="sendButton" type="submit"><i class="material-icons">send</i></button>
+  </form>
+</main>
+
+<footer>&copy;Copyright 2022 Jakub Chamera</footer>
+
+</body>
+</html>

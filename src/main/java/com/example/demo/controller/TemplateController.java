@@ -4,9 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * TemplateController Class manages routing to a select few basic application pages (templates).
  *
@@ -31,8 +28,5 @@ public class TemplateController {
 
     @GetMapping("editpersonalprofile")
     public String getEditPersonalProfileView(){return "editpersonalprofile";}
-
-    @GetMapping("messageinbox")
-    public String getMessageInboxView(){return "messageinbox";}
 
 }

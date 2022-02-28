@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * Post Class represents an instance of a feed post and a post entity.
+ * Post Class represents an instance of a post on the news feed.
  *
  * @author jakub
  */
