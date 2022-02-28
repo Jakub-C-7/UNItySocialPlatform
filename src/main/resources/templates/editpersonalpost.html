@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Edit Personal Post</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+  <link rel="stylesheet" href="../unity.css" type="text/css"/>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/feed">Feed</a>
+      <a href="/personalprofile">Profile</a>
+      <a href="/logout">Log out</a>
+    </nav>
+  </header>
+<main>
+  <h1>Edit Personal Post</h1>
+
+  <form class="newPostBox" th:action="@{'/editpersonalpost/{id}'(id=${post.getId()})}" method="post">
+    <p>
+    <label for="postContent" class="sr-only">Post Content</label>
+    <input class="createPost" type="text" id="postContent" name="postContent"
+           th:value="|${post.postContent}|" maxlength="255" autofocus required>
+    <button class="postButton" type="submit">Submit Changes</button>
+  </form>
+
+  <form method="get" action="/feed">
+    <button class="postButton" type="submit">Back to feed</button>
+  </form>
+
+</main>
+
+<footer>&copy;Copyright 2022 Jakub Chamera</footer>
+
+</body>
+</html>
