@@ -1,6 +1,7 @@
 package com.example.demo.chatMessage;
 
 
+import com.example.demo.appuser.AppUser;
 import com.example.demo.chat.Chat;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -42,14 +43,25 @@ public class ChatMessage {
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private AppUser author;
+
+    /**
+     * The contents of the message
+     */
+    private String messageContent;
+
     /**
      * DateTime of when the message was sent.
      */
-    private LocalDateTime postDateTime;
+    private LocalDateTime messageDateTime;
 
-    public ChatMessage(Long id, Chat chat, LocalDateTime postDateTime) {
+    public ChatMessage(Long id, Chat chat, AppUser author, String messageContent, LocalDateTime messageDateTime) {
         this.id = id;
         this.chat = chat;
-        this.postDateTime = postDateTime;
+        this.author = author;
+        this.messageContent = messageContent;
+        this.messageDateTime = messageDateTime;
     }
 }
