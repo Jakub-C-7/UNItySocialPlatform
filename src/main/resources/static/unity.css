@@ -86,7 +86,7 @@ h1 {
 /***********************************************/
 /* Feed Page                                   */
 /***********************************************/
-.postButton {
+.postButton, .sendButton {
     width: 10em;
     height: 3em;
     font-weight: bold;
@@ -97,7 +97,7 @@ h1 {
     border: black;
 }
 
-.postButton:hover {
+.postButton:hover, .sendButton:hover {
     background-color: rgb(58, 52, 128);
     color: white;
 }
@@ -107,7 +107,7 @@ ol {
     flex-direction: column;
 }
 
-.aPost {
+.aPost, .aMessage {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -135,7 +135,7 @@ ol {
     width: 20%;
 }
 
-.postText {
+.postText, .messageText {
     text-align: left;
     margin-left: 2em;
     margin-right: 1em;
@@ -156,6 +156,41 @@ ol {
 
 .profile-picture {
     max-width: 200px;
+}
+/***********************************************/
+/* Chat Page                       */
+/***********************************************/
+.chatName {
+    font-size: xx-large;
+    background-color: inherit;
+    margin-top: 0;
+}
+
+.chatWrapper {
+    overflow:auto;
+    display:flex;
+    flex-direction:column-reverse;
+    height: 70vh;
+}
+
+.aMessage {
+    border-radius: 40px;
+}
+
+.createMessage {
+    min-width: 40vw;
+    max-width: 70vw;
+    width: 500px;
+    min-height: 5vh;
+    height: 50px;
+}
+
+.sendButton {
+    min-width: 5vw;
+    max-width: 10vw;
+    width: 50px;
+    min-height: 5vh;
+    height: 50px;
 }
 
 /***********************************************/
