@@ -10,6 +10,7 @@
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="../unity.css" type="text/css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
 
@@ -26,6 +27,9 @@
         <div class="profile-header">
             <img th:src="${user.getProfilePicture}" class="profile-picture">
             <b><h1 th:text="${user.getFullName()}"></h1></b>
+            <form th:action="@{'/createnewchat/{id}'(id=${user.getId()})}" method="post" >
+                <button class="delete-button" type="submit"> <i class="material-icons 30">chat</i></button>
+            </form>
         </div>
 
         <p th:text="${user.getProfileBio()}"></p>

@@ -26,6 +26,20 @@
         <h1>Messages</h1>
         <p>This is your message inbox which will contain any messages that are sent to you and will allow you to reply and
         send messages back to other UNIty users!</p>
+
+        <p class="alert alert-danger" th:unless="${chats} and ${chats.size()}"> There are currently no chats available</p>
+        <ol>
+            <th:block th:each="chat : ${chats}">
+                <li class="aPost">
+                    <img th:src="${chat.participantOne.getProfilePicture()}" class="post-profile-picture">
+                    <img th:src="${chat.participantTwo.getProfilePicture()}" class="post-profile-picture">
+                    <article class="postText">
+                        <em><h2 th:text="${chat.participantOne.getFullName()}"></h2></em>
+                        <em><h2 th:text="${chat.participantTwo.getFullName()}"></h2></em>
+                    </article>
+                </li>
+            </th:block>
+        </ol>
     </main>
 
     <footer>&copy;Copyright 2022 Jakub Chamera</footer>

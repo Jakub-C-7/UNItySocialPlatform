@@ -29,7 +29,4 @@ public class TemplateController {
     @GetMapping("editpersonalprofile")
     public String getEditPersonalProfileView(){return "editpersonalprofile";}
 
-    @GetMapping("messages")
-    public String getMessageInboxView(){return "messages";}
-
 }

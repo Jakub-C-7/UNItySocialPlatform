@@ -30,9 +30,6 @@ import java.util.List;
 public class FeedController {
 
     private final PostService postService;
-    private final PostRepository postRepository;
-
-    private static List<Post> posts = new ArrayList<>();
 
     @PostMapping
     public RedirectView newPost(
