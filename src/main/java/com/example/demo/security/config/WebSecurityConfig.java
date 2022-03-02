@@ -36,7 +36,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "index", "/css/*", "/js/*", "/register", "/register/*", "/unity.css")
+                .antMatchers("/", "index", "/css/*", "/js/*", "/register", "/register/*", "/unity.css",
+                        "/feed", "/searchusers", "/profile/*")
+                // permit guest user application sections to all
                 .permitAll()
                 .anyRequest()
                 .authenticated()
