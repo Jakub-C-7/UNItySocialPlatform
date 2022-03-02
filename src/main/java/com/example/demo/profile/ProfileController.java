@@ -50,10 +50,12 @@ public class ProfileController {
 
         AppUser user = appUserRepository.getById(userId);
 
-        AppUser loggedInUser = appUserRepository.findByEmail(principal.getName()).get();
+        if (principal != null) {
+            AppUser loggedInUser = appUserRepository.findByEmail(principal.getName()).get();
 
-        if (loggedInUser.getId().equals(user.getId())){
-            return "redirect:/personalprofile";
+            if (loggedInUser.getId().equals(user.getId())){
+                return "redirect:/personalprofile";
+            }
         }
 
         model.addAttribute("user", user);
