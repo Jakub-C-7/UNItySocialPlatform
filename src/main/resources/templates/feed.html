@@ -64,7 +64,8 @@
                 <li class="aPost">
                     <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
                     <article class="postText">
-                        <em><h2 th:text="${post.postUser.getFullName()}"></h2></em>
+                        <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
+                               th:text="${post.postUser.getFullName()}"></a></em>
                         <p th:text="|${post.postContent}|"></p>
                         <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
 
