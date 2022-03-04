@@ -28,6 +28,7 @@
             <a sec:authorize="!isAuthenticated()" href="/register">Register</a>
             <a sec:authorize="isAuthenticated()" href="/personalprofile">Profile</a>
             <a sec:authorize="isAuthenticated()" href="/messageinbox">Messages</a>
+            <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
             <a sec:authorize="isAuthenticated()" href="/logout">Log out</a>
         </nav>
     </header>
