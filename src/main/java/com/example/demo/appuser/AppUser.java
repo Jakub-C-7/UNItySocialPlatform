@@ -1,5 +1,7 @@
 package com.example.demo.appuser;
 
+import com.example.demo.chat.Chat;
+import com.example.demo.post.Post;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -77,6 +80,15 @@ public class AppUser implements UserDetails {
      * String containing the user's academic course.
      */
     private String academicCourse;
+
+    @OneToMany(mappedBy = "participantOne", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Chat> chats1;
+
+    @OneToMany(mappedBy = "participantTwo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Chat> chats2;
+
+    @OneToMany(mappedBy = "postUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts;
 
     /**
      * The ENUM role of the user.
