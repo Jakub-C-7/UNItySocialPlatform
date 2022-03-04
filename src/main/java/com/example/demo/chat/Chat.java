@@ -1,12 +1,14 @@
 package com.example.demo.chat;
 
 import com.example.demo.appuser.AppUser;
+import com.example.demo.chatMessage.ChatMessage;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Chat Class represents an instance of a chat between users.
@@ -44,6 +46,9 @@ public class Chat {
     @ManyToOne
     @JoinColumn(name = "participant_two_id")
     private AppUser participantTwo;
+
+    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChatMessage> chatMessages;
 
     public Chat(Long id, AppUser participantOne, AppUser participantTwo) {
         this.id = id;

@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Profile</title>
+
+    <title>Admin</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../unity.css" type="text/css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
+
 <body>
 
     <header>
@@ -31,36 +34,41 @@
             <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
             <a sec:authorize="isAuthenticated()" href="/logout">Log out</a>
         </nav>
+
+        <h1>Admin Portal - Manage Users</h1>
     </header>
 
     <main>
-        <div class="profile-header">
-            <img th:src="${user.getProfilePicture}" class="profile-picture">
-            <b><h1 th:text="${user.getFullName()}"></h1></b>
-            <form th:action="@{'/chat/createnewchat/{id}'(id=${user.getId()})}" method="post" >
-                <button sec:authorize="isAuthenticated()" class="delete-button" type="submit"> <i class="material-icons 30">chat</i></button>
-            </form>
-        </div>
 
-        <p th:text="${user.getProfileBio()}"></p>
-        <p th:text="${user.getAcademicCourse()}"></p>
+        <p class="alert alert-danger" th:unless="${users} and ${users.size()}"> There are currently no users available!</p>
 
-        <h2>User's Posts: </h2>
-
+        <!-- Ordered list of users -->
         <ol>
-            <th:block th:each="post : ${posts}">
-                <li class="aPost">
-                    <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
+            <th:block th:each="user : ${users}">
+                <li class="aPost" th:if="${user.getEmail() != principal.getName()}">
+                    <img th:src="${user.getProfilePicture()}" class="post-profile-picture">
                     <article class="postText">
-                        <em><h2 th:text="${post.postUser.getFullName()}"></h2></em>
-                        <p th:text="|${post.postContent}|"></p>
-                        <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
+                        <em><a class="user-search-link" th:href="@{profile+'/'+${user.getId()}}" th:text="${user.getFullName()}"></a></em>
+                        <p th:text="${user.getProfileBio()}"></p>
                     </article>
+
+                    <div class="div-delete-button">
+                        <form th:action="@{'/adminportal/deleteuser/{id}'(id=${user.getId()})}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>
+                        </form>
+                    </div>
                 </li>
             </th:block>
         </ol>
+
+        <form class="form-signin" method="get" action="/adminportal">
+            <button class="btn btn-primary btn-block" type="submit">Back</button>
+        </form>
+
+        <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+
     </main>
 
-    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
 </body>
 </html>

@@ -54,4 +54,16 @@ public class AppUserService implements UserDetailsService {
         //Register a new user
         appUserRepository.save(appUser);
     }
+
+    /**
+     * Function for deleting users from the database by their unique user ID.
+     * @param id
+     */
+    public void deleteUser(Long id) {
+        boolean exists = appUserRepository.existsById(id);
+        if (!exists){
+            throw new IllegalStateException("user with id " + id + " does not exist");
+        }
+        appUserRepository.deleteById(id);
+    }
 }
