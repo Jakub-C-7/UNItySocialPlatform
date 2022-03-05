@@ -52,7 +52,7 @@
         <!-- Ordered list of friends. Ordered alphabetically-->
         <ol>
             <th:block th:each="friend : ${friends}">
-                <li class="aPost" th:if="${friend.getAdded() == true}">
+                <li class="aPost" th:if="${friend.getAdded() == true && !friend.getUser().getEmail().equals(principal.getName())}">
                     <img th:src="${friend.user.getProfilePicture()}" class="post-profile-picture">
                     <article class="postText">
                         <em><a class="user-search-link" th:href="@{profile+'/'+${friend.user.getId()}}"

@@ -23,14 +23,19 @@ public interface FriendRepository extends JpaRepository<Friend, Long> {
     List<Friend> findByUser(AppUser user);
 
     //find all received friend requests
-    List<Friend> findByUsersFriend(AppUser user);
+    List<Friend> findByUsersFriendAndAddedFalse(AppUser user);
 
     //find a specific friend record
     List<Friend> findByUserAndUsersFriend(AppUser user, AppUser usersFriend);
 
-    //find all of a user's friends
+    //find all of a user's friends 1
     @Transactional
     @Query("SELECT c FROM Friend c WHERE c.added = true and c.usersFriend =:usersFriend")
-    List<Friend> findAddedFriends(AppUser usersFriend);
+    List<Friend> findAddedFriends1(AppUser usersFriend);
+
+    //find all of a user's friends 2
+    @Transactional
+    @Query("SELECT c FROM Friend c WHERE c.added = true and c.user =:user")
+    List<Friend> findAddedFriends2(AppUser user);
 
 }
