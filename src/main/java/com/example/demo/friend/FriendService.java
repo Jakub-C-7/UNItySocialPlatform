@@ -1,12 +1,11 @@
 package com.example.demo.friend;
 
 import com.example.demo.appuser.AppUser;
-import com.example.demo.chat.Chat;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
- * FriendService Class contains methods to add, remove, and view friends.
+ * FriendService Class contains methods to send and accept friend requests.
  *
  * @author jakub
  */
@@ -31,19 +30,10 @@ public class FriendService {
     /**
      * Function for accepting a user's friend request and
      */
-    public void acceptFriendRequest(AppUser usersFriend, AppUser user){
-        Friend friendRecord = friendRepository.findByUserAndUsersFriend(user, usersFriend).get(0);
-        friendRecord.setAdded(true);
+    public void acceptFriendRequest(Friend friendRequest){
+        friendRequest.setAdded(true);
 
-        friendRepository.save(friendRecord);
+        friendRepository.save(friendRequest);
     }
 
-    /**
-     * Function for removing a user from being a friend.
-     */
-    public void removeFriend(AppUser user, AppUser usersFriend){
-        Friend friendRecord = friendRepository.findByUserAndUsersFriend(user, usersFriend).get(0);
-
-        friendRepository.delete(friendRecord);
-    }
 }

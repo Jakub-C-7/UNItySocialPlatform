@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,9 +34,16 @@ public class FriendController {
         AppUser currentUser = appUserRepository.getById(
                 appUserRepository.findByEmail(principal.getName()).get().getId());
 
-        List<Friend> friends = friendRepository.findAddedFriends(currentUser);
+        List<Friend> friends1 = friendRepository.findAddedFriends1(currentUser);
+        List<Friend> friends2 = friendRepository.findAddedFriends2(currentUser);
+        List<Friend> friendList = new ArrayList<>();
 
-        model.addAttribute("friends", friends);
+        friendList.addAll(friends1);
+        friendList.addAll(friends2);
+
+        model.addAttribute("principal", principal);
+
+        model.addAttribute("friends", friendList);
 
         return "friendlist";
 
@@ -47,7 +55,7 @@ public class FriendController {
         AppUser currentUser = appUserRepository.getById(
                 appUserRepository.findByEmail(principal.getName()).get().getId());
 
-        List<Friend> friends = friendRepository.findByUsersFriend(currentUser);
+        List<Friend> friends = friendRepository.findByUsersFriendAndAddedFalse(currentUser);
 
         model.addAttribute("friends", friends);
 
@@ -56,7 +64,7 @@ public class FriendController {
     }
 
     @PostMapping(path = "sendfriendrequest/{id}")
-    public String newChat(@PathVariable Long id, Principal principal) {
+    public String sendFriendRequest(@PathVariable Long id, Principal principal) {
 
         AppUser currentUser = appUserRepository.getById(
                 appUserRepository.findByEmail(principal.getName()).get().getId());
@@ -83,16 +91,7 @@ public class FriendController {
 
         Friend friendRequest = friendRepository.getById(id);
 
-        friendRequest.setAdded(true);
-
-        friendRepository.save(friendRequest);
-
-        Friend friendRequest2 = new Friend();
-        friendRequest2.setUser(friendRequest.getUsersFriend());
-        friendRequest2.setUsersFriend(friendRequest.getUser());
-        friendRequest2.setAdded(true);
-
-        friendRepository.save(friendRequest2);
+        friendService.acceptFriendRequest(friendRequest);
 
         return "redirect:/friendrequests?acceptsuccess";
     }
