@@ -2,6 +2,8 @@ package com.example.demo.profile;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
+import com.example.demo.friend.Friend;
+import com.example.demo.friend.FriendRepository;
 import com.example.demo.post.Post;
 import com.example.demo.post.PostService;
 import lombok.AllArgsConstructor;
@@ -34,6 +36,7 @@ public class ProfileController {
 
     private final AppUserRepository appUserRepository;
     private final PostService postService;
+    private final FriendRepository friendRepository;
 
     @GetMapping
     public String defaultRoute (){
@@ -56,6 +59,26 @@ public class ProfileController {
             if (loggedInUser.getId().equals(user.getId())){
                 return "redirect:/personalprofile";
             }
+
+            Boolean areFriends;
+            Friend friendRecord;
+            //Check to see if the current user is this user's friend
+            if (!friendRepository.findByUserAndUsersFriend(loggedInUser, user).isEmpty()){
+                areFriends = true;
+                friendRecord = friendRepository.findByUserAndUsersFriend(loggedInUser, user).get(0);
+                model.addAttribute("friendRecord", friendRecord);
+
+            } else if (!friendRepository.findByUserAndUsersFriend(user, loggedInUser).isEmpty()) {
+                 areFriends = true;
+                 friendRecord = friendRepository.findByUserAndUsersFriend(user, loggedInUser).get(0);
+                 model.addAttribute("friendRecord", friendRecord);
+            }
+
+            else {
+                 areFriends = false;
+            }
+            model.addAttribute("areFriends", areFriends);
+
         }
 
         model.addAttribute("user", user);
