@@ -1,7 +1,7 @@
 package com.example.demo.groupMember;
 
 import com.example.demo.appuser.AppUser;
-import com.example.demo.group.Group;
+import com.example.demo.group.AppGroup;
 import com.example.demo.group.GroupRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class GroupMemberService {
     private final GroupRepository groupRepository;
     private final GroupMemberRepository groupMemberRepository;
 
-    public void addCreator(Group group, AppUser creator){
+    public void addCreator(AppGroup group, AppUser creator){
 
         GroupMember groupMember = new GroupMember();
 
@@ -29,7 +29,7 @@ public class GroupMemberService {
         groupMemberRepository.save(groupMember);
     }
 
-    public void addMember(Group group, AppUser user ){
+    public void addMember(AppGroup group, AppUser user ){
 
         GroupMember groupMember = new GroupMember();
 
@@ -40,7 +40,7 @@ public class GroupMemberService {
         groupMemberRepository.save(groupMember);
     }
 
-    public void acceptMember(Group group, AppUser user) {
+    public void acceptMember(AppGroup group, AppUser user) {
         GroupMember record = groupMemberRepository.findByGroupAndUser(group, user);
 
         record.setAdded(true);
@@ -48,7 +48,7 @@ public class GroupMemberService {
         groupMemberRepository.save(record);
     }
 
-    public void setAdmin(Group group, AppUser user) {
+    public void setAdmin(AppGroup group, AppUser user) {
         GroupMember record = groupMemberRepository.findByGroupAndUser(group, user);
 
         record.setRole(GroupMemberRole.GROUP_ADMIN);
@@ -56,7 +56,7 @@ public class GroupMemberService {
         groupMemberRepository.save(record);
     }
 
-    public void setUser(Group group, AppUser user) {
+    public void setUser(AppGroup group, AppUser user) {
         GroupMember record = groupMemberRepository.findByGroupAndUser(group, user);
 
         record.setRole(GroupMemberRole.GROUP_USER);

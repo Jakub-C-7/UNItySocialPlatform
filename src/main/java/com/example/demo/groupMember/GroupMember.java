@@ -1,7 +1,7 @@
 package com.example.demo.groupMember;
 
 import com.example.demo.appuser.AppUser;
-import com.example.demo.group.Group;
+import com.example.demo.group.AppGroup;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,7 +42,7 @@ public class GroupMember {
      */
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private Group group;
+    private AppGroup group;
 
     /**
      * ID of the user who's the member of the group.
@@ -61,4 +61,11 @@ public class GroupMember {
      */
     @Enumerated(EnumType.STRING)
     private GroupMemberRole role;
+
+    public GroupMember(AppGroup group, AppUser user, Boolean added, GroupMemberRole role) {
+        this.group = group;
+        this.user = user;
+        this.added = added;
+        this.role = role;
+    }
 }

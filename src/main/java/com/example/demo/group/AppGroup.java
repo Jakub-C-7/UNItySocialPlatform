@@ -17,7 +17,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-public class Group {
+public class AppGroup {
 
     /**
      * Unique ID for each group that is incrementally generated.
@@ -56,9 +56,10 @@ public class Group {
     @JoinColumn(name = "user_id")
     private AppUser creator;
 
-    public Group(String name, String description, String type) {
+    public AppGroup(String name, String description, String type, AppUser creator) {
         this.name = name;
         this.description = description;
         this.type = type;
+        this.creator = creator;
     }
 }

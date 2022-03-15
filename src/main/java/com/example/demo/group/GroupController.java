@@ -1,9 +1,13 @@
 package com.example.demo.group;
 
+import com.example.demo.post.Post;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * GroupController Class provides routing to the groups page.
@@ -11,13 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author jakub
  */
 @Controller
-@RequestMapping("group")
+@RequestMapping("groups")
 @AllArgsConstructor
 public class GroupController {
 
-    @GetMapping
-    public String getAllGroups() {
+    private final GroupService groupService;
 
-        return "group";
+    @GetMapping
+    public String getAllGroups(Model model) {
+        List<AppGroup> groups = groupService.getGroups();
+        model.addAttribute("groups", groups);
+
+        return "groups";
     }
 }

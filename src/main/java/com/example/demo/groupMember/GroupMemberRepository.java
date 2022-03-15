@@ -1,12 +1,10 @@
 package com.example.demo.groupMember;
 
 import com.example.demo.appuser.AppUser;
-import com.example.demo.group.Group;
+import com.example.demo.group.AppGroup;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 
 /**
@@ -20,6 +18,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface GroupMemberRepository extends JpaRepository<GroupMember, Long> {
 
-    GroupMember findByGroupAndUser(Group group, AppUser user);
+    GroupMember findByGroupAndUser(AppGroup group, AppUser user);
 
 }

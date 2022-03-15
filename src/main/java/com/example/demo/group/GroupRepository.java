@@ -2,6 +2,7 @@ package com.example.demo.group;
 
 import com.example.demo.appuser.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +17,12 @@ import java.util.List;
  */
 @Repository
 @Transactional(readOnly = true)
-public interface GroupRepository extends JpaRepository<Group, Long> {
+public interface GroupRepository extends JpaRepository<AppGroup, Long> {
 
-    List<Group> findByCreator(AppUser creator);
+    List<AppGroup> findByCreator(AppUser creator);
+
+//    SELECT * FROM post ORDER BY postDateTime in DESCENDING order
+    @Query("SELECT g FROM AppGroup g ORDER BY g.name DESC")
+    List<AppGroup> findAllByName();
 
 }
