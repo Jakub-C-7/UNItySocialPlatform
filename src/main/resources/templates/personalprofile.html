@@ -25,6 +25,7 @@
             </form>
 
             <a href="/feed">Feed</a>
+            <a href="/groups">Groups</a>
             <a href="/personalprofile">Profile</a>
             <a href="/messageinbox">Messages</a>
             <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
@@ -48,6 +49,14 @@
 
         <form method="get" action="/editpersonalprofile">
             <button class="postButton" type="submit">Edit Profile</button>
+        </form>
+
+        <form method="get" action="/friendlist">
+            <button class="postButton" type="submit">Friend List</button>
+        </form>
+
+        <form method="get" action="/friendrequests">
+            <button class="postButton" type="submit">Friend Requests</button>
         </form>
 
         <h2>Your Posts: </h2>

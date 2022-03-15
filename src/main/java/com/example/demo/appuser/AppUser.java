@@ -1,6 +1,9 @@
 package com.example.demo.appuser;
 
 import com.example.demo.chat.Chat;
+import com.example.demo.friend.Friend;
+import com.example.demo.group.AppGroup;
+import com.example.demo.groupMember.GroupMember;
 import com.example.demo.post.Post;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -89,6 +92,18 @@ public class AppUser implements UserDetails {
 
     @OneToMany(mappedBy = "postUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Friend> friends1;
+
+    @OneToMany(mappedBy = "usersFriend", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Friend> friends2;
+
+    @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AppGroup> groups;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GroupMember> member;
 
     /**
      * The ENUM role of the user.
