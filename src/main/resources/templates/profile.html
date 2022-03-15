@@ -43,7 +43,7 @@
             <form th:unless="${areFriends}" th:action="@{'/sendfriendrequest/{id}'(id=${user.getId()})}" method="post" >
                 <button sec:authorize="isAuthenticated()" class="delete-button" type="submit"> <i class="material-icons 30">person_add</i></button>
             </form>
-            <span th:if="${areFriends && friendRecord.getAdded() == false}">Friend Request Pending</span>
+            <span sec:authorize="isAuthenticated()" th:if="${areFriends && friendRecord.getAdded() == false}">Friend Request Pending</span>
         </div>
 
         <p th:text="${user.getProfileBio()}"></p>
