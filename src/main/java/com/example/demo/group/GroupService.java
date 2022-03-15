@@ -24,6 +24,13 @@ public class GroupService {
         return groupRepository.findAll();
     }
 
+    /**
+     * Function which creates a new group adds the creator to it as an Admin.
+     * @param creator
+     * @param name
+     * @param description
+     * @param type
+     */
     public void createGroup(AppUser creator, String name, String description, String type ){
 
         AppGroup group = new AppGroup();
@@ -34,7 +41,6 @@ public class GroupService {
         group.setType(type);
         groupRepository.save(group);
 
-        //add the user as an accepted member and admin of the group
         groupMemberService.addCreator(group, creator);
     }
 }

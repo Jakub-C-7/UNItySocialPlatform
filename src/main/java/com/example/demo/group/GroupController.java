@@ -1,12 +1,16 @@
 package com.example.demo.group;
 
-import com.example.demo.post.Post;
+import com.example.demo.appuser.AppUser;
+import com.example.demo.appuser.AppUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -20,6 +24,7 @@ import java.util.List;
 public class GroupController {
 
     private final GroupService groupService;
+    private final AppUserRepository appUserRepository;
 
     @GetMapping
     public String getAllGroups(Model model) {
@@ -27,5 +32,14 @@ public class GroupController {
         model.addAttribute("groups", groups);
 
         return "groups";
+    }
+
+    @PostMapping
+    public String createGroup(Principal principal, @RequestParam String name, @RequestParam String description, @RequestParam String type){
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+
+        groupService.createGroup(user, name, description, type);
+
+        return "redirect:/groups";
     }
 }

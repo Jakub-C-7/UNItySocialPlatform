@@ -48,12 +48,16 @@
 <!--        <div class="alert alert-danger">Post cannot be empty!</div>-->
 <!--    </div>-->
 
-    <!-- Form to create a new post on the feed -->
-<!--    <form sec:authorize="isAuthenticated()" class="newPostBox" action="/feed" method="post">-->
-<!--        <input class="createPost" type="text" id="postContent" name="postContent"-->
-<!--               placeholder="What would you like to post?" maxlength="255" required>-->
-<!--        <button class="postButton" type="submit"><i class="material-icons">post_add</i></button>-->
-<!--    </form>-->
+    <!-- Form to create a new group -->
+    <form sec:authorize="isAuthenticated()" action="/groups" method="post">
+        <input type="text" id="name" name="name"
+               placeholder="Group Name" maxlength="20" required>
+        <input type="text" id="description" name="description"
+               placeholder="Group Description" maxlength="100" required>
+        <input type="text" id="type" name="type"
+               placeholder="Group Type" maxlength="20" required>
+        <button class="postButton" type="submit"><i class="material-icons">post_add</i></button>
+    </form>
 
     <p class="alert alert-danger" th:unless="${groups} and ${groups.size()}"> There are currently no groups available</p>
 
