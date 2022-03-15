@@ -66,10 +66,11 @@
         <th:block th:each="group : ${groups}">
             <li class="aPost">
                 <article class="postText">
-                    <p th:text="|${group.name}|"></p>
-                    <p th:text="|${group.type}|"></p>
-                    <em><a class="user-search-link" th:href="@{profile+'/'+${group.creator.getId()}}"
-                           th:text="${group.creator.getFullName()}"></a></em>
+                    <em><a th:text="|${group.name}|" th:href="@{group+'/'+${group.getId()}}"></a></em>
+                    <h2 th:text="|${group.type}|"></h2>
+                    <p>Owner: <a class="user-search-link" th:href="@{profile+'/'+${group.creator.getId()}}"
+                                 th:text="${group.creator.getFullName()}"></a></p>
+                    <p th:text="|${group.description}|"></p>
                 </article>
 <!--                <div class="div-delete-button" sec:authorize="isAuthenticated()" th:if="${post.postUser.getEmail() == principal.getName()}">-->
 
