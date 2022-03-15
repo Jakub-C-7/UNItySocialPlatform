@@ -49,6 +49,10 @@
 
         <p class="alert alert-danger" th:unless="${friends} and ${friends.size()}"> There are currently no friends available</p>
 
+        <form method="get" action="/personalprofile">
+            <button class="postButton" type="submit">Back to Profile</button>
+        </form>
+
         <!-- Ordered list of friends. Ordered alphabetically-->
         <ol>
             <th:block th:each="friend : ${friends}">

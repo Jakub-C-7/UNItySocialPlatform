@@ -49,6 +49,10 @@
 
         <p class="alert alert-danger" th:unless="${friends} and ${friends.size()}"> There are currently no friend requests available</p>
 
+        <form method="get" action="/personalprofile">
+            <button class="postButton" type="submit">Back to Profile</button>
+        </form>
+
         <!-- Ordered list of friend requests. Ordered from newest to oldest in descending order -->
         <ol>
             <th:block th:each="friend : ${friends}">
