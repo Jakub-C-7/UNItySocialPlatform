@@ -42,6 +42,6 @@ public class GroupsController {
 
         groupService.createGroup(user, name, description, type);
 
-        return "redirect:/groups";
+        return "redirect:/groups?success";
     }
 }
