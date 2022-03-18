@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 /**
  * GroupMemberRepository Interface performs GroupMember queries between the application and the database.
@@ -19,5 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 public interface GroupMemberRepository extends JpaRepository<GroupMember, Long> {
 
     GroupMember findByGroupAndUser(AppGroup group, AppUser user);
+
+    List<GroupMember> findByGroupAndAddedFalse(AppGroup group);
+
+    List<GroupMember> findByGroupAndAddedTrue(AppGroup group);
 
 }

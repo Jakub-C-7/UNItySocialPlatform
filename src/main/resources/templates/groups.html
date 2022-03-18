@@ -38,12 +38,9 @@
 
 <main>
 
-<!--    <div th:if="${param.postsuccess}">-->
-<!--        <div class="alert alert-info">Post created successfully!</div>-->
-<!--    </div>-->
-<!--    <div th:if="${param.posteditsuccess}">-->
-<!--        <div class="alert alert-info">Post edited successfully!</div>-->
-<!--    </div>-->
+    <div sec:authorize="isAuthenticated()" th:if="${param.success}">
+        <div class="alert alert-info">Group created successfully!</div>
+    </div>
 <!--    <div th:if="${param.postempty}">-->
 <!--        <div class="alert alert-danger">Post cannot be empty!</div>-->
 <!--    </div>-->
@@ -61,7 +58,7 @@
 
     <p class="alert alert-danger" th:unless="${groups} and ${groups.size()}"> There are currently no groups available</p>
 
-    <!-- Ordered list of posts on the feed -->
+    <!-- Ordered list of groups -->
     <ol>
         <th:block th:each="group : ${groups}">
             <li class="aPost">
@@ -72,18 +69,6 @@
                                  th:text="${group.creator.getFullName()}"></a></p>
                     <p th:text="|${group.description}|"></p>
                 </article>
-<!--                <div class="div-delete-button" sec:authorize="isAuthenticated()" th:if="${post.postUser.getEmail() == principal.getName()}">-->
-
-<!--                    <form th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">-->
-<!--                        <input type="hidden" name="_method" value="DELETE" />-->
-<!--                        <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>-->
-<!--                    </form>-->
-
-<!--                    <form th:action="@{'/editpersonalpost/{id}'(id=${post.getId()})}" method="get" >-->
-<!--                        <button class="delete-button" type="submit"> <i class="material-icons">edit</i></button>-->
-<!--                    </form> <br>-->
-
-<!--                </div>-->
             </li>
         </th:block>
     </ol>

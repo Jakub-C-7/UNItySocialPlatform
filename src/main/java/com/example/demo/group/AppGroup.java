@@ -1,12 +1,14 @@
 package com.example.demo.group;
 
 import com.example.demo.appuser.AppUser;
+import com.example.demo.groupMember.GroupMember;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Group Class represents an instance of a user created group.
@@ -55,6 +57,9 @@ public class AppGroup {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private AppUser creator;
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GroupMember> members;
 
     public AppGroup(String name, String description, String type, AppUser creator) {
         this.name = name;

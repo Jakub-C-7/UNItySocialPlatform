@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class GroupMemberService {
 
-    private final GroupRepository groupRepository;
     private final GroupMemberRepository groupMemberRepository;
 
     public void addCreator(AppGroup group, AppUser creator){
@@ -29,7 +28,7 @@ public class GroupMemberService {
         groupMemberRepository.save(groupMember);
     }
 
-    public void addMember(AppGroup group, AppUser user ){
+    public void addMemberRequest(AppGroup group, AppUser user ){
 
         GroupMember groupMember = new GroupMember();
 
@@ -46,6 +45,12 @@ public class GroupMemberService {
         record.setAdded(true);
 
         groupMemberRepository.save(record);
+    }
+
+    public void denyRequest(AppGroup group, AppUser user) {
+        GroupMember record = groupMemberRepository.findByGroupAndUser(group, user);
+
+        groupMemberRepository.delete(record);
     }
 
     public void setAdmin(AppGroup group, AppUser user) {

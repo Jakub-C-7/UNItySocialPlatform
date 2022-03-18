@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Group Members</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../unity.css" type="text/css"/>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+
+            <form class="search-container" th:action="@{/searchusers}" method="get">
+                <input type="search" name="keyword" th:value="${keyword}" class="search-bar" placeholder="Search for users...">
+                <button type="submit"><i class="material-icons">search</i></button>
+            </form>
+
+            <a href="/feed">Feed</a>
+            <a href="/groups">Groups</a>
+            <a sec:authorize="!isAuthenticated()" href="/login">Log-in</a>
+            <a sec:authorize="!isAuthenticated()" href="/register">Register</a>
+            <a sec:authorize="isAuthenticated()" href="/personalprofile">Profile</a>
+            <a sec:authorize="isAuthenticated()" href="/messageinbox">Messages</a>
+            <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
+            <a sec:authorize="isAuthenticated()" href="/logout">Log out</a>
+        </nav>
+
+        <h1>Group Members</h1>
+    </header>
+
+    <main>
+
+        <form method="get" th:action="@{'/group/{id}'(id=${group.getId()})}">
+            <button class="postButton" type="submit">Back to Group</button>
+        </form>
+
+        <ol>
+            <th:block th:each="member : ${members}">
+                <li class="aPost" th:if="${member.getAdded() == true}">
+                    <img th:src="${member.user.getProfilePicture()}" class="post-profile-picture">
+                    <article class="postText">
+                        <em><a class="user-search-link" th:href="@{'/'+profile+'/'+${member.user.getId()}}"
+                               th:text="${member.user.getFullName()}"></a></em>
+                        <p th:text="${member.getRole()}"></p>
+                    </article>
+                </li>
+            </th:block>
+        </ol>
+
+        <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+
+    </main>
+
+</body>
+</html>
