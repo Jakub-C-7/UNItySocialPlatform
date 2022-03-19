@@ -6,12 +6,15 @@ import com.example.demo.groupMember.GroupMember;
 import com.example.demo.groupMember.GroupMemberRepository;
 import com.example.demo.groupMember.GroupMemberRole;
 import com.example.demo.groupMember.GroupMemberService;
+import com.example.demo.groupPost.GroupPost;
+import com.example.demo.groupPost.GroupPostService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -27,6 +30,7 @@ public class GroupController {
     private final GroupRepository groupRepository;
     private final GroupMemberRepository groupMemberRepository;
     private final AppUserRepository appUserRepository;
+    private final GroupPostService groupPostService;
 
     @GetMapping("group/{groupId}")
     public String getUserProfile(@PathVariable("groupId") Long groupId, Model model, Principal principal){
@@ -71,9 +75,36 @@ public class GroupController {
             model.addAttribute("record", record);
         }
 
+        List<GroupPost> posts = groupPostService.getPosts(group);
+
+        model.addAttribute("posts", posts);
+
+        model.addAttribute("principal", principal);
+
         model.addAttribute("group", group);
 
         return "group";
+    }
+
+    @PostMapping(path = "group/{gid}/deletepost/{id}")
+    public String deletePost(@PathVariable Long id, @PathVariable Long gid ) {
+        groupPostService.deletePost(id);
+
+        return "redirect:/group/{gid}?deletesuccess";
+    }
+
+    @PostMapping("group/{groupId}")
+    public String newPost(@PathVariable("groupId") Long id, GroupPost post, Principal principal, LocalDateTime localdatetime) {
+        AppGroup group = groupRepository.findById(id).get();
+
+        if (post.getPostContent().equals("")){
+            return "redirect:/group/{groupId}?postempty";
+        }
+
+        groupPostService.createNewPost(post, group, principal, localdatetime.now());
+
+        return "redirect:/group/{groupId}?postsuccess";
+
     }
 
     @GetMapping("groupadmininbox/{groupId}")
