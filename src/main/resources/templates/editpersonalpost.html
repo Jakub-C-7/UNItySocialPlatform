@@ -32,7 +32,7 @@
 <main>
   <h1>Edit Personal Post</h1>
 
-  <form class="newPostBox" th:action="@{'/editpersonalpost/{id}'(id=${post.getId()})}" method="post">
+  <form class="newPostBox" th:if="${!editingGroupPost}" th:action="@{'/editpersonalpost/group{id}'(id=${post.getId()})}" method="post">
     <p>
     <label for="postContent" class="sr-only">Post Content</label>
     <input class="createPost" type="text" id="postContent" name="postContent"
@@ -40,8 +40,20 @@
     <button class="postButton" type="submit">Submit Changes</button>
   </form>
 
-  <form method="get" action="/feed">
+  <form class="newPostBox" th:if="${editingGroupPost}" th:action="@{'/editpersonalpost/group{id}/{gid}'(id=${post.getId()},gid=${post.getGroup().getId()} )}" method="post">
+    <p>
+      <label for="postContent" class="sr-only">Post Content</label>
+      <input class="createPost" type="text" id="groupPostContent" name="groupPostContent"
+             th:value="|${post.postContent}|" maxlength="255" autofocus required>
+      <button class="postButton" type="submit">Submit Changes</button>
+  </form>
+
+  <form th:if="${!editingGroupPost}" method="get" action="/feed">
     <button class="postButton" type="submit">Back to feed</button>
+  </form>
+
+  <form th:if="${editingGroupPost}" method="get"th:action="@{'/group/{id}'(id=${post.group.getId()})}">
+    <button class="postButton" type="submit">Back to group</button>
   </form>
 
 </main>
