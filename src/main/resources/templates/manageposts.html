@@ -43,7 +43,7 @@
         <p class="alert alert-danger" th:unless="${posts} and ${posts.size()}"> There are currently no posts available!</p>
 
         <!-- Ordered list of posts on the feed -->
-        <ol>
+        <ol id="itemlist">
             <th:block th:each="post : ${posts}">
 
                 <li class="aPost">
@@ -71,9 +71,17 @@
             <button class="btn btn-primary btn-block" type="submit">Back</button>
         </form>
 
-        <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+        <span id="pagination">
+            <button id="prev">&lt;</button>
+            <span id="pageIndicator">0</span> of <span id="nPages">0</span>
+            <button id="next">&gt;</button>
+        </span>
 
     </main>
+
+    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+
+    <script type="text/javascript" src="../js/pagination.js"></script>
 
 </body>
 </html>

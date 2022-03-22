@@ -43,7 +43,7 @@
         <p class="alert alert-danger" th:unless="${users} and ${users.size()}"> There are currently no users available!</p>
 
         <!-- Ordered list of users -->
-        <ol>
+        <ol id="itemlist">
             <th:block th:each="user : ${users}">
                 <li class="aPost" th:if="${user.getEmail() != principal.getName()}">
                     <img th:src="${user.getProfilePicture()}" class="post-profile-picture">
@@ -66,9 +66,17 @@
             <button class="btn btn-primary btn-block" type="submit">Back</button>
         </form>
 
-        <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+        <span id="pagination">
+            <button id="prev">&lt;</button>
+            <span id="pageIndicator">0</span> of <span id="nPages">0</span>
+            <button id="next">&gt;</button>
+        </span>
 
     </main>
+
+    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+
+    <script type="text/javascript" src="../js/pagination.js"></script>
 
 </body>
 </html>
