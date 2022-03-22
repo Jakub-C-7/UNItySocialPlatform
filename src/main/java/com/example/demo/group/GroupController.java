@@ -2,7 +2,6 @@ package com.example.demo.group;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
-import com.example.demo.editpersonalprofile.EditProfileRequest;
 import com.example.demo.groupMember.GroupMember;
 import com.example.demo.groupMember.GroupMemberRepository;
 import com.example.demo.groupMember.GroupMemberRole;
@@ -188,7 +187,6 @@ public class GroupController {
         // If one of the updates succeeds.
         if (nameResult || descriptionResult || typeResult){
 
-
             return "redirect:/editgroup/{groupId}?success";
 
         } else {
@@ -206,13 +204,63 @@ public class GroupController {
             return "redirect:/groups";
         }
 
+        if (principal != null) {
+            AppUser loggedInUser = appUserRepository.findByEmail(principal.getName()).get();
+            GroupMember record = groupMemberRepository.findByGroupAndUser(group, loggedInUser);
+
+            Boolean isAdmin;
+            if (record != null && record.getAdded() == true) {
+                if (record.getRole() == GroupMemberRole.GROUP_ADMIN) {
+                    isAdmin = true;
+                } else {
+                    isAdmin = false;
+                }
+            } else {
+                isAdmin = false;
+            }
+            model.addAttribute("isAdmin", isAdmin);
+        }
+
+        GroupMemberRole admin = GroupMemberRole.GROUP_ADMIN;
+        GroupMemberRole user = GroupMemberRole.GROUP_USER;
+
+        model.addAttribute("admin", admin);
+        model.addAttribute("user", user);
+
         List<GroupMember> members = groupMemberRepository.findByGroupAndAddedTrue(group);
 
         model.addAttribute("members", members);
 
         model.addAttribute("group", group);
 
+        model.addAttribute("principal", principal);
+
         return "groupmemberlist";
+    }
+
+    @PostMapping(path = "group/removemember/{id}/{groupId}")
+    public String removeMember(@PathVariable Long id, @PathVariable Long groupId) {
+        groupMemberRepository.deleteById(id);
+
+        return "redirect:/memberlist/{groupId}?deletesuccess";
+    }
+
+    @PostMapping(path = "group/promotemember/{id}/{groupId}")
+    public String promoteMember(@PathVariable Long id, @PathVariable Long groupId) {
+        GroupMember member = groupMemberRepository.findById(id).get();
+
+        groupMemberService.setAdmin(member);
+
+        return "redirect:/memberlist/{groupId}?promotesuccess";
+    }
+
+    @PostMapping(path = "group/demotemember/{id}/{groupId}")
+    public String demoteMember(@PathVariable Long id, @PathVariable Long groupId, Model model) {
+        GroupMember member = groupMemberRepository.findById(id).get();
+
+        groupMemberService.setUser(member);
+
+        return "redirect:/memberlist/{groupId}?demotesuccess";
     }
 
     @PostMapping(path = "group/sendjoinrequest/{id}")
