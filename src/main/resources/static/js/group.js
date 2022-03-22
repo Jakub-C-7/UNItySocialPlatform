@@ -1,35 +1,35 @@
 "use strict"
 
-let pageSize = 5;
+let pageSize = 10;
 let currentPage = 1;
-let userRepos;
+let objects;
 
 function clearResults() {
-    while (listofposts.firstChild) {
-        listofposts.firstChild.remove();
+    while (listofgroupposts.firstChild) {
+        listofgroupposts.firstChild.remove();
     }
 }
 
 function loadPosts(){
     const result = document.querySelectorAll('li');
-    userRepos = Array.from(result) || [];
+    objects = Array.from(result) || [];
 }
 
 function loadPage() {
     clearResults();
-    nPages.textContent = Math.ceil(userRepos.length / pageSize);
-    const currentObject = userRepos.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+    nPages.textContent = Math.ceil(objects.length / pageSize);
+    const currentObject = objects.slice((currentPage - 1) * pageSize, currentPage * pageSize);
     insertPosts(currentObject);
     pageIndicator.textContent = currentPage;
 }
 
 function insertPosts(objects) {
-    objects.forEach(x => listofposts.appendChild(x));
+    objects.forEach(x => listofgroupposts.appendChild(x));
 }
 
 function nextPage() {
     currentPage += 1;
-    const nPages = Math.ceil(userRepos.length / pageSize);
+    const nPages = Math.ceil(objects.length / pageSize);
     if (currentPage > nPages) {
         currentPage = 1;
     }
@@ -38,7 +38,7 @@ function nextPage() {
 
 function prevPage() {
     currentPage -= 1;
-    const nPages = Math.ceil(userRepos.length / pageSize);
+    const nPages = Math.ceil(objects.length / pageSize);
     if (currentPage < 1) {
         currentPage = nPages;
     }
