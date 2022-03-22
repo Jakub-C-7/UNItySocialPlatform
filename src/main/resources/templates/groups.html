@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Groups</title>
+    <title>UNIty</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
@@ -41,8 +41,8 @@
     <div sec:authorize="isAuthenticated()" th:if="${param.success}">
         <div class="alert alert-info">Group created successfully!</div>
     </div>
-<!--    <div th:if="${param.postempty}">-->
-<!--        <div class="alert alert-danger">Post cannot be empty!</div>-->
+<!--    <div th:if="${param.inputsempty}">-->
+<!--        <div class="alert alert-danger">Input fields cannot be empty</div>-->
 <!--    </div>-->
 
     <!-- Form to create a new group -->
@@ -59,7 +59,7 @@
     <p class="alert alert-danger" th:unless="${groups} and ${groups.size()}"> There are currently no groups available</p>
 
     <!-- Ordered list of groups -->
-    <ol>
+    <ol id="listofgroups">
         <th:block th:each="group : ${groups}">
             <li class="aPost">
                 <article class="postText">
@@ -73,9 +73,17 @@
         </th:block>
     </ol>
 
-    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+    <span id="pagination">
+        <button id="prev">&lt;</button>
+        <span id="pageIndicator">0</span> of <span id="nPages">0</span>
+        <button id="next">&gt;</button>
+    </span>
 
 </main>
+
+<footer>&copy;Copyright 2022 Jakub Chamera</footer>
+
+<script type="text/javascript" src="js/groups.js"></script>
 
 </body>
 </html>

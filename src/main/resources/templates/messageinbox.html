@@ -37,7 +37,7 @@
         <p>Your existing chats are listed below</p>
 
         <p class="alert alert-danger" th:unless="${chats} and ${chats.size()}"> There are currently no chats available</p>
-        <ol>
+        <ol id="itemlist">
             <th:block th:each="chat : ${chats}">
                 <li class="aPost">
                     <img th:src="${chat.participantOne.getProfilePicture()}" class="post-profile-picture">
@@ -50,9 +50,18 @@
                 </li>
             </th:block>
         </ol>
+
+        <span id="pagination">
+            <button id="prev">&lt;</button>
+            <span id="pageIndicator">0</span> of <span id="nPages">0</span>
+            <button id="next">&gt;</button>
+        </span>
+
     </main>
 
     <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+
+    <script type="text/javascript" src="js/pagination.js"></script>
 
 </body>
 </html>

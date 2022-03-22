@@ -59,7 +59,7 @@
         <p class="alert alert-danger" th:unless="${posts} and ${posts.size()}"> There are currently no posts available</p>
 
         <!-- Ordered list of posts on the feed -->
-        <ol>
+        <ol id="itemlist">
             <th:block th:each="post : ${posts}">
                 <li class="aPost">
                     <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
@@ -91,9 +91,17 @@
             </th:block>
         </ol>
 
+        <span id="pagination">
+            <button id="prev">&lt;</button>
+            <span id="pageIndicator">0</span> of <span id="nPages">0</span>
+            <button id="next">&gt;</button>
+        </span>
+
         <footer>&copy;Copyright 2022 Jakub Chamera</footer>
 
     </main>
+
+    <script type="text/javascript" src="js/pagination.js"></script>
 
 </body>
 </html>
