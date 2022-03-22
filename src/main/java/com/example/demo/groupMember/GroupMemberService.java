@@ -2,7 +2,6 @@ package com.example.demo.groupMember;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.group.AppGroup;
-import com.example.demo.group.GroupRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -53,17 +52,13 @@ public class GroupMemberService {
         groupMemberRepository.delete(record);
     }
 
-    public void setAdmin(AppGroup group, AppUser user) {
-        GroupMember record = groupMemberRepository.findByGroupAndUser(group, user);
-
+    public void setAdmin(GroupMember record) {
         record.setRole(GroupMemberRole.GROUP_ADMIN);
 
         groupMemberRepository.save(record);
     }
 
-    public void setUser(AppGroup group, AppUser user) {
-        GroupMember record = groupMemberRepository.findByGroupAndUser(group, user);
-
+    public void setUser(GroupMember record) {
         record.setRole(GroupMemberRole.GROUP_USER);
 
         groupMemberRepository.save(record);

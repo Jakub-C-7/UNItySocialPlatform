@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Group Members</title>
+    <title>UNIty</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
@@ -44,6 +44,18 @@
             <button class="postButton" type="submit">Back to Group</button>
         </form>
 
+        <div sec:authorize="isAuthenticated()" th:if="${param.deletesuccess}">
+            <div class="alert alert-info">User removed successfully!</div>
+        </div>
+
+        <div sec:authorize="isAuthenticated()" th:if="${param.promotesuccess}">
+            <div class="alert alert-info">User promoted to admin!</div>
+        </div>
+
+        <div sec:authorize="isAuthenticated()" th:if="${param.demotesuccess}">
+            <div class="alert alert-info">User demoted to a base user!</div>
+        </div>
+
         <ol>
             <th:block th:each="member : ${members}">
                 <li class="aPost" th:if="${member.getAdded() == true}">
@@ -53,6 +65,22 @@
                                th:text="${member.user.getFullName()}"></a></em>
                         <p th:text="${member.getRole()}"></p>
                     </article>
+                    <div class="div-delete-button" sec:authorize="isAuthenticated()" th:if="${member.user.getEmail() != principal.getName() && isAdmin}">
+
+                        <form th:action="@{'/group/removemember/{id}/{groupId}'(id=${member.getId()}, groupId=${member.group.getId()})}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>
+                        </form>
+
+                        <form th:if="${member.getRole() == user}" th:action="@{'/group/promotemember/{id}/{groupId}'(id=${member.getId()}, groupId=${member.group.getId()})}" method="post" >
+                            <button class="delete-button" type="submit"> <i class="material-icons">supervisor_account</i>Promote</button>
+                        </form> <br>
+
+                        <form th:if="${member.getRole() == admin}" th:action="@{'/group/demotemember/{id}/{groupId}'(id=${member.getId()}, groupId=${member.group.getId()})}" method="post" >
+                            <button class="delete-button" type="submit"> <i class="material-icons">supervisor_account</i>Demote</button>
+                        </form> <br>
+
+                    </div>
                 </li>
             </th:block>
         </ol>

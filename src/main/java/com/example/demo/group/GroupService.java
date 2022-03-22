@@ -2,6 +2,7 @@ package com.example.demo.group;
 
 import com.example.demo.appuser.AppUser;
 //import com.example.demo.groupMember.GroupMemberService;
+import com.example.demo.editpersonalprofile.EditProfileRequest;
 import com.example.demo.groupMember.GroupMemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,32 @@ public class GroupService {
         groupRepository.save(group);
 
         groupMemberService.addCreator(group, creator);
+    }
+
+    public boolean editName(EditGroupRequest request, AppGroup group){
+        if (request.getName() != ""){
+                group.setName(request.getName());
+                groupRepository.save(group);
+                return true;
+        }
+        return false;
+    }
+
+    public boolean editDescription(EditGroupRequest request, AppGroup group){
+        if (request.getDescription() != ""){
+            group.setDescription(request.getDescription());
+            groupRepository.save(group);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean editType(EditGroupRequest request, AppGroup group){
+        if (request.getDescription() != ""){
+            group.setType(request.getType());
+            groupRepository.save(group);
+            return true;
+        }
+        return false;
     }
 }

@@ -52,14 +52,17 @@
     <h3 th:text="${'Owner: '+group.getCreator().getFullName()}"></h3>
     <p th:text="${'Description: '+group.getDescription()}"></p>
 
-    <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get" th:action="@{'/groupadmininbox/{id}'(id=${group.getId()})}">
-        <button class="postButton" type="submit">Admin Inbox</button>
-    </form><br>
-
     <form method="get" th:action="@{'/memberlist/{id}'(id=${group.getId()})}">
         <button class="postButton" type="submit">Member List</button>
     </form><br>
 
+    <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get" th:action="@{'/groupadmininbox/{id}'(id=${group.getId()})}">
+        <button class="postButton" type="submit">Admin Inbox</button>
+    </form><br>
+
+    <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get" th:action="@{'/editgroup/{id}'(id=${group.getId()})}">
+        <button class="postButton" type="submit">Edit Group</button>
+    </form><br>
 
     <section sec:authorize="isAuthenticated()" th:if="${isAMember}">
         <!-- Form to create a new post in the group -->
@@ -68,16 +71,16 @@
                    placeholder="What would you like to post?" maxlength="255" required>
             <button class="postButton" type="submit"><i class="material-icons">post_add</i></button>
         </form>
-        <div th:if="${param.postsuccess}">
+        <div sec:authorize="isAuthenticated()" th:if="${param.postsuccess}">
             <div class="alert alert-info">Post created successfully!</div>
         </div>
-        <div th:if="${param.deletesuccess}">
+        <div sec:authorize="isAuthenticated()" th:if="${param.deletesuccess}">
             <div class="alert alert-info">Post deleted successfully!</div>
         </div>
-        <div th:if="${param.posteditsuccess}">
+        <div sec:authorize="isAuthenticated()" th:if="${param.posteditsuccess}">
             <div class="alert alert-info">Post edited successfully!</div>
         </div>
-        <div th:if="${param.postempty}">
+        <div sec:authorize="isAuthenticated()" th:if="${param.postempty}">
             <div class="alert alert-danger">Post cannot be empty!</div>
         </div>
         <h2>Group Content: </h2>
@@ -86,7 +89,7 @@
                 <li class="aPost">
                     <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
                     <article class="postText">
-                        <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
+                        <em><a class="user-search-link" th:href="@{'/'+profile+'/'+${post.postUser.getId()}}"
                                th:text="${post.postUser.getFullName()}"></a></em>
                         <p th:text="|${post.postContent}|"></p>
                         <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
