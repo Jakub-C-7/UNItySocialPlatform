@@ -2,6 +2,7 @@ package com.example.demo.group;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
+import com.example.demo.editpersonalprofile.EditProfileRequest;
 import com.example.demo.groupMember.GroupMember;
 import com.example.demo.groupMember.GroupMemberRepository;
 import com.example.demo.groupMember.GroupMemberRole;
@@ -12,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
@@ -27,6 +29,7 @@ import java.util.List;
 public class GroupController {
 
     private final GroupMemberService groupMemberService;
+    private final GroupService groupService;
     private final GroupRepository groupRepository;
     private final GroupMemberRepository groupMemberRepository;
     private final AppUserRepository appUserRepository;
@@ -129,6 +132,69 @@ public class GroupController {
         model.addAttribute("group", group);
 
         return "groupadmininbox";
+    }
+
+    @GetMapping("managegroup/{groupId}")
+    public String getManagingGroup(@PathVariable("groupId") Long groupId, Model model, Principal principal){
+        boolean groupExists = groupRepository.findById(groupId).isPresent();
+        AppGroup group = groupRepository.getById(groupId);
+        AppUser loggedInUser = appUserRepository.findByEmail(principal.getName()).get();
+        GroupMember record = groupMemberRepository.findByGroupAndUser(group, loggedInUser);
+
+        if (!groupExists){
+            return "redirect:/groups";
+        } else if (record == null) {
+            return "redirect:/groups";
+        } else if (record.getRole() != GroupMemberRole.GROUP_ADMIN) {
+            return "redirect:/groups";
+        }
+
+        List<GroupMember> members = groupMemberRepository.findByGroupAndAddedTrue(group);
+
+        model.addAttribute("members", members);
+
+        model.addAttribute("group", group);
+
+        return "editgroup";
+    }
+
+    @GetMapping("editgroup/{groupId}")
+    public String getEditingGroup(@PathVariable("groupId") Long groupId, Model model, Principal principal){
+        boolean groupExists = groupRepository.findById(groupId).isPresent();
+        AppGroup group = groupRepository.getById(groupId);
+        AppUser loggedInUser = appUserRepository.findByEmail(principal.getName()).get();
+        GroupMember record = groupMemberRepository.findByGroupAndUser(group, loggedInUser);
+
+        if (!groupExists){
+            return "redirect:/groups";
+        } else if (record == null) {
+            return "redirect:/groups";
+        } else if (record.getRole() != GroupMemberRole.GROUP_ADMIN) {
+            return "redirect:/groups";
+        }
+
+        model.addAttribute("group", group);
+
+        return "editgroup";
+    }
+
+    @PostMapping("editgroup/{groupId}")
+    public String editGroup(@PathVariable("groupId") Long groupId, EditGroupRequest request, Principal principal){
+        AppGroup group = groupRepository.findById(groupId).get();
+        boolean nameResult = groupService.editName(request, group);
+        boolean descriptionResult = groupService.editDescription(request, group);
+        boolean typeResult = groupService.editType(request, group);
+
+        // If one of the updates succeeds.
+        if (nameResult || descriptionResult || typeResult){
+
+
+            return "redirect:/editgroup/{groupId}?success";
+
+        } else {
+            return "redirect:/editgroup/{groupId}?error";
+        }
+
     }
 
     @GetMapping("memberlist/{groupId}")

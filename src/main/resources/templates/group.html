@@ -52,14 +52,17 @@
     <h3 th:text="${'Owner: '+group.getCreator().getFullName()}"></h3>
     <p th:text="${'Description: '+group.getDescription()}"></p>
 
-    <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get" th:action="@{'/groupadmininbox/{id}'(id=${group.getId()})}">
-        <button class="postButton" type="submit">Admin Inbox</button>
-    </form><br>
-
     <form method="get" th:action="@{'/memberlist/{id}'(id=${group.getId()})}">
         <button class="postButton" type="submit">Member List</button>
     </form><br>
 
+    <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get" th:action="@{'/groupadmininbox/{id}'(id=${group.getId()})}">
+        <button class="postButton" type="submit">Admin Inbox</button>
+    </form><br>
+
+    <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get" th:action="@{'/editgroup/{id}'(id=${group.getId()})}">
+        <button class="postButton" type="submit">Edit Group</button>
+    </form><br>
 
     <section sec:authorize="isAuthenticated()" th:if="${isAMember}">
         <!-- Form to create a new post in the group -->
