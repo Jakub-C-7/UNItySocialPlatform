@@ -278,6 +278,12 @@ ol {
     margin-bottom: 2rem;
 }
 
+.flat-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vh;
+}
+
 /***********************************************/
 /* User Search Page                            */
 /***********************************************/
