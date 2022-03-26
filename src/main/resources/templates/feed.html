@@ -66,20 +66,15 @@
         <ol id="itemlist">
             <th:block  th:each="post : ${posts}">
                 <li class="aPost">
-                    <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
-                    <article class="postText">
-                        <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
-                               th:text="${post.postUser.getFullName()}"></a></em>
-                        <p id="post_content" th:text="|${post.postContent}|"></p>
-                        <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
-                        <label id="likes" th:text="${postService.getLikeCount(post)+' likes'}"></label>
-
-<!--                        <form th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" th:method="delete">-->
-<!--                            <input type="hidden" name="_method" value="delete" />-->
-<!--                            <button type="submit" id="submitButton"></button>-->
-<!--                        </form>-->
-
-                    </article>
+                    <div class="post-top">
+                        <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
+                        <article class="postText">
+                            <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
+                                   th:text="${post.postUser.getFullName()}"></a></em>
+                            <p id="post_content" th:text="|${post.postContent}|"></p>
+                            <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
+                            <label id="likes" th:text="${postService.getLikeCount(post)+' likes'}"></label>
+                        </article>
                         <div class="div-delete-button" sec:authorize="isAuthenticated()">
 
                             <form th:if="${post.postUser.getEmail() == principal.getName()}" th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">
@@ -94,9 +89,30 @@
                             <form th:action="@{'/feed/likepost/{id}'(id=${post.getId()})}" method="post">
                                 <button class="delete-button" type="submit"> <i class="material-icons">thumb_up</i></button>
                             </form> <br>
-
                         </div>
+                    </div>
 
+                    <div th:if="${postCommentService.getPostComments(post).size()}" class="post_bottom">
+                        <ol id="commentWrapper">
+                            <th:block th:each="comment : ${postCommentService.getPostComments(post)}">
+                                <div class="aComment">
+                                    <img th:src="${comment.getCommentAuthor().getProfilePicture()}" class="post-profile-picture">
+                                    <article class="messageText">
+                                        <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
+                                               th:text="${post.postUser.getFullName()}"></a></em>
+                                        <p th:text="${comment.getCommentContent()}"></p>
+                                    </article>
+                                </div>
+                            </th:block>
+                        </ol>
+                    </div>
+
+                    <!-- Form to create and add a new comment -->
+                    <form sec:authorize="isAuthenticated()" class="createMessageWrapper" th:action="@{'feed/addcomment/{id}'(id=${post.getId()})}" method="post">
+                        <input class="createComment" type="text" id="commentContent" name="commentContent"
+                               placeholder="Comment..." maxlength="255" required>
+                        <button class="sendButton" type="submit"><i class="material-icons">send</i></button>
+                    </form>
                 </li>
             </th:block>
         </ol>
