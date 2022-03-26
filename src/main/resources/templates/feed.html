@@ -58,16 +58,19 @@
 
         <p class="alert alert-danger" th:unless="${posts} and ${posts.size()}"> There are currently no posts available</p>
 
+        <section id="search">
+            <input id="myQuery" type="search" placeholder="&#128269; search" aria-label="search">
+        </section>
+
         <!-- Ordered list of posts on the feed -->
         <ol id="itemlist">
-
-            <th:block th:each="post : ${posts}">
+            <th:block  th:each="post : ${posts}">
                 <li class="aPost">
                     <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
                     <article class="postText">
                         <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
                                th:text="${post.postUser.getFullName()}"></a></em>
-                        <p th:text="|${post.postContent}|"></p>
+                        <p id="post_content" th:text="|${post.postContent}|"></p>
                         <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
                         <label id="likes" th:text="${postService.getLikeCount(post)+' likes'}"></label>
 
@@ -108,7 +111,7 @@
 
     </main>
 
-    <script type="text/javascript" src="js/pagination.js"></script>
+    <script type="text/javascript" src="js/feed.js"></script>
 
 </body>
 </html>
