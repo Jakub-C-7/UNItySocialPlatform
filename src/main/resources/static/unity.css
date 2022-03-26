@@ -114,7 +114,7 @@ ol {
     flex-direction: column;
 }
 
-.aPost, .aMessage {
+.aPost, .aMessage, .aChat {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -239,6 +239,14 @@ ol {
 
 .aMessage {
     border-radius: 40px;
+}
+
+.aChat {
+    flex-direction: column;
+}
+
+#chat-top {
+    display: flex;
 }
 
 .createMessage {
