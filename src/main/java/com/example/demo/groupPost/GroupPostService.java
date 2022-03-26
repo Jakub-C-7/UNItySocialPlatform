@@ -3,6 +3,8 @@ package com.example.demo.groupPost;
 import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
 import com.example.demo.group.AppGroup;
+import com.example.demo.post.Post;
+import com.example.demo.postLike.PostLikeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,7 @@ public class GroupPostService {
 
     private final GroupPostRepository groupPostRepository;
     private final AppUserRepository appUserRepository;
+    private final PostLikeRepository postLikeRepository;
 
     /**
      * Function for creating new posts.
@@ -75,6 +78,20 @@ public class GroupPostService {
         GroupPost post = groupPostRepository.findById(postId).get();
         post.setPostContent(postContent);
         groupPostRepository.save(post);
+    }
+
+    /**
+     * Function to get the like count of a post
+     * @param post
+     * @return
+     */
+    public Integer getLikeCount(GroupPost post) {
+
+        if (postLikeRepository.findAllByGroupPost(post).isEmpty()) {
+            return 0;
+        } else {
+            return postLikeRepository.findAllByGroupPost(post).size();
+        }
     }
 
 }

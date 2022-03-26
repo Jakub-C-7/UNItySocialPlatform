@@ -6,6 +6,7 @@ import com.example.demo.group.AppGroup;
 import com.example.demo.groupMember.GroupMember;
 import com.example.demo.groupPost.GroupPost;
 import com.example.demo.post.Post;
+import com.example.demo.postComment.PostComment;
 import com.example.demo.postLike.PostLike;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -112,6 +113,9 @@ public class AppUser implements UserDetails {
 
     @OneToMany(mappedBy = "likeUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostLike> userLikes;
+
+    @OneToMany(mappedBy = "commentAuthor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostComment> userComments;
 
     /**
      * The ENUM role of the user.

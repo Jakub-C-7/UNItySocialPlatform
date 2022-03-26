@@ -2,6 +2,8 @@ package com.example.demo.groupPost;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.group.AppGroup;
+import com.example.demo.postComment.PostComment;
+import com.example.demo.postLike.PostLike;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * GroupPost Class represents an instance of a post in a group.
@@ -58,6 +61,18 @@ public class GroupPost {
      * DateTime of when the post was created.
      */
     private LocalDateTime postDateTime;
+
+    /**
+     * The list of post likes related to the post.
+     */
+    @OneToMany(mappedBy = "groupPost", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostLike> postLikes;
+
+    /**
+     * The list of post comments related to the post
+     */
+    @OneToMany(mappedBy = "groupPost", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PostComment> postComments;
 
     public GroupPost(String postContent, AppUser postUser, AppGroup group, LocalDateTime postDateTime) {
         this.postContent = postContent;

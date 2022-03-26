@@ -2,6 +2,7 @@ package com.example.demo.postLike;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
+import com.example.demo.groupPost.GroupPost;
 import com.example.demo.post.Post;
 import com.example.demo.postLike.PostLike;
 import com.example.demo.postLike.PostLikeRepository;
@@ -39,13 +40,37 @@ public class PostLikeService {
     }
 
     /**
-     * Function for removing a like from a given post.
+     * Function for adding a new like to a group post.
+     */
+    public void addGroupLike(GroupPost post, Principal principal){
+
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+
+        PostLike like = new PostLike(post, user);
+
+        postLikeRepository.save(like);
+    }
+
+    /**
+     * Function for removing a like from a given feed post.
      */
     public void removeLike(Post post, Principal principal){
 
         AppUser user = appUserRepository.findByEmail(principal.getName()).get();
 
         PostLike like = postLikeRepository.findByLikeUserAndPost(user, post);
+
+        postLikeRepository.delete(like);
+    }
+
+    /**
+     * Function for removing a like from a given group post.
+     */
+    public void removeGroupLike(GroupPost post, Principal principal){
+
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+
+        PostLike like = postLikeRepository.findByLikeUserAndGroupPost(user, post);
 
         postLikeRepository.delete(like);
     }

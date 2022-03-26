@@ -5,6 +5,9 @@ import com.example.demo.appuser.AppUserRepository;
 import com.example.demo.post.Post;
 import com.example.demo.post.PostRepository;
 import com.example.demo.post.PostService;
+import com.example.demo.postComment.PostComment;
+import com.example.demo.postComment.PostCommentRepository;
+import com.example.demo.postComment.PostCommentService;
 import com.example.demo.postLike.PostLikeRepository;
 import com.example.demo.postLike.PostLikeService;
 import lombok.AllArgsConstructor;
@@ -38,6 +41,8 @@ public class FeedController {
     private final PostLikeService postLikeService;
     private final PostLikeRepository postLikeRepository;
     private final AppUserRepository appUserRepository;
+    private final PostCommentRepository postCommentRepository;
+    private final PostCommentService postCommentService;
 
     @PostMapping
     public RedirectView newPost(
@@ -66,6 +71,7 @@ public class FeedController {
 
         model.addAttribute("principal", principal);
         model.addAttribute("postService", postService);
+        model.addAttribute("postCommentService", postCommentService);
 
         return "feed";
     }
@@ -89,5 +95,61 @@ public class FeedController {
         }
 
         return "redirect:/feed";
+    }
+
+    @PostMapping(path = "/likepost/toprofile/{id}")
+    public String likePostPersonalProfile(@PathVariable Long id, Principal principal) {
+        Post post = postRepository.getById(id);
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+
+        if (postLikeRepository.findByLikeUserAndPost(user, post) == null) {
+            postLikeService.addLike(post, principal);
+        } else {
+            postLikeService.removeLike(post, principal);
+        }
+
+        return "redirect:/personalprofile";
+    }
+
+    @PostMapping(path = "/addcomment/{id}")
+    public String addComment(@PathVariable Long id, PostComment postComment, Principal principal) {
+        Post post = postRepository.getById(id);
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+
+        postComment.setPost(post);
+        postComment.setCommentAuthor(user);
+
+        postCommentRepository.save(postComment);
+
+        return "redirect:/feed";
+    }
+
+    @PostMapping(path = "/addcomment/toprofile/{id}")
+    public String addCommentPersonalProfile(@PathVariable Long id, PostComment postComment, Principal principal) {
+        Post post = postRepository.getById(id);
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+
+        postComment.setPost(post);
+        postComment.setCommentAuthor(user);
+
+        postCommentRepository.save(postComment);
+
+        return "redirect:/personalprofile";
+    }
+
+    @PostMapping(path = "/deletecomment/{id}")
+    public String deleteComment(@PathVariable Long id) {
+
+        postCommentRepository.deleteById(id);
+
+        return "redirect:/feed";
+    }
+
+    @PostMapping(path = "/deletecomment/toprofile/{id}")
+    public String deleteCommentPersonalProfile(@PathVariable Long id) {
+
+        postCommentRepository.deleteById(id);
+
+        return "redirect:/personalprofile";
     }
 }

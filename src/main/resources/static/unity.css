@@ -26,12 +26,6 @@ footer {
     overflow: auto;
 }
 
-.aPost.hidden {
-    padding: 0;
-    margin: 0;
-    border: 0;
-}
-
 nav {
     display: flex;
     flex-direction: row;
@@ -120,7 +114,7 @@ ol {
     flex-direction: column;
 }
 
-.aPost, .aMessage {
+.aPost, .aMessage, .aChat {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -131,6 +125,63 @@ ol {
     border: 1px solid #000;
     margin: 1em auto;
     list-style: none;
+}
+
+.aPost {
+    flex-direction: column;
+}
+
+.aPost.hidden {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.aComment {
+    display: flex;
+    margin-bottom: 1vh;
+}
+
+.aComment img {
+    width: 10%;
+    border-radius: 50%;
+}
+
+.aComment a {
+    font-size: 1rem;
+}
+
+.aComment button {
+    margin-right: 2vw;
+}
+
+#post_content {
+   font-size: 1.5rem;
+}
+
+.post_bottom {
+    display: flex;
+    flex-direction:column-reverse;
+    max-height: 15vh;
+}
+
+#commentWrapper {
+    overflow:auto;
+}
+
+.aMessage {
+    border-radius: 40px;
+    width: auto;
+    height: auto;
+}
+
+.post-top {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2vh;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: gray;
 }
 
 .div-delete-button {
@@ -190,6 +241,14 @@ ol {
     border-radius: 40px;
 }
 
+.aChat {
+    flex-direction: column;
+}
+
+#chat-top {
+    display: flex;
+}
+
 .createMessage {
     min-width: 40vw;
     max-width: 70vw;
@@ -217,6 +276,12 @@ ol {
     background: rgb(58, 52, 128);
     margin-top: 2rem;
     margin-bottom: 2rem;
+}
+
+.flat-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vh;
 }
 
 /***********************************************/

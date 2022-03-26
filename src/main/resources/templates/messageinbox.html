@@ -37,15 +37,18 @@
         <p>Your existing chats are listed below</p>
 
         <p class="alert alert-danger" th:unless="${chats} and ${chats.size()}"> There are currently no chats available</p>
+
         <ol id="itemlist">
             <th:block th:each="chat : ${chats}">
-                <li class="aPost">
-                    <img th:src="${chat.participantOne.getProfilePicture()}" class="post-profile-picture">
-                    <img th:src="${chat.participantTwo.getProfilePicture()}" class="post-profile-picture">
-                    <article class="postText">
-                        <em><h2 th:text="${chat.participantOne.getFullName()}"></h2></em>
-                        <em><h2 th:text="${chat.participantTwo.getFullName()}"></h2></em>
-                    </article>
+                <li class="aChat">
+                    <div id="chat-top">
+                        <img th:src="${chat.participantOne.getProfilePicture()}" class="post-profile-picture">
+                        <img th:src="${chat.participantTwo.getProfilePicture()}" class="post-profile-picture">
+                        <article class="postText">
+                            <em><h2 th:text="${chat.participantOne.getFullName()}"></h2></em>
+                            <em><h2 th:text="${chat.participantTwo.getFullName()}"></h2></em>
+                        </article>
+                    </div>
                     <a th:href="@{chat +'/' + ${chat.getId()}}">View Messages</a>
                 </li>
             </th:block>

@@ -4,6 +4,7 @@ import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
 import com.example.demo.post.Post;
 import com.example.demo.post.PostService;
+import com.example.demo.postComment.PostCommentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ public class PersonalProfileController {
 
     private final AppUserRepository appUserRepository;
     private final PostService postService;
+    private final PostCommentService postCommentService;
 
     @GetMapping
     public String getPersonalProfileView(Principal principal, Model model){
@@ -39,6 +41,8 @@ public class PersonalProfileController {
         List<Post> posts = postService.getPostsByUserId(loggedInUser.getId());
         model.addAttribute("posts", posts);
         model.addAttribute("principal", principal);
+        model.addAttribute("postService", postService);
+        model.addAttribute("postCommentService", postCommentService);
 
         return "personalprofile";
     }

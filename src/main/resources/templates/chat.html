@@ -36,9 +36,9 @@
   <h1 class="chatName" th:text="${chat.getParticipantOne().getFirstName()} + '\'s and '
   + ${chat.getParticipantTwo().getFirstName()} + '\'s chat'"></h1>
 
-  <p class="alert alert-danger" th:unless="${messages} and ${messages.size()}"> There are currently no messages available</p>
   <div class="chatWrapper">
-    <ol >
+    <p class="alert alert-danger" th:unless="${messages} and ${messages.size()}"> There are currently no messages available</p>
+    <ol>
       <th:block th:each="message : ${messages}">
         <li class="aMessage">
           <img th:src="${message.getAuthor().getProfilePicture()}" class="post-profile-picture">
