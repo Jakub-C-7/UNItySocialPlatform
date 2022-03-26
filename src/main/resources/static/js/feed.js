@@ -12,7 +12,7 @@ function clearResults() {
 }
 
 function loadPosts(){
-    const result = document.querySelectorAll('li');
+    const result = document.querySelectorAll('.aPost');
     objects = Array.from(result) || [];
 }
 
@@ -80,12 +80,12 @@ myQuery.addEventListener('input', ev => {
     }
 
     const filteredSections = objects.filter(section => {
-        const name = section.childNodes[3].textContent.toUpperCase();
+        const name = section.childNodes[1].childNodes[3].textContent.toUpperCase();
         return !name.includes(myQuery.value.toString().toUpperCase());
     });
 
     filteredObjects = objects.filter(section => {
-        const name = section.childNodes[3].textContent.toUpperCase();
+        const name = section.childNodes[1].childNodes[3].textContent.toUpperCase();
         return name.includes(myQuery.value.toString().toUpperCase());
     });
 
