@@ -1,6 +1,7 @@
 package com.example.demo.post;
 
 import com.example.demo.appuser.AppUser;
+import com.example.demo.postLike.PostLikeRepository;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -59,4 +60,5 @@ public class Post {
         this.postUser = postUser;
         this.postDateTime = postDateTime;
     }
+
 }

@@ -1,8 +1,12 @@
 package com.example.demo.feed;
 
+import com.example.demo.appuser.AppUser;
+import com.example.demo.appuser.AppUserRepository;
 import com.example.demo.post.Post;
 import com.example.demo.post.PostRepository;
 import com.example.demo.post.PostService;
+import com.example.demo.postLike.PostLikeRepository;
+import com.example.demo.postLike.PostLikeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +34,10 @@ import java.util.List;
 public class FeedController {
 
     private final PostService postService;
+    private final PostRepository postRepository;
+    private final PostLikeService postLikeService;
+    private final PostLikeRepository postLikeRepository;
+    private final AppUserRepository appUserRepository;
 
     @PostMapping
     public RedirectView newPost(
@@ -57,6 +65,7 @@ public class FeedController {
         model.addAttribute("posts", posts);
 
         model.addAttribute("principal", principal);
+        model.addAttribute("postService", postService);
 
         return "feed";
     }
@@ -64,6 +73,20 @@ public class FeedController {
     @PostMapping(path = "/deletepost/{id}")
     public String deletePost(@PathVariable Long id) {
         postService.deletePost(id);
+
+        return "redirect:/feed";
+    }
+
+    @PostMapping(path = "/likepost/{id}")
+    public String likePost(@PathVariable Long id, Principal principal) {
+        Post post = postRepository.getById(id);
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+
+        if (postLikeRepository.findByLikeUserAndPost(user, post) == null) {
+            postLikeService.addLike(post, principal);
+        } else {
+            postLikeService.removeLike(post, principal);
+        }
 
         return "redirect:/feed";
     }
