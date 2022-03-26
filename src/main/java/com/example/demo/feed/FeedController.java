@@ -105,8 +105,15 @@ public class FeedController {
         postComment.setPost(post);
         postComment.setCommentAuthor(user);
 
-//        postCommentService.addComment(post, principal);
         postCommentRepository.save(postComment);
+
+        return "redirect:/feed";
+    }
+
+    @PostMapping(path = "/deletecomment/{id}")
+    public String deleteComment(@PathVariable Long id) {
+
+        postCommentRepository.deleteById(id);
 
         return "redirect:/feed";
     }

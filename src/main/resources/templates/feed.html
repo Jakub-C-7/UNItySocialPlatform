@@ -96,12 +96,21 @@
                         <ol id="commentWrapper">
                             <th:block th:each="comment : ${postCommentService.getPostComments(post)}">
                                 <div class="aComment">
+
                                     <img th:src="${comment.getCommentAuthor().getProfilePicture()}" class="post-profile-picture">
                                     <article class="messageText">
                                         <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
-                                               th:text="${post.postUser.getFullName()}"></a></em>
+                                               th:text="${comment.commentAuthor.getFullName()}"></a></em>
                                         <p th:text="${comment.getCommentContent()}"></p>
                                     </article>
+
+                                    <div class="div-delete-button" sec:authorize="isAuthenticated()">
+                                        <form th:if="${comment.getCommentAuthor().getEmail() == principal.getName()}" th:action="@{'/feed/deletecomment/{id}'(id=${comment.getId()})}" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE" />
+                                            <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>
+                                        </form>
+                                    </div>
+
                                 </div>
                             </th:block>
                         </ol>

@@ -151,6 +151,10 @@ ol {
     font-size: 1rem;
 }
 
+.aComment button {
+    margin-right: 2vw;
+}
+
 #post_content {
    font-size: 1.5rem;
 }
