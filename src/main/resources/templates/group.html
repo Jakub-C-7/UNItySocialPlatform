@@ -97,10 +97,10 @@
                                    th:text="${post.postUser.getFullName()}"></a></em>
                             <p th:text="|${post.postContent}|"></p>
                             <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
+                            <label id="likes" th:text="${groupPostService.getLikeCount(post)+' likes'}"></label>
                         </article>
 
                         <div class="div-delete-button" sec:authorize="isAuthenticated()" th:if="${post.postUser.getEmail() == principal.getName()}">
-
                             <form th:action="@{'/group/{gid}/deletepost/{id}'(id=${post.getId()}, gid=${group.getId()})}" method="POST">
                                 <input type="hidden" name="_method" value="DELETE" />
                                 <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>
@@ -110,6 +110,9 @@
                                 <button class="delete-button" type="submit"> <i class="material-icons">edit</i></button>
                             </form> <br>
 
+                            <form th:action="@{'/likepost/{id}/{gid}'(id=${post.getId()}, gid=${group.getId()})}" method="post">
+                                <button class="delete-button" type="submit"> <i class="material-icons">thumb_up</i></button>
+                            </form> <br>
                         </div>
                     </div>
 

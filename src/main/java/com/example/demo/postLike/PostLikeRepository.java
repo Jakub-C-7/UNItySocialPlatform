@@ -1,6 +1,7 @@
 package com.example.demo.postLike;
 
 import com.example.demo.appuser.AppUser;
+import com.example.demo.groupPost.GroupPost;
 import com.example.demo.post.Post;
 import com.example.demo.postLike.PostLike;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,10 +22,12 @@ public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
 
     List<PostLike> findAllByPost(Post post);
 
+    List<PostLike> findAllByGroupPost(GroupPost post);
+
     List<PostLike> findAllByLikeUser(AppUser user);
 
     PostLike findByLikeUserAndPost(AppUser user, Post post);
 
-    boolean existsByLikeUserAndPost(AppUser user, Post post);
+    PostLike findByLikeUserAndGroupPost(AppUser user, GroupPost post);
 
 }

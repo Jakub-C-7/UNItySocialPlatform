@@ -1,6 +1,7 @@
 package com.example.demo.postLike;
 
 import com.example.demo.appuser.AppUser;
+import com.example.demo.groupPost.GroupPost;
 import com.example.demo.post.Post;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -45,6 +46,13 @@ public class PostLike {
     private Post post;
 
     /**
+     * Pointer to the GroupPost which has been liked (uses post ID).
+     */
+    @ManyToOne
+    @JoinColumn(name = "group_post_id")
+    private GroupPost groupPost;
+
+    /**
      * Pointer to the AppUser who authored the like (uses user ID).
      */
     @ManyToOne
@@ -53,6 +61,11 @@ public class PostLike {
 
     public PostLike(Post post, AppUser likeUser) {
         this.post = post;
+        this.likeUser = likeUser;
+    }
+
+    public PostLike(GroupPost post, AppUser likeUser) {
+        this.groupPost = post;
         this.likeUser = likeUser;
     }
 }
