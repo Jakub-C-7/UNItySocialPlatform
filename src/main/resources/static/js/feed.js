@@ -3,6 +3,7 @@
 let pageSize = 5;
 let currentPage = 1;
 let objects;
+let filteredObjects;
 
 function clearResults() {
     while (itemlist.firstChild) {
@@ -28,21 +29,40 @@ function insertPosts(objects) {
 }
 
 function nextPage() {
-    const nPages = Math.ceil(objects.length / pageSize);
-    currentPage += 1;
+    if (filteredObjects != null){
+        const nPages = Math.ceil(filteredObjects.length / pageSize);
+        currentPage += 1;
         if (currentPage > nPages) {
             currentPage = 1;
         }
-    loadPage();
+        loadFilteredPage();
+    } else {
+        const nPages = Math.ceil(objects.length / pageSize);
+        currentPage += 1;
+        if (currentPage > nPages) {
+            currentPage = 1;
+        }
+        loadPage();
+    }
 }
 
 function prevPage() {
-    const nPages = Math.ceil(objects.length / pageSize);
-    currentPage -= 1;
+    if (filteredObjects != null){
+        const nPages = Math.ceil(filteredObjects.length / pageSize);
+        currentPage -= 1;
         if (currentPage < 1) {
             currentPage = nPages;
         }
-    loadPage();
+        loadFilteredPage();
+    }
+    else {
+        const nPages = Math.ceil(objects.length / pageSize);
+        currentPage -= 1;
+        if (currentPage < 1) {
+            currentPage = nPages;
+        }
+        loadPage();
+    }
 }
 
 prev.addEventListener('click', prevPage);
@@ -53,6 +73,7 @@ loadPage();
 
 //Search --------------------
 myQuery.addEventListener('input', ev => {
+    filteredObjects = null
 
     for (const result of document.querySelectorAll('.hidden')) {
         result.classList.remove('hidden');
@@ -63,11 +84,22 @@ myQuery.addEventListener('input', ev => {
         return !name.includes(myQuery.value.toString().toUpperCase());
     });
 
+    filteredObjects = objects.filter(section => {
+        const name = section.childNodes[3].textContent.toUpperCase();
+        return name.includes(myQuery.value.toString().toUpperCase());
+    });
+
     for (const section of filteredSections) {
         section.classList.add('hidden');
     }
 
-    const nLength = Math.ceil(objects.length - filteredSections.length);
-
-    nPages.textContent = Math.max(Math.ceil(nLength / pageSize), 1);
+    loadFilteredPage();
 });
+
+function loadFilteredPage() {
+    clearResults();
+    nPages.textContent = Math.ceil(filteredObjects.length / pageSize);
+    const currentObject = filteredObjects.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+    insertPosts(currentObject);
+    pageIndicator.textContent = currentPage;
+}
