@@ -37,6 +37,7 @@
         <p>Your existing chats are listed below</p>
 
         <p class="alert alert-danger" th:unless="${chats} and ${chats.size()}"> There are currently no chats available</p>
+
         <ol id="itemlist">
             <th:block th:each="chat : ${chats}">
                 <li class="aChat">

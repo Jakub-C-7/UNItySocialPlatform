@@ -7,7 +7,12 @@ import com.example.demo.groupMember.GroupMemberRepository;
 import com.example.demo.groupMember.GroupMemberRole;
 import com.example.demo.groupMember.GroupMemberService;
 import com.example.demo.groupPost.GroupPost;
+import com.example.demo.groupPost.GroupPostRepository;
 import com.example.demo.groupPost.GroupPostService;
+import com.example.demo.post.Post;
+import com.example.demo.postComment.PostComment;
+import com.example.demo.postComment.PostCommentRepository;
+import com.example.demo.postComment.PostCommentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +38,9 @@ public class GroupController {
     private final GroupMemberRepository groupMemberRepository;
     private final AppUserRepository appUserRepository;
     private final GroupPostService groupPostService;
+    private final GroupPostRepository groupPostRepository;
+    private final PostCommentRepository postCommentRepository;
+    private final PostCommentService postCommentService;
 
     @GetMapping("group/{groupId}")
     public String getUserProfile(@PathVariable("groupId") Long groupId, Model model, Principal principal){
@@ -84,6 +92,8 @@ public class GroupController {
         model.addAttribute("principal", principal);
 
         model.addAttribute("group", group);
+
+        model.addAttribute("postCommentService", postCommentService);
 
         return "group";
     }
@@ -289,7 +299,7 @@ public class GroupController {
     }
 
     @PostMapping(path = "group/denyjoinrequest/{id}/{gid}")
-    public String denyGroupJoinRequest(@PathVariable Long id,@PathVariable Long gid ) {
+    public String denyGroupJoinRequest(@PathVariable Long id, @PathVariable Long gid ) {
 
         AppUser user = appUserRepository.getById(id);
 
@@ -298,5 +308,27 @@ public class GroupController {
         groupMemberService.denyRequest(group, user);
 
         return "redirect:/groupadmininbox/{gid}?denysuccess";
+    }
+
+    @PostMapping(path = "/addcomment/{id}/{gid}")
+    public String addComment(@PathVariable Long id, @PathVariable Long gid, PostComment postComment, Principal principal) {
+        GroupPost post = groupPostRepository.getById(id);
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+
+        postComment.setGroupPost(post);
+        postComment.setCommentAuthor(user);
+
+        postCommentRepository.save(postComment);
+
+        return "redirect:/group/{gid}";
+    }
+
+
+    @PostMapping(path = "/deletecomment/{id}/{gid}")
+    public String deleteComment(@PathVariable Long id, @PathVariable Long gid) {
+
+        postCommentRepository.deleteById(id);
+
+        return "redirect:/group/{gid}";
     }
 }

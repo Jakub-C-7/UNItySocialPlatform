@@ -2,6 +2,7 @@ package com.example.demo.postComment;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
+import com.example.demo.groupPost.GroupPost;
 import com.example.demo.post.Post;
 import com.example.demo.postLike.PostLike;
 import com.example.demo.postLike.PostLikeRepository;
@@ -46,5 +47,12 @@ public class PostCommentService {
      * Function for retrieving all comments under a specific post.
      */
     public List<PostComment> getPostComments(Post post) { return postCommentRepository.findAllByPost(post); }
+
+    /**
+     * Function for retrieving all comments under a specific group post.
+     */
+    public List<PostComment> getGroupPostComments(GroupPost post) {
+        return postCommentRepository.findAllByGroupPost(post);
+    }
 
 }
