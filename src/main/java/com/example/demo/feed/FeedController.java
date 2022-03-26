@@ -97,6 +97,20 @@ public class FeedController {
         return "redirect:/feed";
     }
 
+    @PostMapping(path = "/likepost/toprofile/{id}")
+    public String likePostPersonalProfile(@PathVariable Long id, Principal principal) {
+        Post post = postRepository.getById(id);
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+
+        if (postLikeRepository.findByLikeUserAndPost(user, post) == null) {
+            postLikeService.addLike(post, principal);
+        } else {
+            postLikeService.removeLike(post, principal);
+        }
+
+        return "redirect:/personalprofile";
+    }
+
     @PostMapping(path = "/addcomment/{id}")
     public String addComment(@PathVariable Long id, PostComment postComment, Principal principal) {
         Post post = postRepository.getById(id);

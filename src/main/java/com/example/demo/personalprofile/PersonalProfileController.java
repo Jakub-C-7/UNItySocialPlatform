@@ -41,6 +41,7 @@ public class PersonalProfileController {
         List<Post> posts = postService.getPostsByUserId(loggedInUser.getId());
         model.addAttribute("posts", posts);
         model.addAttribute("principal", principal);
+        model.addAttribute("postService", postService);
         model.addAttribute("postCommentService", postCommentService);
 
         return "personalprofile";
