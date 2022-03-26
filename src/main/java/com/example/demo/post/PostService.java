@@ -2,6 +2,7 @@ package com.example.demo.post;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
+import com.example.demo.postLike.PostLikeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final AppUserRepository appUserRepository;
+    private final PostLikeRepository postLikeRepository;
 
     /**
      * Function for creating new posts.
@@ -81,6 +83,20 @@ public class PostService {
         Post post = postRepository.findById(postId).get();
         post.setPostContent(postContent);
         postRepository.save(post);
+    }
+
+    /**
+     * Function to get the like count of a post
+     * @param post
+     * @return
+     */
+    public Integer getLikeCount(Post post) {
+
+        if (postLikeRepository.findAllByPost(post).isEmpty()) {
+            return 0;
+        } else {
+            return postLikeRepository.findAllByPost(post).size();
+        }
     }
 
 }
