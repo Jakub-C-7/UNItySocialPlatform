@@ -110,11 +110,32 @@ public class FeedController {
         return "redirect:/feed";
     }
 
+    @PostMapping(path = "/addcomment/toprofile/{id}")
+    public String addCommentPersonalProfile(@PathVariable Long id, PostComment postComment, Principal principal) {
+        Post post = postRepository.getById(id);
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+
+        postComment.setPost(post);
+        postComment.setCommentAuthor(user);
+
+        postCommentRepository.save(postComment);
+
+        return "redirect:/personalprofile";
+    }
+
     @PostMapping(path = "/deletecomment/{id}")
     public String deleteComment(@PathVariable Long id) {
 
         postCommentRepository.deleteById(id);
 
         return "redirect:/feed";
+    }
+
+    @PostMapping(path = "/deletecomment/toprofile/{id}")
+    public String deleteCommentPersonalProfile(@PathVariable Long id) {
+
+        postCommentRepository.deleteById(id);
+
+        return "redirect:/personalprofile";
     }
 }
