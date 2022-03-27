@@ -76,6 +76,8 @@ public class ChatController {
 
         chatService.createNewChat(currentUser, otherUser);
 
-        return "redirect:/messageinbox";
+        Long cid = chatRepository.findByParticipantOneAndParticipantTwo(currentUser, otherUser).get(0).getId();
+
+        return "redirect:/chat/" + cid;
     }
 }
