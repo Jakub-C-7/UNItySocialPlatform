@@ -98,7 +98,7 @@ myQuery.addEventListener('input', ev => {
 
 function loadFilteredPage() {
     clearResults();
-    nPages.textContent = Math.ceil(filteredObjects.length / pageSize);
+    nPages.textContent = Math.max(Math.ceil(filteredObjects.length / pageSize), 1);
     const currentObject = filteredObjects.slice((currentPage - 1) * pageSize, currentPage * pageSize);
     insertPosts(currentObject);
     pageIndicator.textContent = currentPage;
