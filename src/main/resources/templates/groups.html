@@ -58,6 +58,10 @@
 
     <p class="alert alert-danger" th:unless="${groups} and ${groups.size()}"> There are currently no groups available</p>
 
+    <section id="search">
+        <input id="myQuery" type="search" placeholder="&#128269; Search groups..." aria-label="search">
+    </section>
+
     <!-- Ordered list of groups -->
     <ol id="listofgroups">
         <th:block th:each="group : ${groups}">
