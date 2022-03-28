@@ -6,6 +6,7 @@ import com.example.demo.friend.Friend;
 import com.example.demo.friend.FriendRepository;
 import com.example.demo.post.Post;
 import com.example.demo.post.PostService;
+import com.example.demo.postComment.PostCommentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,7 @@ public class ProfileController {
     private final AppUserRepository appUserRepository;
     private final PostService postService;
     private final FriendRepository friendRepository;
+    private final PostCommentService postCommentService;
 
     @GetMapping
     public String defaultRoute (){
@@ -78,6 +80,9 @@ public class ProfileController {
                  areFriends = false;
             }
             model.addAttribute("areFriends", areFriends);
+            model.addAttribute("postService", postService);
+            model.addAttribute("postCommentService", postCommentService);
+            model.addAttribute("principal", principal);
 
         }
 

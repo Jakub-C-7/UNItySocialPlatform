@@ -52,15 +52,56 @@
 
         <h2 th:if="${!posts.isEmpty()}">User's Posts: </h2>
 
-        <ol>
+        <ol id="itemlist">
             <th:block th:each="post : ${posts}">
                 <li class="aPost">
-                    <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
-                    <article class="postText">
-                        <em><h2 th:text="${post.postUser.getFullName()}"></h2></em>
-                        <p th:text="|${post.postContent}|"></p>
-                        <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
-                    </article>
+                    <div class="post-top">
+                        <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
+                        <article class="postText">
+                            <em><h2 th:text="${post.postUser.getFullName()}"></h2></em>
+                            <p th:text="|${post.postContent}|"></p>
+                            <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
+                            <label id="likes" th:text="${postService.getLikeCount(post)+' likes'}"></label>
+                        </article>
+
+                        <div class="div-delete-button">
+                            <form th:action="@{'/feed/likepost/otheruserprofile/{id}/{pid}'(id=${post.getId()}, pid=${post.getPostUser().getId()})}" method="post">
+                                <button class="delete-button" type="submit"> <i class="material-icons">thumb_up</i></button>
+                            </form> <br>
+                        </div>
+                    </div>
+
+                    <div th:if="${postCommentService.getPostComments(post).size()}" class="post_bottom">
+                        <ol id="commentWrapper">
+                            <th:block th:each="comment : ${postCommentService.getPostComments(post)}">
+                                <div class="aComment">
+
+                                    <img th:src="${comment.getCommentAuthor().getProfilePicture()}" class="post-profile-picture">
+                                    <article class="messageText">
+                                        <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
+                                               th:text="${comment.commentAuthor.getFullName()}"></a></em>
+                                        <p th:text="${comment.getCommentContent()}"></p>
+                                    </article>
+
+                                    <div class="div-delete-button" sec:authorize="isAuthenticated()">
+                                        <form th:if="${comment.getCommentAuthor().getEmail() == principal.getName()}" th:action="@{'/feed/deletecomment/otheruserprofile/{id}/{pid}'(id=${comment.getId()}, pid=${post.getPostUser().getId()})}" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE" />
+                                            <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </th:block>
+                        </ol>
+                    </div>
+
+                    <!-- Form to create and add a new comment -->
+                    <form sec:authorize="isAuthenticated()" class="createMessageWrapper" th:action="@{'/feed/addcomment/otheruserprofile/{id}/{pid}'(id=${post.getId()}, pid=${post.getPostUser().getId()})}" method="post">
+                        <input class="createComment" type="text" id="commentContent" name="commentContent"
+                               placeholder="Comment..." maxlength="255" required>
+                        <button class="sendButton" type="submit"><i class="material-icons">send</i></button>
+                    </form>
+
                 </li>
             </th:block>
         </ol>

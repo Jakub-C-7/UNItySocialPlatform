@@ -111,6 +111,20 @@ public class FeedController {
         return "redirect:/personalprofile";
     }
 
+    @PostMapping(path = "/likepost/otheruserprofile/{id}/{pid}")
+    public String likePostOtherUserProfile(@PathVariable Long id, @PathVariable Long pid, Principal principal) {
+        Post post = postRepository.getById(id);
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+
+        if (postLikeRepository.findByLikeUserAndPost(user, post) == null) {
+            postLikeService.addLike(post, principal);
+        } else {
+            postLikeService.removeLike(post, principal);
+        }
+
+        return "redirect:/profile/{pid}";
+    }
+
     @PostMapping(path = "/addcomment/{id}")
     public String addComment(@PathVariable Long id, PostComment postComment, Principal principal) {
         Post post = postRepository.getById(id);
@@ -137,6 +151,19 @@ public class FeedController {
         return "redirect:/personalprofile";
     }
 
+    @PostMapping(path = "/addcomment/otheruserprofile/{id}/{pid}")
+    public String addCommentOtherUserProfile(@PathVariable Long id, @PathVariable Long pid, PostComment postComment, Principal principal) {
+        Post post = postRepository.getById(id);
+        AppUser user = appUserRepository.findByEmail(principal.getName()).get();
+
+        postComment.setPost(post);
+        postComment.setCommentAuthor(user);
+
+        postCommentRepository.save(postComment);
+
+        return "redirect:/profile/{pid}";
+    }
+
     @PostMapping(path = "/deletecomment/{id}")
     public String deleteComment(@PathVariable Long id) {
 
@@ -151,5 +178,13 @@ public class FeedController {
         postCommentRepository.deleteById(id);
 
         return "redirect:/personalprofile";
+    }
+
+    @PostMapping(path = "/deletecomment/otheruserprofile/{id}/{pid}")
+    public String deleteCommentOtherUserProfile(@PathVariable Long id, @PathVariable Long pid) {
+
+        postCommentRepository.deleteById(id);
+
+        return "redirect:/profile/{pid}";
     }
 }
