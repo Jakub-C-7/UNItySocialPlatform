@@ -55,7 +55,7 @@
         </form>
 
         <!-- Ordered list of friend requests. Ordered from newest to oldest in descending order -->
-        <ol>
+        <ol id="itemlist">
             <th:block th:each="friend : ${friends}">
                 <li class="aPost" th:if="${friend.getAdded() == false}">
                     <img th:src="${friend.user.getProfilePicture()}" class="post-profile-picture">
@@ -80,9 +80,17 @@
             </th:block>
         </ol>
 
+        <span id="pagination">
+            <button id="prev">&lt;</button>
+            <span id="pageIndicator">0</span> of <span id="nPages">0</span>
+            <button id="next">&gt;</button>
+        </span>
+
         <footer>&copy;Copyright 2022 Jakub Chamera</footer>
 
     </main>
+
+    <script type="text/javascript" src="js/pagination.js"></script>
 
 </body>
 </html>
