@@ -89,6 +89,11 @@
         </div>
 
         <h2>Group Content: </h2>
+
+        <section id="search">
+            <input id="myQuery" type="search" placeholder="&#128269; Search posts..." aria-label="search">
+        </section>
+
         <ol id="listofgroupposts">
             <th:block th:each="post : ${posts}">
                 <li class="aPost">

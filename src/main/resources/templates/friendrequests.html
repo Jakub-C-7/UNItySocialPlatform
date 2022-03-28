@@ -55,14 +55,14 @@
         </form>
 
         <!-- Ordered list of friend requests. Ordered from newest to oldest in descending order -->
-        <ol>
+        <ol id="itemlist">
             <th:block th:each="friend : ${friends}">
-                <li class="aPost" th:if="${friend.getAdded() == false}">
+                <li class="aRequest" th:if="${friend.getAdded() == false}">
                     <img th:src="${friend.user.getProfilePicture()}" class="post-profile-picture">
                     <article class="postText">
                         <em><a class="user-search-link" th:href="@{profile+'/'+${friend.user.getId()}}"
                                th:text="${friend.user.getFullName()}"></a></em>
-<!--                        <p class="postDate" th:text="|${post.getPostDateTime}|"></p>-->
+                        <p th:text="${friend.user.getAcademicCourse()}"></p>
                     </article>
                         <div class="div-delete-button" sec:authorize="isAuthenticated()">
 
@@ -80,9 +80,17 @@
             </th:block>
         </ol>
 
+        <span id="pagination">
+            <button id="prev">&lt;</button>
+            <span id="pageIndicator">0</span> of <span id="nPages">0</span>
+            <button id="next">&gt;</button>
+        </span>
+
         <footer>&copy;Copyright 2022 Jakub Chamera</footer>
 
     </main>
+
+    <script type="text/javascript" src="js/pagination.js"></script>
 
 </body>
 </html>
