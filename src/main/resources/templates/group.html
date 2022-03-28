@@ -102,13 +102,13 @@
                             <label id="likes" th:text="${groupPostService.getLikeCount(post)+' likes'}"></label>
                         </article>
 
-                        <div class="div-delete-button" sec:authorize="isAuthenticated()" th:if="${post.postUser.getEmail() == principal.getName()}">
-                            <form th:action="@{'/group/{gid}/deletepost/{id}'(id=${post.getId()}, gid=${group.getId()})}" method="POST">
+                        <div class="div-delete-button" sec:authorize="isAuthenticated()">
+                            <form  th:if="${post.postUser.getEmail() == principal.getName()}" th:action="@{'/group/{gid}/deletepost/{id}'(id=${post.getId()}, gid=${group.getId()})}" method="POST">
                                 <input type="hidden" name="_method" value="DELETE" />
                                 <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>
                             </form>
 
-                            <form th:action="@{'/editpersonalpost/group{id}'(id=${post.getId()})}" method="get" >
+                            <form  th:if="${post.postUser.getEmail() == principal.getName()}" th:action="@{'/editpersonalpost/group{id}'(id=${post.getId()})}" method="get" >
                                 <button class="delete-button" type="submit"> <i class="material-icons">edit</i></button>
                             </form> <br>
 
