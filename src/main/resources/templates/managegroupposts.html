@@ -35,26 +35,29 @@
             <a sec:authorize="isAuthenticated()" href="/logout">Log out</a>
         </nav>
 
-        <h1>Admin Portal - Manage Groups</h1>
+        <h1>Admin Portal - Manage Group Posts</h1>
     </header>
 
     <main>
 
-        <p class="alert alert-danger" th:unless="${groups} and ${groups.size()}"> There are currently no groups available!</p>
+        <p class="alert alert-danger" th:unless="${groupPosts} and ${groupPosts.size()}"> There are currently no posts available!</p>
 
         <!-- Ordered list of posts on the feed -->
         <ol id="itemlist">
-            <th:block th:each="group : ${groups}">
+            <th:block th:each="post : ${groupPosts}">
 
                 <li class="aPost">
+
+                    <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
                     <article class="postText">
-                        <em><a class="user-search-link" th:href="@{'/'+group+'/'+${group.getId()}}"
-                               th:text="${group.getName()}"></a></em>
-                        <p th:text="|${group.getType()}|"></p>
+                        <em><a class="user-search-link" th:href="@{'/'+profile+'/'+${post.postUser.getId()}}"
+                               th:text="${post.postUser.getFullName()}"></a></em>
+                        <p th:text="|${post.postContent}|"></p>
+                        <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
                     </article>
 
                     <div class="div-delete-button">
-                        <form th:action="@{'/adminportal/deletegroup/{id}'(id=${group.getId()})}" method="POST">
+                        <form th:action="@{'/adminportal/deletegrouppost/{id}'(id=${post.getId()})}" method="POST">
                             <input type="hidden" name="_method" value="DELETE" />
                             <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>
                         </form>

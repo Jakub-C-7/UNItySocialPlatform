@@ -47,7 +47,14 @@ public class GroupPostService {
     }
 
     /**
-     * Function for retrieving all posts in descending order by date.
+     * Function for retrieving all group posts across all groups.
+     */
+    public List<GroupPost> getAllPosts() {
+        return groupPostRepository.findAll();
+    }
+
+    /**
+     * Function for retrieving all posts in specific group.
      */
     public List<GroupPost> getPosts(AppGroup group) {
         return groupPostRepository.findAllByGroupSortedByDate(group);
