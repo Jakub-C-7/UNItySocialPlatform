@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin</title>
+    <title>UNIty</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
@@ -35,29 +35,29 @@
             <a sec:authorize="isAuthenticated()" href="/logout">Log out</a>
         </nav>
 
-        <h1>Admin Portal - Manage Posts</h1>
+        <h1>Admin Portal - Manage Group Posts</h1>
     </header>
 
     <main>
 
-        <p class="alert alert-danger" th:unless="${posts} and ${posts.size()}"> There are currently no posts available!</p>
+        <p class="alert alert-danger" th:unless="${groupPosts} and ${groupPosts.size()}"> There are currently no posts available!</p>
 
         <!-- Ordered list of posts on the feed -->
         <ol id="itemlist">
-            <th:block th:each="post : ${posts}">
+            <th:block th:each="post : ${groupPosts}">
 
                 <li class="adminRecord">
 
                     <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
                     <article class="postText">
-                        <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
+                        <em><a class="user-search-link" th:href="@{'/'+profile+'/'+${post.postUser.getId()}}"
                                th:text="${post.postUser.getFullName()}"></a></em>
                         <p th:text="|${post.postContent}|"></p>
                         <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
                     </article>
 
                     <div class="div-delete-button">
-                        <form th:action="@{'/adminportal/deletepost/{id}'(id=${post.getId()})}" method="POST">
+                        <form th:action="@{'/adminportal/deletegrouppost/{id}'(id=${post.getId()})}" method="POST">
                             <input type="hidden" name="_method" value="DELETE" />
                             <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>
                         </form>

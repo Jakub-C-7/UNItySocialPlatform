@@ -38,14 +38,14 @@
             <img th:src="${user.getProfilePicture}" class="profile-picture">
             <h1>[[${#request.userPrincipal.principal.fullName}]]</h1>
         </div>
+        <div>
+            <p>[[${#request.userPrincipal.principal.getProfileBio}]]</p>
+            <p>[[${#request.userPrincipal.principal.getAcademicCourse}]]</p>
 
-        <label>[[${#request.userPrincipal.principal.getProfileBio}]]</label><br>
-        <label>[[${#request.userPrincipal.principal.getAcademicCourse}]]</label><br><br>
+            <p>Email: [[${#request.userPrincipal.principal.username}]]</p>
+            <p>Role: [[${#request.userPrincipal.principal.getAuthorities}]]</p>
+        </div>
 
-        <p>
-            <label>Email: [[${#request.userPrincipal.principal.username}]]</label> <br>
-            <label>Role: [[${#request.userPrincipal.principal.getAuthorities}]]</label> <br>
-        </p>
 
         <div class="flat-buttons">
             <form method="get" action="/editpersonalprofile">
@@ -82,10 +82,10 @@
                             </form>
                             <form th:action="@{'/editpersonalpost/{id}'(id=${post.getId()})}" method="get" >
                                 <button class="delete-button" type="submit"> <i class="material-icons">edit</i></button>
-                            </form> <br>
+                            </form>
                             <form th:action="@{'/feed/likepost/toprofile/{id}'(id=${post.getId()})}" method="post">
                                 <button class="delete-button" type="submit"> <i class="material-icons">thumb_up</i></button>
-                            </form> <br>
+                            </form>
                         </div>
                     </div>
 

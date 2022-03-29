@@ -12,7 +12,7 @@ function clearResults() {
 }
 
 function loadPosts(){
-    const result = document.querySelectorAll('.aPost');
+    const result = document.querySelectorAll('.aGroup');
     objects = Array.from(result) || [];
 }
 

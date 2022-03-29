@@ -65,7 +65,7 @@
     <!-- Ordered list of groups -->
     <ol id="listofgroups">
         <th:block th:each="group : ${groups}">
-            <li class="aPost">
+            <li class="aGroup">
                 <article class="postText">
                     <em><a th:text="|${group.name}|" th:href="@{group+'/'+${group.getId()}}"></a></em>
                     <h2 th:text="|${group.type}|"></h2>

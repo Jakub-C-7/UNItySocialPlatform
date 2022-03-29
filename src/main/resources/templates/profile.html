@@ -67,7 +67,7 @@
                         <div class="div-delete-button">
                             <form th:action="@{'/feed/likepost/otheruserprofile/{id}/{pid}'(id=${post.getId()}, pid=${post.getPostUser().getId()})}" method="post">
                                 <button class="delete-button" type="submit"> <i class="material-icons">thumb_up</i></button>
-                            </form> <br>
+                            </form>
                         </div>
                     </div>
 

@@ -114,7 +114,7 @@ ol {
     flex-direction: column;
 }
 
-.aPost, .aMessage, .aChat, .aRequest {
+.aPost, .aMessage, .aChat, .aRequest, .adminRecord, .aGroup {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -265,6 +265,43 @@ ol {
     height: 50px;
 }
 
+/***********************************************/
+/* Admin Portal                                */
+/***********************************************/
+.adminRecord {
+    flex-direction: row;
+}
+
+.adminRecord img {
+    width: 10%;
+}
+
+.adminRecord a {
+    font-size: x-large;
+}
+
+.adminRecord p {
+    font-size: medium;
+}
+
+/***********************************************/
+/* Chat Page                       */
+/***********************************************/
+.aGroup a {
+    font-size: x-large;
+}
+
+.aGroup h2 {
+    font-size: large;
+}
+
+.aGroup p {
+    font-size: large;
+}
+
+.aGroup a.user-search-link {
+    font-size: large;
+}
 /***********************************************/
 /* Personal Profile Page                       */
 /***********************************************/
