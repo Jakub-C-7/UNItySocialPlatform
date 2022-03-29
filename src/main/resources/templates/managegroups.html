@@ -46,7 +46,7 @@
         <ol id="itemlist">
             <th:block th:each="group : ${groups}">
 
-                <li class="aPost">
+                <li class="adminRecord">
                     <article class="postText">
                         <em><a class="user-search-link" th:href="@{'/'+group+'/'+${group.getId()}}"
                                th:text="${group.getName()}"></a></em>
