@@ -3,6 +3,9 @@ package com.example.demo.adminportal;
 import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
 import com.example.demo.appuser.AppUserService;
+import com.example.demo.group.AppGroup;
+import com.example.demo.group.GroupRepository;
+import com.example.demo.group.GroupService;
 import com.example.demo.post.Post;
 import com.example.demo.post.PostService;
 import lombok.AllArgsConstructor;
@@ -31,6 +34,7 @@ public class AdminPortalController {
     private final AppUserRepository appUserRepository;
     private final PostService postService;
     private final AppUserService appUserService;
+    private final GroupService groupService;
 
     @GetMapping
     public String defaultRoute (){
@@ -56,6 +60,15 @@ public class AdminPortalController {
         return "manageposts";
     }
 
+    @GetMapping("managegroups")
+    public String managingGroupsp (Model model){
+
+        List<AppGroup> groups = groupService.getGroups();
+        model.addAttribute("groups", groups);
+
+        return "managegroups";
+    }
+
     @PostMapping(path = "/deleteuser/{id}")
     public String deleteUser(@PathVariable Long id) {
         appUserService.deleteUser(id);
@@ -68,6 +81,13 @@ public class AdminPortalController {
         postService.deletePost(id);
 
         return "redirect:/adminportal/manageposts";
+    }
+
+    @PostMapping(path = "/deletegroup/{id}")
+    public String deleteGroup(@PathVariable Long id) {
+        groupService.deleteGroup(id);
+
+        return "redirect:/adminportal/managegroups";
     }
 
 }

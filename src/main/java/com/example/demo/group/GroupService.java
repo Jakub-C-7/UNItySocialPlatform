@@ -45,6 +45,14 @@ public class GroupService {
         groupMemberService.addCreator(group, creator);
     }
 
+    /**
+     * Function for deleting groups by group id.
+     * @param id
+     */
+    public void deleteGroup(Long id) {
+        groupRepository.deleteById(id);
+    }
+
     public boolean editName(EditGroupRequest request, AppGroup group){
         if (request.getName() != ""){
                 group.setName(request.getName());
