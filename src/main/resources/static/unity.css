@@ -382,7 +382,7 @@ ol {
     font-size: large;
 }
 /***********************************************/
-/* Personal Profile Page                       */
+/* Profile Pages                       */
 /***********************************************/
 
 .profile-header {
@@ -440,6 +440,10 @@ ol {
     font-size: 1.4em;
 }
 
+#other-user-post-like {
+    justify-content: flex-end;
+}
+
 
 /***********************************************/
 /* User Search Page                            */
@@ -457,6 +461,10 @@ ol {
 /*    padding-bottom: 40px;*/
 /*    background-color: #eee;*/
 /*}*/
+
+#login-page {
+    margin-top: 20vh;
+}
 
 .form-signin {
     max-width: 330px;
