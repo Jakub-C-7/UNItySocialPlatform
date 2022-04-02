@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
     <title>UNIty</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -36,8 +37,23 @@
 
 <main>
     <div class="profile-header">
-        <img th:src="${user.getProfilePicture}" class="profile-picture">
-        <h1>[[${#request.userPrincipal.principal.fullName}]]</h1>
+        <div class="profile-header-left">
+            <img th:src="${user.getProfilePicture}" class="profile-picture">
+            <h1>[[${#request.userPrincipal.principal.fullName}]]</h1>
+        </div>
+        <div class="profile-header-right">
+            <form method="get" action="/editpersonalprofile">
+                <button class="postButton" type="submit"><i class="material-icons">edit</i> Edit Profile</button>
+            </form>
+
+            <form method="get" action="/friendlist">
+                <button class="postButton" type="submit"><i class="material-icons">group</i> Friends</button>
+            </form>
+
+            <form method="get" action="/friendrequests">
+                <button class="postButton" type="submit"><i class="material-icons">notifications</i> Requests</button>
+            </form>
+        </div>
     </div>
     <div>
         <p>[[${#request.userPrincipal.principal.getProfileBio}]]</p>
@@ -45,21 +61,6 @@
 
         <p>Email: [[${#request.userPrincipal.principal.username}]]</p>
         <p>Role: [[${#request.userPrincipal.principal.getAuthorities}]]</p>
-    </div>
-
-
-    <div class="flat-buttons">
-        <form method="get" action="/editpersonalprofile">
-            <button class="postButton" type="submit">Edit Profile</button>
-        </form>
-
-        <form method="get" action="/friendlist">
-            <button class="postButton" type="submit">Friend List</button>
-        </form>
-
-        <form method="get" action="/friendrequests">
-            <button class="postButton" type="submit">Friend Requests</button>
-        </form>
     </div>
 
     <h2>Your Posts: </h2>

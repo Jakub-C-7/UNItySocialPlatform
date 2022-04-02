@@ -55,7 +55,7 @@
     <form sec:authorize="isAuthenticated()" class="newPostBox" action="/feed" method="post">
         <input class="createPost" type="text" id="postContent" name="postContent"
                placeholder="What would you like to post?" maxlength="255" required>
-        <button class="postButton" type="submit"><i class="material-icons">post_add</i></button>
+        <button class="postButton" type="submit"><i class="material-icons">post_add</i> Post</button>
     </form>
 
     <p class="alert alert-danger" th:unless="${posts} and ${posts.size()}"> There are currently no posts available</p>
@@ -78,24 +78,23 @@
                         <label id="likes" th:text="${postService.getLikeCount(post)+' likes'}"></label>
                     </article>
                     <div class="div-delete-button" sec:authorize="isAuthenticated()">
+                        <div class="div-delete-button-top">
+                            <form th:if="${post.postUser.getEmail() == principal.getName()}"
+                                  th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">
+                                <input type="hidden" name="_method" value="DELETE"/>
+                                <button class="delete-button" type="submit" value="delete"><i
+                                        class="material-icons">clear</i></button>
+                            </form>
 
-                        <form th:if="${post.postUser.getEmail() == principal.getName()}"
-                              th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">
-                            <input type="hidden" name="_method" value="DELETE"/>
-                            <button class="delete-button" type="submit" value="delete"><i
-                                    class="material-icons">clear</i></button>
-                        </form>
-
-                        <form th:if="${post.postUser.getEmail() == principal.getName()}"
-                              th:action="@{'/editpersonalpost/{id}'(id=${post.getId()})}" method="get">
-                            <button class="delete-button" type="submit"><i class="material-icons">edit</i></button>
-                        </form>
-                        <br>
+                            <form th:if="${post.postUser.getEmail() == principal.getName()}"
+                                  th:action="@{'/editpersonalpost/{id}'(id=${post.getId()})}" method="get">
+                                <button class="delete-button" type="submit"><i class="material-icons">edit</i></button>
+                            </form>
+                        </div>
 
                         <form th:action="@{'/feed/likepost/{id}'(id=${post.getId()})}" method="post">
                             <button class="delete-button" type="submit"><i class="material-icons">thumb_up</i></button>
                         </form>
-                        <br>
                     </div>
                 </div>
 
