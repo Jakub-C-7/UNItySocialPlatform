@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Bebas+Neue&family=Montserrat&family=Philosopher&display=swap');
+
 html {
     margin: 0;
     padding: 0;
@@ -5,8 +7,6 @@ html {
 
 body, main {
     color: white;
-    background-color: #3e3e3e;
-    /*background-image: url('white.jpg');*/
     font-family: sans-serif;
     font-size: medium;
     text-align: center;
@@ -15,8 +15,9 @@ body, main {
 
 footer {
     margin-top: 3em;
-    margin-bottom: 1em;
-    color: gray;
+    padding-bottom: 1em;
+    color: white;
+    font-weight: bold;
 }
 
 .hidden {
@@ -32,26 +33,28 @@ nav {
     justify-content: space-around;
     text-align: center;
     flex-shrink: 0;
-    background-color: rgb(58, 52, 128);
+    background-color: rgba(0, 0, 0, 0.6);
     overflow: auto;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
 nav a {
     flex-shrink: 0;
+    flex-grow: 1;
     color: white;
     font-weight: bold;
     font-size: large;
-
     padding: 0.5em 1.5em;
-    margin: 0.75em 2em;
-    border-radius: 1em;
-
-    transition: background-color 1s;
+    transition: background-color 0.5s;
 }
 
 nav a:hover {
-    background-color: #3e3e3e;
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
+    text-decoration: none;
 }
 
 nav .search-container {
@@ -77,6 +80,176 @@ nav button:hover {
 }
 
 /***********************************************/
+/* Shared Styles                                */
+/***********************************************/
+#prev, #next {
+    color: white;
+    border: none;
+    background-color: inherit;
+    font-size: 3em;
+}
+
+#pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+#nPages, #pageIndicator {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#myQuery {
+    min-width: 30vw;
+}
+
+.aPost, .adminRecord, .aComment, .aGroup, .about, .aChat, .aMessage, .aRequest {
+    background-color: #3e3e3e;
+}
+
+/***********************************************/
+/* Homepage styles                                */
+/***********************************************/
+
+#index main, #login-page main {
+    background-color: transparent;
+}
+
+#index, #login-page {
+    width: 100%;
+    height: 100vh;
+    background-image: url(https://picsum.photos/id/1067/1800/800);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: url(https://picsum.photos/id/115/1800/800);
+}
+
+#index main, #index h1 {
+    border: none;
+}
+
+#index h1 {
+    padding-top: 20vh;
+    margin-bottom: 0;
+    padding-bottom: 1rem;
+}
+
+#index #unity-catchprase {
+    color: transparent;
+    background: #666666;
+    -webkit-background-clip: text;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.5);
+    font-size: 2vw;
+    font-weight: bold;
+    font-family: 'Philosopher', sans-serif;
+}
+
+#index main {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#login-page h2 {
+    color: #3e3e3e;
+    font-size: 4vw;
+    font-weight: bold;
+    font-family: 'Philosopher', sans-serif;
+}
+
+#login-page button {
+    margin-bottom: 2rem;
+}
+
+#login-page main {
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.already-have-text {
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 1rem;
+}
+
+#login-page p a {
+    color: white;
+    font-size: 2vw;
+    font-weight: bold;
+    font-family: 'Philosopher', sans-serif;
+}
+
+.button-2 {
+    align-items: center;
+    background-color: #fafafa;
+    border: 2px solid black;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+    display: flex;
+    font-family: Inter,sans-serif;
+    font-size: 16px;
+    height: 48px;
+    justify-content: center;
+    line-height: 24px;
+    max-width: 100%;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-2:after {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    content: "";
+    display: block;
+    height: 48px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    top: -2px;
+    transform: translate(8px, 8px);
+    transition: transform .2s ease-out;
+    z-index: -1;
+}
+
+.button-2:hover:after {
+    transform: translate(0, 0);
+}
+
+.button-2:active {
+    background-color: #ffdeda;
+    outline: 0;
+}
+
+.button-2:hover {
+    outline: 0;
+}
+
+@media (min-width: 768px) {
+    .button-2 {
+        padding: 0 40px;
+    }
+}
+
+    /***********************************************/
 /* H tag styles                                */
 /***********************************************/
 h1 {
@@ -84,24 +257,44 @@ h1 {
     margin-bottom: 1em;
     padding: 1em;
     text-align: center;
-    background: rgb(58, 52, 128);
-    color: white;
-    font-size: xxx-large;
     font-weight: Bold;
+    color: #3e3e3e;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.5);
+    font-size: 4vw;
+    font-family: 'Philosopher', sans-serif;
 }
 
 /***********************************************/
 /* Feed Page                                   */
 /***********************************************/
 .postButton, .sendButton {
-    width: 10em;
-    height: 3em;
     font-weight: bold;
     color: rgb(58, 52, 128);
     border-radius: 1em;
     text-align: center;
     transition: background-color 0.3s;
     border: black;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.postButton {
+    width: 15vw;
+    display: flex;
+}
+
+.sendButton {
+    width: auto;
+    margin-left: 0.5rem;
+}
+
+.createMessageWrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    margin-top: 1rem;
 }
 
 .postButton:hover, .sendButton:hover {
@@ -129,6 +322,15 @@ ol {
 
 .aPost {
     flex-direction: column;
+}
+
+.aPost a {
+    color: white;
+}
+
+.aPost .delete-button {
+    background-color: inherit;
+    color: white;
 }
 
 .aPost.hidden {
@@ -167,6 +369,7 @@ ol {
 
 #commentWrapper {
     overflow:auto;
+    border-bottom: 1px solid grey;
 }
 
 .aMessage {
@@ -186,6 +389,10 @@ ol {
 
 .div-delete-button {
     margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
 }
 
 .delete-button {
@@ -210,17 +417,49 @@ ol {
 }
 
 .newPostBox {
-    margin-bottom: 4em;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid grey;
 }
 
 .createPost {
     width: 75vw;
     height: 5vw;
+    margin-bottom: 1rem;
 }
 
 .profile-picture {
     max-width: 200px;
 }
+
+/***********************************************/
+/* Groups Pages                       */
+/***********************************************/
+#group-creation-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid grey;
+}
+
+#group-creation {
+    min-width: 50vw;
+    max-width: 80vw;
+    width: 800px;
+    padding: 1em;
+    margin: 1em auto;
+}
+
+#group-creation h2 {
+    text-align: left;
+}
+
 /***********************************************/
 /* Chat Page                       */
 /***********************************************/
@@ -253,14 +492,6 @@ ol {
     min-width: 40vw;
     max-width: 70vw;
     width: 500px;
-    min-height: 5vh;
-    height: 50px;
-}
-
-.sendButton {
-    min-width: 5vw;
-    max-width: 10vw;
-    width: 50px;
     min-height: 5vh;
     height: 50px;
 }
@@ -303,16 +534,29 @@ ol {
     font-size: large;
 }
 /***********************************************/
-/* Personal Profile Page                       */
+/* Profile Pages                       */
 /***********************************************/
 
 .profile-header {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background: rgb(58, 52, 128);
+    align-items: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
+}
+
+.profile-header-left {
+    display: flex;
+    margin-right: 2rem;
+}
+
+.profile-header-right {
+    flex-direction: column;
+}
+
+.profile-header-right button {
+    margin-top: 2rem;
 }
 
 .flat-buttons {
@@ -325,6 +569,30 @@ ol {
     flex-direction: row;
 }
 
+.about {
+    min-width: 50vw;
+    max-width: 80vw;
+    width: 550px;
+    padding: 1em;
+    margin: 1em auto;
+    text-align: left;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+.about h2 {
+    font-weight: bold;
+}
+
+.about em {
+    font-size: 1.4em;
+}
+
+#other-user-post-like {
+    justify-content: flex-end;
+}
+
+
 /***********************************************/
 /* User Search Page                            */
 /***********************************************/
@@ -336,11 +604,9 @@ ol {
 /***********************************************/
 /* Sign-in styles                              */
 /***********************************************/
-/*body {*/
-/*    padding-top: 40px;*/
-/*    padding-bottom: 40px;*/
-/*    background-color: #eee;*/
-/*}*/
+#login-page {
+    margin-top: 20vh;
+}
 
 .form-signin {
     max-width: 330px;
