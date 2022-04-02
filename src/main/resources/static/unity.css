@@ -32,25 +32,26 @@ nav {
     justify-content: space-around;
     text-align: center;
     flex-shrink: 0;
-    background-color: rgb(58, 52, 128);
+    background-color: rgba(0, 0, 0, 0.6);
     overflow: auto;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
 nav a {
     flex-shrink: 0;
+    flex-grow: 1;
     color: white;
     font-weight: bold;
     font-size: large;
-
     padding: 0.5em 1.5em;
-    margin: 0.75em 2em;
-    border-radius: 1em;
-
-    transition: background-color 1s;
+    transition: background-color 0.5s;
 }
 
 nav a:hover {
-    background-color: #3e3e3e;
+    background-color: rgba(58, 52, 128, 0.3);
     color: white;
 }
 
@@ -282,6 +283,31 @@ ol {
 .profile-picture {
     max-width: 200px;
 }
+
+/***********************************************/
+/* Groups Pages                       */
+/***********************************************/
+#group-creation-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid grey;
+}
+
+#group-creation {
+    min-width: 50vw;
+    max-width: 80vw;
+    width: 800px;
+    padding: 1em;
+    margin: 1em auto;
+}
+
+#group-creation h2 {
+    text-align: left;
+}
+
 /***********************************************/
 /* Chat Page                       */
 /***********************************************/
@@ -364,9 +390,12 @@ ol {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background: rgb(58, 52, 128);
     margin-top: 2rem;
     margin-bottom: 2rem;
+}
+
+.profile-header h1 {
+    border: none;
 }
 
 .profile-header-left {
@@ -391,6 +420,26 @@ ol {
 .aRequest {
     flex-direction: row;
 }
+
+.about {
+    min-width: 50vw;
+    max-width: 80vw;
+    width: 550px;
+    padding: 1em;
+    margin: 1em auto;
+    text-align: left;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+.about h2 {
+    font-weight: bold;
+}
+
+.about em {
+    font-size: 1.4em;
+}
+
 
 /***********************************************/
 /* User Search Page                            */

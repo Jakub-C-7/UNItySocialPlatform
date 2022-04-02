@@ -48,15 +48,19 @@
     <!--    </div>-->
 
     <!-- Form to create a new group -->
-    <form sec:authorize="isAuthenticated()" action="/groups" method="post">
-        <input type="text" id="name" name="name"
-               placeholder="Group Name" maxlength="20" required>
-        <input type="text" id="description" name="description"
-               placeholder="Group Description" maxlength="100" required>
-        <input type="text" id="type" name="type"
-               placeholder="Group Type" maxlength="20" required>
-        <button class="postButton" type="submit"><i class="material-icons">post_add</i></button>
-    </form>
+    <section id="group-creation">
+        <h2>New Group Creation:</h2>
+        <form id="group-creation-form" sec:authorize="isAuthenticated()" action="/groups" method="post">
+            <input type="text" id="name" name="name"
+                   placeholder="Group Name" maxlength="20" required>
+            <input type="text" id="description" name="description"
+                   placeholder="Group Description" maxlength="100" required>
+            <input type="text" id="type" name="type"
+                   placeholder="Group Type" maxlength="20" required>
+            <button class="postButton" type="submit"><i class="material-icons">post_add</i></button>
+        </form>
+    </section>
+
 
     <p class="alert alert-danger" th:unless="${groups} and ${groups.size()}"> There are currently no groups
         available</p>
