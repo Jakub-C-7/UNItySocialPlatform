@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Main Feed</title>
+
+    <title>UNIty</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
@@ -16,127 +17,138 @@
 
 <body>
 
-    <header>
-        <nav>
+<header>
+    <nav>
 
-            <form class="search-container" th:action="@{/searchusers}" method="get">
-                <input type="search" name="keyword" th:value="${keyword}" class="search-bar" placeholder="Search for users...">
-                <button type="submit"><i class="material-icons">search</i></button>
-            </form>
-
-            <a href="/feed">Feed</a>
-            <a href="/groups">Groups</a>
-            <a sec:authorize="!isAuthenticated()" href="/login">Log-in</a>
-            <a sec:authorize="!isAuthenticated()" href="/register">Register</a>
-            <a sec:authorize="isAuthenticated()" href="/personalprofile">Profile</a>
-            <a sec:authorize="isAuthenticated()" href="/messageinbox">Messages</a>
-            <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
-            <a sec:authorize="isAuthenticated()" href="/logout">Log out</a>
-        </nav>
-
-        <h1>News Feed</h1>
-    </header>
-
-    <main>
-
-        <div th:if="${param.postsuccess}">
-            <div class="alert alert-info">Post created successfully!</div>
-        </div>
-        <div th:if="${param.posteditsuccess}">
-            <div class="alert alert-info">Post edited successfully!</div>
-        </div>
-        <div th:if="${param.postempty}">
-            <div class="alert alert-danger">Post cannot be empty!</div>
-        </div>
-
-        <!-- Form to create a new post on the feed -->
-        <form sec:authorize="isAuthenticated()" class="newPostBox" action="/feed" method="post">
-            <input class="createPost" type="text" id="postContent" name="postContent"
-                   placeholder="What would you like to post?" maxlength="255" required>
-            <button class="postButton" type="submit"><i class="material-icons">post_add</i></button>
+        <form class="search-container" th:action="@{/searchusers}" method="get">
+            <input type="search" name="keyword" th:value="${keyword}" class="search-bar"
+                   placeholder="Search for users...">
+            <button type="submit"><i class="material-icons">search</i></button>
         </form>
 
-        <p class="alert alert-danger" th:unless="${posts} and ${posts.size()}"> There are currently no posts available</p>
+        <a href="/feed">Feed</a>
+        <a href="/groups">Groups</a>
+        <a sec:authorize="!isAuthenticated()" href="/login">Log-in</a>
+        <a sec:authorize="!isAuthenticated()" href="/register">Register</a>
+        <a sec:authorize="isAuthenticated()" href="/personalprofile">Profile</a>
+        <a sec:authorize="isAuthenticated()" href="/messageinbox">Messages</a>
+        <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
+        <a sec:authorize="isAuthenticated()" href="/logout">Log out</a>
+    </nav>
 
-        <section id="search">
-            <input id="myQuery" type="search" placeholder="&#128269; Search posts..." aria-label="search">
-        </section>
+    <h1>News Feed</h1>
+</header>
 
-        <!-- Ordered list of posts on the feed -->
-        <ol id="itemlist">
-            <th:block  th:each="post : ${posts}">
-                <li class="aPost">
-                    <div class="post-top">
-                        <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
-                        <article class="postText">
-                            <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
-                                   th:text="${post.postUser.getFullName()}"></a></em>
-                            <p id="post_content" th:text="|${post.postContent}|"></p>
-                            <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
-                            <label id="likes" th:text="${postService.getLikeCount(post)+' likes'}"></label>
-                        </article>
-                        <div class="div-delete-button" sec:authorize="isAuthenticated()">
+<main>
 
-                            <form th:if="${post.postUser.getEmail() == principal.getName()}" th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">
-                                <input type="hidden" name="_method" value="DELETE" />
-                                <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>
-                            </form>
+    <div th:if="${param.postsuccess}">
+        <div class="alert alert-info">Post created successfully!</div>
+    </div>
+    <div th:if="${param.posteditsuccess}">
+        <div class="alert alert-info">Post edited successfully!</div>
+    </div>
+    <div th:if="${param.postempty}">
+        <div class="alert alert-danger">Post cannot be empty!</div>
+    </div>
 
-                            <form th:if="${post.postUser.getEmail() == principal.getName()}" th:action="@{'/editpersonalpost/{id}'(id=${post.getId()})}" method="get" >
-                                <button class="delete-button" type="submit"> <i class="material-icons">edit</i></button>
-                            </form> <br>
+    <!-- Form to create a new post on the feed -->
+    <form sec:authorize="isAuthenticated()" class="newPostBox" action="/feed" method="post">
+        <input class="createPost" type="text" id="postContent" name="postContent"
+               placeholder="What would you like to post?" maxlength="255" required>
+        <button class="postButton" type="submit"><i class="material-icons">post_add</i></button>
+    </form>
 
-                            <form th:action="@{'/feed/likepost/{id}'(id=${post.getId()})}" method="post">
-                                <button class="delete-button" type="submit"> <i class="material-icons">thumb_up</i></button>
-                            </form> <br>
-                        </div>
+    <p class="alert alert-danger" th:unless="${posts} and ${posts.size()}"> There are currently no posts available</p>
+
+    <section id="search">
+        <input id="myQuery" type="search" placeholder="&#128269; Search posts..." aria-label="search">
+    </section>
+
+    <!-- Ordered list of posts on the feed -->
+    <ol id="itemlist">
+        <th:block th:each="post : ${posts}">
+            <li class="aPost">
+                <div class="post-top">
+                    <img th:src="${post.postUser.getProfilePicture()}" class="post-profile-picture">
+                    <article class="postText">
+                        <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
+                               th:text="${post.postUser.getFullName()}"></a></em>
+                        <p id="post_content" th:text="|${post.postContent}|"></p>
+                        <p class="postDate" th:text="|${post.getPostDateTime}|"></p>
+                        <label id="likes" th:text="${postService.getLikeCount(post)+' likes'}"></label>
+                    </article>
+                    <div class="div-delete-button" sec:authorize="isAuthenticated()">
+
+                        <form th:if="${post.postUser.getEmail() == principal.getName()}"
+                              th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE"/>
+                            <button class="delete-button" type="submit" value="delete"><i
+                                    class="material-icons">clear</i></button>
+                        </form>
+
+                        <form th:if="${post.postUser.getEmail() == principal.getName()}"
+                              th:action="@{'/editpersonalpost/{id}'(id=${post.getId()})}" method="get">
+                            <button class="delete-button" type="submit"><i class="material-icons">edit</i></button>
+                        </form>
+                        <br>
+
+                        <form th:action="@{'/feed/likepost/{id}'(id=${post.getId()})}" method="post">
+                            <button class="delete-button" type="submit"><i class="material-icons">thumb_up</i></button>
+                        </form>
+                        <br>
                     </div>
+                </div>
 
-                    <div th:if="${postCommentService.getPostComments(post).size()}" class="post_bottom">
-                        <ol id="commentWrapper">
-                            <th:block th:each="comment : ${postCommentService.getPostComments(post)}">
-                                <div class="aComment">
+                <div th:if="${postCommentService.getPostComments(post).size()}" class="post_bottom">
+                    <ol id="commentWrapper">
+                        <th:block th:each="comment : ${postCommentService.getPostComments(post)}">
+                            <div class="aComment">
 
-                                    <img th:src="${comment.getCommentAuthor().getProfilePicture()}" class="post-profile-picture">
-                                    <article class="messageText">
-                                        <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
-                                               th:text="${comment.commentAuthor.getFullName()}"></a></em>
-                                        <p th:text="${comment.getCommentContent()}"></p>
-                                    </article>
+                                <img th:src="${comment.getCommentAuthor().getProfilePicture()}"
+                                     class="post-profile-picture">
+                                <article class="messageText">
+                                    <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
+                                           th:text="${comment.commentAuthor.getFullName()}"></a></em>
+                                    <p th:text="${comment.getCommentContent()}"></p>
+                                </article>
 
-                                    <div class="div-delete-button" sec:authorize="isAuthenticated()">
-                                        <form th:if="${comment.getCommentAuthor().getEmail() == principal.getName()}" th:action="@{'/feed/deletecomment/{id}'(id=${comment.getId()})}" method="POST">
-                                            <input type="hidden" name="_method" value="DELETE" />
-                                            <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>
-                                        </form>
-                                    </div>
-
+                                <div class="div-delete-button" sec:authorize="isAuthenticated()">
+                                    <form th:if="${comment.getCommentAuthor().getEmail() == principal.getName()}"
+                                          th:action="@{'/feed/deletecomment/{id}'(id=${comment.getId()})}"
+                                          method="POST">
+                                        <input type="hidden" name="_method" value="DELETE"/>
+                                        <button class="delete-button" type="submit" value="delete"><i
+                                                class="material-icons">clear</i></button>
+                                    </form>
                                 </div>
-                            </th:block>
-                        </ol>
-                    </div>
 
-                    <!-- Form to create and add a new comment -->
-                    <form sec:authorize="isAuthenticated()" class="createMessageWrapper" th:action="@{'feed/addcomment/{id}'(id=${post.getId()})}" method="post">
-                        <input class="createComment" type="text" id="commentContent" name="commentContent"
-                               placeholder="Comment..." maxlength="255" required>
-                        <button class="sendButton" type="submit"><i class="material-icons">send</i></button>
-                    </form>
-                </li>
-            </th:block>
-        </ol>
+                            </div>
+                        </th:block>
+                    </ol>
+                </div>
 
-        <span id="pagination">
+                <!-- Form to create and add a new comment -->
+                <form sec:authorize="isAuthenticated()" class="createMessageWrapper"
+                      th:action="@{'feed/addcomment/{id}'(id=${post.getId()})}" method="post">
+                    <input class="createComment" type="text" id="commentContent" name="commentContent"
+                           placeholder="Comment..." maxlength="255" required>
+                    <button class="sendButton" type="submit"><i class="material-icons">send</i></button>
+                </form>
+            </li>
+        </th:block>
+    </ol>
+
+    <span id="pagination">
             <button id="prev">&lt;</button>
             <span id="pageIndicator">0</span> of <span id="nPages">0</span>
             <button id="next">&gt;</button>
         </span>
 
-        <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
 
-    </main>
+</main>
 
-    <script type="text/javascript" src="js/feed.js"></script>
+<script type="text/javascript" src="js/feed.js"></script>
 
 </body>
 </html>

@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Messages</title>
+
+    <title>UNIty</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
@@ -15,56 +16,57 @@
 </head>
 
 <body>
-    <header>
-        <nav>
+<header>
+    <nav>
 
-            <form class="search-container" th:action="@{/searchusers}" method="get">
-                <input type="search" name="keyword" th:value="${keyword}" class="search-bar" placeholder="Search for users...">
-                <button type="submit"><i class="material-icons">search</i></button>
-            </form>
+        <form class="search-container" th:action="@{/searchusers}" method="get">
+            <input type="search" name="keyword" th:value="${keyword}" class="search-bar"
+                   placeholder="Search for users...">
+            <button type="submit"><i class="material-icons">search</i></button>
+        </form>
 
-            <a href="/feed">Feed</a>
-            <a href="/groups">Groups</a>
-            <a href="/personalprofile">Profile</a>
-            <a href="/messageinbox">Messages</a>
-            <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
-            <a href="/logout">Log out</a>
-        </nav>
-    </header>
+        <a href="/feed">Feed</a>
+        <a href="/groups">Groups</a>
+        <a href="/personalprofile">Profile</a>
+        <a href="/messageinbox">Messages</a>
+        <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
+        <a href="/logout">Log out</a>
+    </nav>
+</header>
 
-    <main>
-        <h1>Chats</h1>
-        <p>Your existing chats are listed below</p>
+<main>
+    <h1>Chats</h1>
+    <p>Your existing chats are listed below</p>
 
-        <p class="alert alert-danger" th:unless="${chats} and ${chats.size()}"> There are currently no chats available</p>
+    <p class="alert alert-danger" th:unless="${chats} and ${chats.size()}"> There are currently no chats available</p>
 
-        <ol id="itemlist">
-            <th:block th:each="chat : ${chats}">
-                <li class="aChat">
-                    <div id="chat-top">
-                        <img th:src="${chat.participantOne.getProfilePicture()}" class="post-profile-picture">
-                        <img th:src="${chat.participantTwo.getProfilePicture()}" class="post-profile-picture">
-                        <article class="postText">
-                            <em><h2 th:text="${chat.participantOne.getFullName()}"></h2></em>
-                            <em><h2 th:text="${chat.participantTwo.getFullName()}"></h2></em>
-                        </article>
-                    </div>
-                    <a th:href="@{chat +'/' + ${chat.getId()}}">View Messages</a>
-                </li>
-            </th:block>
-        </ol>
+    <ol id="itemlist">
+        <th:block th:each="chat : ${chats}">
+            <li class="aChat">
+                <div id="chat-top">
+                    <img th:src="${chat.participantOne.getProfilePicture()}" class="post-profile-picture">
+                    <img th:src="${chat.participantTwo.getProfilePicture()}" class="post-profile-picture">
+                    <article class="postText">
+                        <em><h2 th:text="${chat.participantOne.getFullName()}"></h2></em>
+                        <em><h2 th:text="${chat.participantTwo.getFullName()}"></h2></em>
+                    </article>
+                </div>
+                <a th:href="@{chat +'/' + ${chat.getId()}}">View Messages</a>
+            </li>
+        </th:block>
+    </ol>
 
-        <span id="pagination">
+    <span id="pagination">
             <button id="prev">&lt;</button>
             <span id="pageIndicator">0</span> of <span id="nPages">0</span>
             <button id="next">&gt;</button>
         </span>
 
-    </main>
+</main>
 
-    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+<footer>&copy;Copyright 2022 Jakub Chamera</footer>
 
-    <script type="text/javascript" src="js/pagination.js"></script>
+<script type="text/javascript" src="js/pagination.js"></script>
 
 </body>
 </html>

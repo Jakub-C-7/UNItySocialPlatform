@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
     <title>UNIty</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -20,7 +21,8 @@
     <nav>
 
         <form class="search-container" th:action="@{/searchusers}" method="get">
-            <input type="search" name="keyword" th:value="${keyword}" class="search-bar" placeholder="Search for users...">
+            <input type="search" name="keyword" th:value="${keyword}" class="search-bar"
+                   placeholder="Search for users...">
             <button type="submit"><i class="material-icons">search</i></button>
         </form>
 
@@ -38,13 +40,19 @@
     <div class="profile-header">
         <b><h1 th:text="${group.getName()}"></h1></b>
 
-        <form sec:authorize="isAuthenticated()" th:if="${memberPending == false && isAMember == false}" th:action="@{'sendjoinrequest/{id}'(id=${group.getId()})}" method="post" >
-            <button sec:authorize="isAuthenticated()" class="delete-button" type="submit"> <i class="material-icons 30">group_add</i></button>
+        <form sec:authorize="isAuthenticated()" th:if="${memberPending == false && isAMember == false}"
+              th:action="@{'sendjoinrequest/{id}'(id=${group.getId()})}" method="post">
+            <button sec:authorize="isAuthenticated()" class="delete-button" type="submit"><i class="material-icons 30">group_add</i>
+            </button>
         </form>
 
-        <form sec:authorize="isAuthenticated()" th:if="${isAMember && !record.getGroup().getCreator().equals(record.getUser())}" th:action="@{'/group/denyjoinrequest/{id}/{gid}'(id=${record.user.getId()}, gid=${group.getId()})}" method="POST">
-            <input type="hidden" name="_method" value="DELETE" />
-            <button class="delete-button" type="submit" value="delete"><i class="material-icons">cancel</i>Leave Group</button>
+        <form sec:authorize="isAuthenticated()"
+              th:if="${isAMember && !record.getGroup().getCreator().equals(record.getUser())}"
+              th:action="@{'/group/denyjoinrequest/{id}/{gid}'(id=${record.user.getId()}, gid=${group.getId()})}"
+              method="POST">
+            <input type="hidden" name="_method" value="DELETE"/>
+            <button class="delete-button" type="submit" value="delete"><i class="material-icons">cancel</i>Leave Group
+            </button>
         </form>
 
         <span sec:authorize="isAuthenticated()" th:if="${memberPending == true && isAMember == false}">Join Request Pending</span>
@@ -56,15 +64,20 @@
     <div class="flat-buttons">
         <form method="get" th:action="@{'/memberlist/{id}'(id=${group.getId()})}">
             <button class="postButton" type="submit">Member List</button>
-        </form><br>
+        </form>
+        <br>
 
-        <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get" th:action="@{'/groupadmininbox/{id}'(id=${group.getId()})}">
+        <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get"
+              th:action="@{'/groupadmininbox/{id}'(id=${group.getId()})}">
             <button class="postButton" type="submit">Admin Inbox</button>
-        </form><br>
+        </form>
+        <br>
 
-        <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get" th:action="@{'/editgroup/{id}'(id=${group.getId()})}">
+        <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get"
+              th:action="@{'/editgroup/{id}'(id=${group.getId()})}">
             <button class="postButton" type="submit">Edit Group</button>
-        </form><br>
+        </form>
+        <br>
     </div>
 
     <section sec:authorize="isAuthenticated()" th:if="${isAMember}">
@@ -108,18 +121,26 @@
                         </article>
 
                         <div class="div-delete-button" sec:authorize="isAuthenticated()">
-                            <form  th:if="${post.postUser.getEmail() == principal.getName()}" th:action="@{'/group/{gid}/deletepost/{id}'(id=${post.getId()}, gid=${group.getId()})}" method="POST">
-                                <input type="hidden" name="_method" value="DELETE" />
-                                <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>
+                            <form th:if="${post.postUser.getEmail() == principal.getName()}"
+                                  th:action="@{'/group/{gid}/deletepost/{id}'(id=${post.getId()}, gid=${group.getId()})}"
+                                  method="POST">
+                                <input type="hidden" name="_method" value="DELETE"/>
+                                <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i>
+                                </button>
                             </form>
 
-                            <form  th:if="${post.postUser.getEmail() == principal.getName()}" th:action="@{'/editpersonalpost/group{id}'(id=${post.getId()})}" method="get" >
-                                <button class="delete-button" type="submit"> <i class="material-icons">edit</i></button>
-                            </form> <br>
+                            <form th:if="${post.postUser.getEmail() == principal.getName()}"
+                                  th:action="@{'/editpersonalpost/group{id}'(id=${post.getId()})}" method="get">
+                                <button class="delete-button" type="submit"><i class="material-icons">edit</i></button>
+                            </form>
+                            <br>
 
-                            <form th:action="@{'/likepost/{id}/{gid}'(id=${post.getId()}, gid=${group.getId()})}" method="post">
-                                <button class="delete-button" type="submit"> <i class="material-icons">thumb_up</i></button>
-                            </form> <br>
+                            <form th:action="@{'/likepost/{id}/{gid}'(id=${post.getId()}, gid=${group.getId()})}"
+                                  method="post">
+                                <button class="delete-button" type="submit"><i class="material-icons">thumb_up</i>
+                                </button>
+                            </form>
+                            <br>
                         </div>
                     </div>
 
@@ -128,17 +149,22 @@
                             <th:block th:each="comment : ${postCommentService.getGroupPostComments(post)}">
                                 <div class="aComment">
 
-                                    <img th:src="${comment.getCommentAuthor().getProfilePicture()}" class="post-profile-picture">
+                                    <img th:src="${comment.getCommentAuthor().getProfilePicture()}"
+                                         class="post-profile-picture">
                                     <article class="messageText">
-                                        <em><a class="user-search-link" th:href="@{profile+'/'+${post.postUser.getId()}}"
+                                        <em><a class="user-search-link"
+                                               th:href="@{profile+'/'+${post.postUser.getId()}}"
                                                th:text="${comment.commentAuthor.getFullName()}"></a></em>
                                         <p th:text="${comment.getCommentContent()}"></p>
                                     </article>
 
                                     <div class="div-delete-button" sec:authorize="isAuthenticated()">
-                                        <form th:if="${comment.getCommentAuthor().getEmail() == principal.getName()}" th:action="@{'/deletecomment/{id}/{gid}'(id=${comment.getId()}, gid=${group.getId()})}" method="POST">
-                                            <input type="hidden" name="_method" value="DELETE" />
-                                            <button class="delete-button" type="submit" value="delete"><i class="material-icons">clear</i></button>
+                                        <form th:if="${comment.getCommentAuthor().getEmail() == principal.getName()}"
+                                              th:action="@{'/deletecomment/{id}/{gid}'(id=${comment.getId()}, gid=${group.getId()})}"
+                                              method="POST">
+                                            <input type="hidden" name="_method" value="DELETE"/>
+                                            <button class="delete-button" type="submit" value="delete"><i
+                                                    class="material-icons">clear</i></button>
                                         </form>
                                     </div>
 
@@ -148,7 +174,9 @@
                     </div>
 
                     <!-- Form to create and add a new comment -->
-                    <form sec:authorize="isAuthenticated()" class="createMessageWrapper" th:action="@{'/addcomment/{id}/{gid}'(id=${post.getId()}, gid=${group.getId()})}" method="post">
+                    <form sec:authorize="isAuthenticated()" class="createMessageWrapper"
+                          th:action="@{'/addcomment/{id}/{gid}'(id=${post.getId()}, gid=${group.getId()})}"
+                          method="post">
                         <input class="createComment" type="text" id="commentContent" name="commentContent"
                                placeholder="Comment..." maxlength="255" required>
                         <button class="sendButton" type="submit"><i class="material-icons">send</i></button>
