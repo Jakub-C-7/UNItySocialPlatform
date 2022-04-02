@@ -50,10 +50,14 @@
         <span sec:authorize="isAuthenticated()" th:if="${areFriends && friendRecord.getAdded() == false}">Friend Request Pending</span>
     </div>
 
-    <p th:text="${user.getProfileBio()}"></p>
-    <p th:text="${user.getAcademicCourse()}"></p>
+    <div class="about">
+        <h2>About</h2>
+        <p th:text="${user.getProfileBio()}"></p>
+        <p th:text="${'Course: '+user.getAcademicCourse()}"></p>
+    </div>
 
-    <h2 th:if="${!posts.isEmpty()}">User's Posts: </h2>
+
+    <h2 th:if="${!posts.isEmpty()}" th:text="${user.getFirstName()+'/s Posts '}"> </h2>
 
     <ol id="itemlist">
         <th:block th:each="post : ${posts}">
@@ -67,7 +71,7 @@
                         <label id="likes" th:text="${postService.getLikeCount(post)+' likes'}"></label>
                     </article>
 
-                    <div class="div-delete-button">
+                    <div sec:authorize="isAuthenticated()" class="div-delete-button" id="other-user-post-like">
                         <form th:action="@{'/feed/likepost/otheruserprofile/{id}/{pid}'(id=${post.getId()}, pid=${post.getPostUser().getId()})}"
                               method="post">
                             <button class="delete-button" type="submit"><i class="material-icons">thumb_up</i></button>

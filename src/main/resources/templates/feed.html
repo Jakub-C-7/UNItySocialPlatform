@@ -78,6 +78,7 @@
                         <label id="likes" th:text="${postService.getLikeCount(post)+' likes'}"></label>
                     </article>
                     <div class="div-delete-button" sec:authorize="isAuthenticated()">
+
                         <div class="div-delete-button-top">
                             <form th:if="${post.postUser.getEmail() == principal.getName()}"
                                   th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">

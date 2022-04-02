@@ -80,8 +80,6 @@ public class ProfileController {
                  areFriends = false;
             }
             model.addAttribute("areFriends", areFriends);
-            model.addAttribute("postService", postService);
-            model.addAttribute("postCommentService", postCommentService);
             model.addAttribute("principal", principal);
 
         }
@@ -90,6 +88,8 @@ public class ProfileController {
 
         List<Post> posts = postService.getPostsByUserId(userId);
         model.addAttribute("posts", posts);
+        model.addAttribute("postService", postService);
+        model.addAttribute("postCommentService", postCommentService);
 
         return "profile";
     }
