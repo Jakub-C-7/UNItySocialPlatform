@@ -105,7 +105,7 @@ nav button:hover {
     min-width: 30vw;
 }
 
-.aPost, .adminRecord, .aComment, .aGroup, .about, .aChat, .aMessage {
+.aPost, .adminRecord, .aComment, .aGroup, .about, .aChat, .aMessage, .aRequest {
     background-color: #3e3e3e;
 }
 
@@ -257,7 +257,6 @@ h1 {
     margin-bottom: 1em;
     padding: 1em;
     text-align: center;
-    border-bottom: 1px solid grey;
     font-weight: Bold;
     color: #3e3e3e;
     text-shadow: 0px 3px 3px rgba(255,255,255,0.5);
@@ -275,19 +274,19 @@ h1 {
     text-align: center;
     transition: background-color 0.3s;
     border: black;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .postButton {
     width: 15vw;
-    height: auto;
     display: flex;
-    justify-content: center;
 }
 
 .sendButton {
-    height: auto;
     width: auto;
-    display: flex;
     margin-left: 0.5rem;
 }
 
@@ -323,6 +322,10 @@ ol {
 
 .aPost {
     flex-direction: column;
+}
+
+.aPost a {
+    color: white;
 }
 
 .aPost .delete-button {
@@ -541,10 +544,6 @@ ol {
     align-items: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
-}
-
-.profile-header h1 {
-    border: none;
 }
 
 .profile-header-left {
