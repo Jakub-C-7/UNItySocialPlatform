@@ -6,91 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Edit Personal Profile</title>
+
+    <title>UNIty</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="unity.css" type="text/css"/>
 </head>
+
 <body>
-    <header>
-        <nav>
+<header>
+    <nav>
 
-            <form class="search-container" th:action="@{/searchusers}" method="get">
-                <input type="search" name="keyword" th:value="${keyword}" class="search-bar" placeholder="Search for users...">
-                <button type="submit"><i class="material-icons">search</i></button>
-            </form>
+        <form class="search-container" th:action="@{/searchusers}" method="get">
+            <input type="search" name="keyword" th:value="${keyword}" class="search-bar"
+                   placeholder="Search for users...">
+            <button type="submit"><i class="material-icons">search</i></button>
+        </form>
 
-            <a href="/feed">Feed</a>
-            <a href="/groups">Groups</a>
-            <a href="/personalprofile">Profile</a>
-            <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
-            <a href="/logout">Log out</a>
-        </nav>
-    </header>
+        <a href="/feed">Feed</a>
+        <a href="/groups">Groups</a>
+        <a href="/personalprofile">Profile</a>
+        <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
+        <a href="/logout">Log out</a>
+    </nav>
+</header>
 
-    <div class="container">
-        <h1>Edit Personal Profile</h1>
-        <h2>[[${#request.userPrincipal.principal.fullName}]]</h2>
-        <p>Edit your personal profile below </p>
-        <form method="post" action="/editpersonalprofile">
-            <p>
-                <!-- success and failure messages -->
-                <div th:if="${param.error}">
-                    <div class="alert alert-danger">Oops, there has been an error editing your profile</div>
-                </div>
-                <div th:if="${param.success}">
-                    <div class="alert alert-info">Success! Please log out and log back in to view changes</div>
-                </div>
+<main class="container">
+    <h1>Edit Personal Profile</h1>
+    <h2>[[${#request.userPrincipal.principal.fullName}]]</h2>
+    <p>Edit your personal profile below </p>
+    <form method="post" action="/editpersonalprofile">
+        <p>
+            <!-- success and failure messages -->
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">Oops, there has been an error editing your profile</div>
+        </div>
+        <div th:if="${param.success}">
+            <div class="alert alert-info">Success! Please log out and log back in to view changes</div>
+        </div>
 
-                <p>
-                    <label for="firstName" class="sr-only">First Name</label>
-                    <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First Name"
-                           maxlength="50" pattern="[A-Za-z].{0,}"
-                           title="Please enter a valid first name"
-                           autofocus="">
-                </p>
-                <p>
-                    <label for="lastName" class="sr-only">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last Name"
-                           maxlength="50" pattern="[A-Za-z].{0,}"
-                           title="Please enter a valid last name"
-                           autofocus="">
-                </p>
-                <p>
-                    <label for="email" class="sr-only">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Email"
-                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                           title="Please enter a valid email"
-                           maxlength="100"
-                           autofocus="">
-                </p>
-                <p>
-                    <label for="profileBio" class="sr-only">Profile Bio</label>
-                    <input type="text" id="profileBio" name="profileBio" class="form-control" placeholder="Profile Bio"
-                           maxlength="250" pattern="[A-Za-z].{0,}"
-                           title="Please enter a valid profile bio"
-                           autofocus="">
-                </p>
-                <p>
-                    <label for="academicCourse" class="sr-only">Profile Bio</label>
-                    <input type="text" id="academicCourse" name="academicCourse" class="form-control"
-                           placeholder="Academic Course" maxlength="25" pattern="[A-Za-z].{0,}"
-                           title="Please enter a valid academic course"
-                           autofocus="">
-                </p>
-            </p>
-            <button class="btn btn-primary btn-block" type="submit">Submit Changes</button>
-        </form> <br>
-        <form method="get" action="/personalprofile">
-            <button class="btn btn-primary btn-block" type="submit">Back to Profile</button>
-        </form><br>
-        <form method="get" action="/feed">
-            <button class="postButton" type="submit">Back to feed</button>
-        </form> <br>
-    </div>
+        <p>
+            <label for="firstName" class="sr-only">First Name</label>
+            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="First Name"
+                   maxlength="50" pattern="[A-Za-z].{0,}"
+                   title="Please enter a valid first name"
+                   autofocus="">
+        </p>
+        <p>
+            <label for="lastName" class="sr-only">Last Name</label>
+            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Last Name"
+                   maxlength="50" pattern="[A-Za-z].{0,}"
+                   title="Please enter a valid last name"
+                   autofocus="">
+        </p>
+        <p>
+            <label for="email" class="sr-only">Email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Email"
+                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                   title="Please enter a valid email"
+                   maxlength="100"
+                   autofocus="">
+        </p>
+        <p>
+            <label for="profileBio" class="sr-only">Profile Bio</label>
+            <input type="text" id="profileBio" name="profileBio" class="form-control" placeholder="Profile Bio"
+                   maxlength="250" pattern="[A-Za-z].{0,}"
+                   title="Please enter a valid profile bio"
+                   autofocus="">
+        </p>
+        <p>
+            <label for="academicCourse" class="sr-only">Profile Bio</label>
+            <input type="text" id="academicCourse" name="academicCourse" class="form-control"
+                   placeholder="Academic Course" maxlength="25" pattern="[A-Za-z].{0,}"
+                   title="Please enter a valid academic course"
+                   autofocus="">
+        </p>
+        </p>
+        <button class="btn btn-primary btn-block" type="submit">Submit Changes</button>
+    </form>
+    <br>
+    <form method="get" action="/personalprofile">
+        <button class="btn btn-primary btn-block" type="submit">Back to Profile</button>
+    </form>
+    <br>
+    <form method="get" action="/feed">
+        <button class="postButton" type="submit">Back to feed</button>
+    </form>
+    <br>
+</main>
 
-    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+<footer>&copy;Copyright 2022 Jakub Chamera</footer>
 </body>
 </html>

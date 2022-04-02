@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
     <title>UNIty</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
@@ -20,7 +21,8 @@
     <nav>
 
         <form class="search-container" th:action="@{/searchusers}" method="get">
-            <input type="search" name="keyword" th:value="${keyword}" class="search-bar" placeholder="Search for users...">
+            <input type="search" name="keyword" th:value="${keyword}" class="search-bar"
+                   placeholder="Search for users...">
             <button type="submit"><i class="material-icons">search</i></button>
         </form>
 
@@ -41,9 +43,9 @@
     <div sec:authorize="isAuthenticated()" th:if="${param.success}">
         <div class="alert alert-info">Group created successfully!</div>
     </div>
-<!--    <div th:if="${param.inputsempty}">-->
-<!--        <div class="alert alert-danger">Input fields cannot be empty</div>-->
-<!--    </div>-->
+    <!--    <div th:if="${param.inputsempty}">-->
+    <!--        <div class="alert alert-danger">Input fields cannot be empty</div>-->
+    <!--    </div>-->
 
     <!-- Form to create a new group -->
     <form sec:authorize="isAuthenticated()" action="/groups" method="post">
@@ -56,7 +58,8 @@
         <button class="postButton" type="submit"><i class="material-icons">post_add</i></button>
     </form>
 
-    <p class="alert alert-danger" th:unless="${groups} and ${groups.size()}"> There are currently no groups available</p>
+    <p class="alert alert-danger" th:unless="${groups} and ${groups.size()}"> There are currently no groups
+        available</p>
 
     <section id="search">
         <input id="myQuery" type="search" placeholder="&#128269; Search groups..." aria-label="search">

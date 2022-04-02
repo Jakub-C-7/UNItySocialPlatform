@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Friend Requests</title>
+    <title>UNIty</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
@@ -17,80 +17,84 @@
 
 <body>
 
-    <header>
-        <nav>
+<header>
+    <nav>
 
-            <form class="search-container" th:action="@{/searchusers}" method="get">
-                <input type="search" name="keyword" th:value="${keyword}" class="search-bar" placeholder="Search for users...">
-                <button type="submit"><i class="material-icons">search</i></button>
-            </form>
-
-            <a href="/feed">Feed</a>
-            <a href="/groups">Groups</a>
-            <a sec:authorize="!isAuthenticated()" href="/login">Log-in</a>
-            <a sec:authorize="!isAuthenticated()" href="/register">Register</a>
-            <a sec:authorize="isAuthenticated()" href="/personalprofile">Profile</a>
-            <a sec:authorize="isAuthenticated()" href="/messageinbox">Messages</a>
-            <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
-            <a sec:authorize="isAuthenticated()" href="/logout">Log out</a>
-        </nav>
-
-        <h1>Friend Requests</h1>
-    </header>
-
-    <main>
-
-        <div th:if="${param.acceptsuccess}">
-            <div class="alert alert-info">Friend added successfully!</div>
-        </div>
-
-        <div th:if="${param.denysuccess}">
-            <div class="alert alert-info">Friend request removed!</div>
-        </div>
-
-        <p class="alert alert-danger" th:unless="${friends} and ${friends.size()}"> There are currently no friend requests available</p>
-
-        <form method="get" action="/personalprofile">
-            <button class="postButton" type="submit">Back to Profile</button>
+        <form class="search-container" th:action="@{/searchusers}" method="get">
+            <input type="search" name="keyword" th:value="${keyword}" class="search-bar"
+                   placeholder="Search for users...">
+            <button type="submit"><i class="material-icons">search</i></button>
         </form>
 
-        <!-- Ordered list of friend requests. Ordered from newest to oldest in descending order -->
-        <ol id="itemlist">
-            <th:block th:each="friend : ${friends}">
-                <li class="aRequest" th:if="${friend.getAdded() == false}">
-                    <img th:src="${friend.user.getProfilePicture()}" class="post-profile-picture">
-                    <article class="postText">
-                        <em><a class="user-search-link" th:href="@{profile+'/'+${friend.user.getId()}}"
-                               th:text="${friend.user.getFullName()}"></a></em>
-                        <p th:text="${friend.user.getAcademicCourse()}"></p>
-                    </article>
-                        <div class="div-delete-button" sec:authorize="isAuthenticated()">
+        <a href="/feed">Feed</a>
+        <a href="/groups">Groups</a>
+        <a sec:authorize="!isAuthenticated()" href="/login">Log-in</a>
+        <a sec:authorize="!isAuthenticated()" href="/register">Register</a>
+        <a sec:authorize="isAuthenticated()" href="/personalprofile">Profile</a>
+        <a sec:authorize="isAuthenticated()" href="/messageinbox">Messages</a>
+        <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
+        <a sec:authorize="isAuthenticated()" href="/logout">Log out</a>
+    </nav>
 
-                            <form th:action="@{'acceptfriendrequest/{id}'(id=${friend.getId()})}" method="POST">
-                                <input type="hidden" name="_method" value="DELETE" />
-                                <button class="delete-button" type="submit" value="delete"><i class="material-icons">done</i></button>
-                            </form>
+    <h1>Friend Requests</h1>
+</header>
 
-                            <form th:action="@{'denyfriendrequest/{id}'(id=${friend.getId()})}" method="post" >
-                                <button class="delete-button" type="submit"> <i class="material-icons">close</i></button>
-                            </form> <br>
+<main>
 
-                        </div>
-                </li>
-            </th:block>
-        </ol>
+    <div th:if="${param.acceptsuccess}">
+        <div class="alert alert-info">Friend added successfully!</div>
+    </div>
 
-        <span id="pagination">
+    <div th:if="${param.denysuccess}">
+        <div class="alert alert-info">Friend request removed!</div>
+    </div>
+
+    <p class="alert alert-danger" th:unless="${friends} and ${friends.size()}"> There are currently no friend requests
+        available</p>
+
+    <form method="get" action="/personalprofile">
+        <button class="postButton" type="submit">Back to Profile</button>
+    </form>
+
+    <!-- Ordered list of friend requests. Ordered from newest to oldest in descending order -->
+    <ol id="itemlist">
+        <th:block th:each="friend : ${friends}">
+            <li class="aRequest" th:if="${friend.getAdded() == false}">
+                <img th:src="${friend.user.getProfilePicture()}" class="post-profile-picture">
+                <article class="postText">
+                    <em><a class="user-search-link" th:href="@{profile+'/'+${friend.user.getId()}}"
+                           th:text="${friend.user.getFullName()}"></a></em>
+                    <p th:text="${friend.user.getAcademicCourse()}"></p>
+                </article>
+                <div class="div-delete-button" sec:authorize="isAuthenticated()">
+
+                    <form th:action="@{'acceptfriendrequest/{id}'(id=${friend.getId()})}" method="POST">
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <button class="delete-button" type="submit" value="delete"><i class="material-icons">done</i>
+                        </button>
+                    </form>
+
+                    <form th:action="@{'denyfriendrequest/{id}'(id=${friend.getId()})}" method="post">
+                        <button class="delete-button" type="submit"><i class="material-icons">close</i></button>
+                    </form>
+                    <br>
+
+                </div>
+            </li>
+        </th:block>
+    </ol>
+
+    <span id="pagination">
             <button id="prev">&lt;</button>
             <span id="pageIndicator">0</span> of <span id="nPages">0</span>
             <button id="next">&gt;</button>
         </span>
 
-        <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
 
-    </main>
+</main>
 
-    <script type="text/javascript" src="js/pagination.js"></script>
+<script type="text/javascript" src="js/pagination.js"></script>
 
 </body>
 </html>

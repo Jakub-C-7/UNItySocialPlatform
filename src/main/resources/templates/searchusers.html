@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>User Search</title>
+    <title>UNIty</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
@@ -21,7 +21,8 @@
     <nav>
 
         <form class="search-container" th:action="@{/searchusers}" method="get">
-            <input type="search" name="keyword" th:value="${keyword}" class="search-bar" placeholder="Search for users...">
+            <input type="search" name="keyword" th:value="${keyword}" class="search-bar"
+                   placeholder="Search for users...">
             <button type="submit"><i class="material-icons">search</i></button>
         </form>
 
@@ -41,11 +42,13 @@
 <main>
 
     <div th:if="${param.searchusers}">
-        <p class="alert alert-danger" th:unless="${users} and ${users.size()}"> There are currently no users available!</p>
+        <p class="alert alert-danger" th:unless="${users} and ${users.size()}"> There are currently no users
+            available!</p>
     </div>
 
     <div th:if="${param.searchusers+'/'}">
-        <p class="alert alert-danger" th:unless="${users} and ${users.size()}"> Oops, nobody matched your search criteria!</p>
+        <p class="alert alert-danger" th:unless="${users} and ${users.size()}"> Oops, nobody matched your search
+            criteria!</p>
     </div>
 
 
@@ -55,7 +58,8 @@
             <li class="aRequest">
                 <img th:src="${user.getProfilePicture()}" class="post-profile-picture">
                 <article class="postText">
-                    <em><a class="user-search-link" th:href="@{profile+'/'+${user.getId()}}" th:text="${user.getFullName()}"></a></em>
+                    <em><a class="user-search-link" th:href="@{profile+'/'+${user.getId()}}"
+                           th:text="${user.getFullName()}"></a></em>
                     <p th:text="${user.getAcademicCourse()}"></p>
                     <p th:text="${user.getProfileBio()}"></p>
                 </article>
