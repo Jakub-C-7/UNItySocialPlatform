@@ -52,14 +52,10 @@
     <p class="alert alert-danger" th:unless="${friends} and ${friends.size()}"> There are currently no friends
         available</p>
 
-    <form method="get" action="/personalprofile">
-        <button class="postButton" type="submit">Back to Profile</button>
-    </form>
-
     <!-- Ordered list of friends. Ordered alphabetically-->
     <ol>
         <th:block th:each="friend : ${friends}">
-            <li class="aPost"
+            <li class="aRequest"
                 th:if="${friend.getAdded() == true && !friend.getUser().getEmail().equals(principal.getName())}">
                 <img th:src="${friend.user.getProfilePicture()}" class="post-profile-picture">
                 <article class="postText">
@@ -84,9 +80,15 @@
         </th:block>
     </ol>
 
-    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+    <div class="flat-buttons">
+        <form method="get" action="/personalprofile">
+            <button class="postButton" type="submit">Back to Profile</button>
+        </form>
+    </div>
 
 </main>
+
+<footer>&copy;Copyright 2022 Jakub Chamera</footer>
 
 </body>
 </html>

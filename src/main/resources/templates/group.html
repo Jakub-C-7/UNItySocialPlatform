@@ -36,9 +36,9 @@
     </nav>
 </header>
 
-<main>
-    <div class="profile-header">
-        <b><h1 th:text="${group.getName()}"></h1></b>
+<main class="container">
+    <section class="profile-header" id="group-header">
+        <h1 th:text="${group.getName()}"></h1>
 
         <form sec:authorize="isAuthenticated()" th:if="${memberPending == false && isAMember == false}"
               th:action="@{'sendjoinrequest/{id}'(id=${group.getId()})}" method="post">
@@ -55,37 +55,42 @@
             </button>
         </form>
 
-        <span sec:authorize="isAuthenticated()" th:if="${memberPending == true && isAMember == false}">Join Request Pending</span>
-    </div>
-    <h2 th:text="${'Type: '+group.getType()}"></h2>
-    <h3 th:text="${'Owner: '+group.getCreator().getFullName()}"></h3>
-    <p th:text="${'Description: '+group.getDescription()}"></p>
+        <span id="pending-text" sec:authorize="isAuthenticated()" th:if="${memberPending == true && isAMember == false}">Join Request Pending</span>
+    </section>
 
-    <div class="flat-buttons">
-        <form method="get" th:action="@{'/memberlist/{id}'(id=${group.getId()})}">
-            <button class="postButton" type="submit">Member List</button>
-        </form>
-        <br>
+    <section class="about" id="group-about">
+        <h2>About</h2>
+        <h3 th:text="${'Type: '+group.getType()}"></h3>
+        <h3 th:text="${'Owner: '+group.getCreator().getFullName()}"></h3>
+        <p th:text="${'Description: '+group.getDescription()}"></p>
 
-        <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get"
-              th:action="@{'/groupadmininbox/{id}'(id=${group.getId()})}">
-            <button class="postButton" type="submit">Admin Inbox</button>
-        </form>
-        <br>
+        <div class="flat-buttons" id="group-buttons">
+            <form method="get" th:action="@{'/memberlist/{id}'(id=${group.getId()})}">
+                <button class="postButton" type="submit">Member List</button>
+            </form>
+            <br>
 
-        <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get"
-              th:action="@{'/editgroup/{id}'(id=${group.getId()})}">
-            <button class="postButton" type="submit">Edit Group</button>
-        </form>
-        <br>
-    </div>
+            <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get"
+                  th:action="@{'/groupadmininbox/{id}'(id=${group.getId()})}">
+                <button class="postButton" type="submit">Admin Inbox</button>
+            </form>
+            <br>
+
+            <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get"
+                  th:action="@{'/editgroup/{id}'(id=${group.getId()})}">
+                <button class="postButton" type="submit">Edit Group</button>
+            </form>
+            <br>
+        </div>
+    </section>
+
 
     <section sec:authorize="isAuthenticated()" th:if="${isAMember}">
         <!-- Form to create a new post in the group -->
         <form class="newPostBox" method="post">
             <input class="createPost" type="text" id="postContent" name="postContent"
                    placeholder="What would you like to post?" maxlength="255" required>
-            <button class="postButton" type="submit"><i class="material-icons">post_add</i></button>
+            <button class="postButton" type="submit"><i class="material-icons">post_add</i>Post</button>
         </form>
 
         <div sec:authorize="isAuthenticated()" th:if="${param.postsuccess}">
