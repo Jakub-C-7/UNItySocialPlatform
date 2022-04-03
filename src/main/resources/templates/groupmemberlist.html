@@ -55,7 +55,7 @@
 
     <ol>
         <th:block th:each="member : ${members}">
-            <li class="aPost" th:if="${member.getAdded() == true}">
+            <li class="aRequest" th:if="${member.getAdded() == true}">
                 <img th:src="${member.user.getProfilePicture()}" class="post-profile-picture">
                 <article class="postText">
                     <em><a class="user-search-link" th:href="@{'/'+profile+'/'+${member.user.getId()}}"
