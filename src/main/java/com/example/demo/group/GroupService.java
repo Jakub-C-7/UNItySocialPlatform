@@ -72,7 +72,7 @@ public class GroupService {
     }
 
     public boolean editType(EditGroupRequest request, AppGroup group){
-        if (request.getDescription() != ""){
+        if (request.getType() != "" && request.getType() != null){
             group.setType(request.getType());
             groupRepository.save(group);
             return true;
