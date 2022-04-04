@@ -112,14 +112,20 @@ nav button:hover {
 .aPost, .adminRecord, .aComment, .aGroup, .about, .aChat, .aMessage, .aRequest {
     background-color: #181818
 }
+#group-creation-form input, #group-creation-form select {
+    width: 20vw;
+    height: 3vh;
+}
 
-form input[type= "text"], form input[type= "search"], form input[type= "email"], form input[type= "password"], #myQuery {
+form input[type= "text"], form input[type= "search"], form input[type= "email"], form input[type= "password"],
+form select, #myQuery {
     background-color: #3A3B3C;
     color: white;
     border: none;
 }
 
-form input[type= "text"]:focus, form input[type= "search"]:focus, form input[type= "email"]:focus, form input[type= "password"]:focus{
+form input[type= "text"]:focus, form input[type= "search"]:focus, form input[type= "email"]:focus,
+form input[type= "password"]:focus, form select:focus {
     background-color: #3A3B3C;
     color: white;
 }
@@ -487,6 +493,16 @@ ol {
 /***********************************************/
 /* Groups Pages                       */
 /***********************************************/
+#edit-group-form select, #edit-group-form input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+}
+
+#edit-group-form label {
+    color: white;
+    margin-right: 5vw;
+}
+
 #group-creation-form {
     display: flex;
     justify-content: center;

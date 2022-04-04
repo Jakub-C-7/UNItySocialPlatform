@@ -55,8 +55,13 @@
                    placeholder="Group Name" maxlength="20" required>
             <input type="text" id="description" name="description"
                    placeholder="Group Description" maxlength="100" required>
-            <input type="text" id="type" name="type"
-                   placeholder="Group Type" maxlength="20" required>
+            <select name="type" id="type" required>
+                <option value="" disabled selected>Group Type</option>
+                <option value="Study">Study</option>
+                <option value="Social">Social</option>
+                <option value="Event">Event</option>
+                <option value="Other">Other</option>
+            </select>
             <button class="postButton" type="submit"><i class="material-icons">post_add</i>Create</button>
         </form>
     </section>

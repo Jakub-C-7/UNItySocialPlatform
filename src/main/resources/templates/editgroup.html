@@ -41,7 +41,7 @@
 
 <main class="container">
 
-    <form method="post" th:action="@{'/editgroup/{id}'(id=${group.getId()})}">
+    <form method="post" id="edit-group-form" th:action="@{'/editgroup/{id}'(id=${group.getId()})}">
         <!-- success and failure messages -->
         <div th:if="${param.error}">
             <div class="alert alert-danger">Oops, there has been an error editing the group</div>
@@ -52,7 +52,7 @@
 
         <p>
             <label for="name" class="sr-only"> Name</label>
-            <input type="text" id="name" name="name" class="form-control" th:placeholder="${group.name}"
+            <input type="text" id="name" name="name" class="form-control" th:value="${group.name}"
                    maxlength="50" pattern="[A-Za-z].{0,}"
                    title="Please enter a valid group name"
                    autofocus="">
@@ -60,18 +60,20 @@
         <p>
             <label for="description" class="sr-only">Description</label>
             <input type="text" id="description" name="description" class="form-control"
-                   th:placeholder="${group.description}"
+                   th:value="${group.description}"
                    maxlength="50" pattern="[A-Za-z].{0,}"
                    title="Please enter a valid description"
                    autofocus="">
         </p>
         <p>
             <label for="type" class="sr-only">Type</label>
-            <input type="text" id="type" name="type" class="form-control" th:placeholder="${group.type}"
-                   pattern="[A-Za-z].{0,}"
-                   title="Please enter a valid type"
-                   maxlength="50"
-                   autofocus="">
+            <select name="type" id="type">
+                <option value="" disabled selected>Group Type</option>
+                <option value="Study">Study</option>
+                <option value="Social">Social</option>
+                <option value="Event">Event</option>
+                <option value="Other">Other</option>
+            </select>
         </p>
         <button class="button-4" type="submit">Submit Changes</button>
     </form>
