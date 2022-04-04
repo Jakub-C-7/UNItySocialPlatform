@@ -39,11 +39,7 @@
     <h1>Edit Group</h1>
 </header>
 
-<main>
-
-    <form method="get" th:action="@{'/group/{id}'(id=${group.getId()})}">
-        <button class="postButton" type="submit">Back to Group</button>
-    </form>
+<main class="container">
 
     <form method="post" th:action="@{'/editgroup/{id}'(id=${group.getId()})}">
         <!-- success and failure messages -->
@@ -77,12 +73,18 @@
                    maxlength="50"
                    autofocus="">
         </p>
-        <button class="btn btn-primary btn-block" type="submit">Submit Changes</button>
+        <button class="button-4" type="submit">Submit Changes</button>
     </form>
 
-    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+    <div class="flat-buttons">
+        <form method="get" th:action="@{'/group/{id}'(id=${group.getId()})}">
+            <button class="postButton" type="submit">Back to Group</button>
+        </form>
+    </div>
 
 </main>
+
+<footer>&copy;Copyright 2022 Jakub Chamera</footer>
 
 </body>
 </html>

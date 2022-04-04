@@ -57,7 +57,7 @@
     </div>
 
 
-    <h2 th:if="${!posts.isEmpty()}" th:text="${user.getFirstName()+'/s Posts '}"> </h2>
+    <h2 th:if="${!posts.isEmpty()}" th:text="${user.getFirstName()+'/s Posts '}"></h2>
 
     <ol id="itemlist">
         <th:block th:each="post : ${posts}">
@@ -122,5 +122,6 @@
 </main>
 
 <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+
 </body>
 </html>

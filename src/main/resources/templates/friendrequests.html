@@ -52,10 +52,6 @@
     <p class="alert alert-danger" th:unless="${friends} and ${friends.size()}"> There are currently no friend requests
         available</p>
 
-    <form method="get" action="/personalprofile">
-        <button class="postButton" type="submit">Back to Profile</button>
-    </form>
-
     <!-- Ordered list of friend requests. Ordered from newest to oldest in descending order -->
     <ol id="itemlist">
         <th:block th:each="friend : ${friends}">
@@ -84,15 +80,20 @@
         </th:block>
     </ol>
 
+    <div class="flat-buttons">
+        <form method="get" action="/personalprofile">
+            <button class="postButton" type="submit">Back to Profile</button>
+        </form>
+    </div>
+
     <span id="pagination">
             <button id="prev">&lt;</button>
             <span id="pageIndicator">0</span> of <span id="nPages">0</span>
             <button id="next">&gt;</button>
-        </span>
-
-    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
-
+    </span>
 </main>
+
+<footer>&copy;Copyright 2022 Jakub Chamera</footer>
 
 <script type="text/javascript" src="js/pagination.js"></script>
 

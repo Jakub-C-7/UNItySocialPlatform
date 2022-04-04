@@ -41,10 +41,6 @@
 
 <main>
 
-    <form method="get" th:action="@{'/group/{id}'(id=${group.getId()})}">
-        <button class="postButton" type="submit">Back to Group</button>
-    </form>
-
     <div sec:authorize="isAuthenticated()" th:if="${param.deletesuccess}">
         <div class="alert alert-info">User removed successfully!</div>
     </div>
@@ -59,7 +55,7 @@
 
     <ol>
         <th:block th:each="member : ${members}">
-            <li class="aPost" th:if="${member.getAdded() == true}">
+            <li class="aRequest" th:if="${member.getAdded() == true}">
                 <img th:src="${member.user.getProfilePicture()}" class="post-profile-picture">
                 <article class="postText">
                     <em><a class="user-search-link" th:href="@{'/'+profile+'/'+${member.user.getId()}}"
@@ -97,9 +93,15 @@
         </th:block>
     </ol>
 
-    <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+    <div class="flat-buttons">
+        <form method="get" th:action="@{'/group/{id}'(id=${group.getId()})}">
+            <button class="postButton" type="submit">Back to Group</button>
+        </form>
+    </div>
 
 </main>
+
+<footer>&copy;Copyright 2022 Jakub Chamera</footer>
 
 </body>
 </html>

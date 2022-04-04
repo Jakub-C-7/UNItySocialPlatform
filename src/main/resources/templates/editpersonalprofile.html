@@ -36,10 +36,10 @@
 <main class="container">
     <h1>Edit Personal Profile</h1>
     <h2>[[${#request.userPrincipal.principal.fullName}]]</h2>
-    <p>Edit your personal profile below </p>
+    <p>Edit your personal profile below</p>
+
     <form method="post" action="/editpersonalprofile">
         <p>
-            <!-- success and failure messages -->
         <div th:if="${param.error}">
             <div class="alert alert-danger">Oops, there has been an error editing your profile</div>
         </div>
@@ -84,19 +84,22 @@
                    autofocus="">
         </p>
         </p>
-        <button class="btn btn-primary btn-block" type="submit">Submit Changes</button>
+        <button class="button-4" type="submit">Submit Changes</button>
     </form>
-    <br>
-    <form method="get" action="/personalprofile">
-        <button class="btn btn-primary btn-block" type="submit">Back to Profile</button>
-    </form>
-    <br>
-    <form method="get" action="/feed">
-        <button class="postButton" type="submit">Back to feed</button>
-    </form>
-    <br>
+
+    <div class="flat-buttons">
+        <form method="get" action="/personalprofile">
+            <button class="postButton" type="submit">Back to Profile</button>
+        </form>
+
+        <form method="get" action="/feed">
+            <button class="postButton" type="submit">Back to feed</button>
+        </form>
+    </div>
+
 </main>
 
 <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+
 </body>
 </html>

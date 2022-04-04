@@ -33,7 +33,7 @@ nav {
     justify-content: space-around;
     text-align: center;
     flex-shrink: 0;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: #181818;
     overflow: auto;
     position: fixed;
     width: 100%;
@@ -48,12 +48,12 @@ nav a {
     font-weight: bold;
     font-size: large;
     padding: 0.5em 1.5em;
-    transition: background-color 0.5s;
+    transition: background-color 0.5s, color 0.5s;
 }
 
 nav a:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
+    background-color: #121212;
+    color: #666666;
     text-decoration: none;
 }
 
@@ -66,17 +66,21 @@ nav .search-container {
 .search-bar {
     width: 15vw;
     height: 3em;
+    background-color: transparent;
+    border: none;
 }
 
 nav button {
-    border-left: none;
     width: 3em;
     height: 3em;
     cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border-width: 0 1px 0 0;
 }
 
 nav button:hover {
-    background: #ccc;
+    color: #543884;
 }
 
 /***********************************************/
@@ -106,7 +110,18 @@ nav button:hover {
 }
 
 .aPost, .adminRecord, .aComment, .aGroup, .about, .aChat, .aMessage, .aRequest {
-    background-color: #3e3e3e;
+    background-color: #181818
+}
+
+form input[type= "text"], form input[type= "search"], form input[type= "email"], form input[type= "password"], #myQuery {
+    background-color: #3A3B3C;
+    color: white;
+    border: none;
+}
+
+form input[type= "text"]:focus, form input[type= "search"]:focus, form input[type= "email"]:focus, form input[type= "password"]:focus{
+    background-color: #3A3B3C;
+    color: white;
 }
 
 /***********************************************/
@@ -120,10 +135,14 @@ nav button:hover {
 #index, #login-page {
     width: 100%;
     height: 100vh;
-    background-image: url(https://picsum.photos/id/1067/1800/800);
+    background-image: url(https://picsum.photos/id/1067/2000/800);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+}
+
+#login-page {
+    height: 80vh;
 }
 
 body {
@@ -132,7 +151,8 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-image: url(https://picsum.photos/id/115/1800/800);
+    background-color: #121212;
+
 }
 
 #index main, #index h1 {
@@ -191,13 +211,11 @@ body {
     font-family: 'Philosopher', sans-serif;
 }
 
-.button-2 {
+.button-2, .button-3, .button-4 {
     align-items: center;
     background-color: #fafafa;
-    border: 2px solid black;
     border-radius: 8px;
     box-sizing: border-box;
-    color: rgba(0, 0, 0, 0.8);
     cursor: pointer;
     display: flex;
     font-family: Inter,sans-serif;
@@ -215,8 +233,17 @@ body {
     touch-action: manipulation;
 }
 
-.button-2:after {
-    background-color: rgba(0, 0, 0, 0.4);
+.button-2 {
+    border: 2px solid black;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.button-3 {
+    border: 2px solid #3A3B3C;
+    color: #3A3B3C;
+}
+
+.button-2:after, .button-3:after, .button-4:after {
     border-radius: 8px;
     content: "";
     display: block;
@@ -230,38 +257,54 @@ body {
     z-index: -1;
 }
 
-.button-2:hover:after {
+.button-2:after {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.button-3:after {
+    background-color: #3A3B3C;
+}
+
+.button-4:after {
+    background-color: #543884;
+}
+
+.button-2:hover:after, .button-3:hover:after, .button-4:hover:after {
     transform: translate(0, 0);
 }
 
-.button-2:active {
+.button-2:active, .button-3:active, .button-4:active {
     background-color: #ffdeda;
     outline: 0;
 }
 
-.button-2:hover {
+.button-2:hover, .button-3:hover, .button-4:hover {
     outline: 0;
 }
 
 @media (min-width: 768px) {
-    .button-2 {
+    .button-2, .button-3, .button-4 {
         padding: 0 40px;
     }
 }
 
-    /***********************************************/
+/***********************************************/
 /* H tag styles                                */
 /***********************************************/
 h1 {
     margin-top: 2rem;
-    margin-bottom: 1em;
     padding: 1em;
     text-align: center;
     font-weight: Bold;
+    color: white;
+    font-size: 4vw;
+    font-family: 'Philosopher', sans-serif;
+}
+
+#index h1, #login-page h1 {
     color: #3e3e3e;
     text-shadow: 0px 3px 3px rgba(255,255,255,0.5);
     font-size: 4vw;
-    font-family: 'Philosopher', sans-serif;
 }
 
 /***********************************************/
@@ -269,7 +312,8 @@ h1 {
 /***********************************************/
 .postButton, .sendButton {
     font-weight: bold;
-    color: rgb(58, 52, 128);
+    color: white;
+    background-color: transparent;
     border-radius: 1em;
     text-align: center;
     transition: background-color 0.3s;
@@ -282,7 +326,7 @@ h1 {
 
 .postButton {
     width: 15vw;
-    display: flex;
+    /*display: flex;*/
 }
 
 .sendButton {
@@ -293,13 +337,10 @@ h1 {
 .createMessageWrapper {
     display: flex;
     justify-content: center;
-    padding-top: 1rem;
-    margin-top: 1rem;
 }
 
 .postButton:hover, .sendButton:hover {
-    background-color: rgb(58, 52, 128);
-    color: white;
+    color: #543884;
 }
 
 ol {
@@ -324,13 +365,17 @@ ol {
     flex-direction: column;
 }
 
-.aPost a {
+.aPost a, .aRequest a {
     color: white;
 }
 
-.aPost .delete-button {
+.aPost a:hover, .aRequest a:hover {
+    color: #543884;
+}
+
+.delete-button {
     background-color: inherit;
-    color: white;
+    color: #543884;
 }
 
 .aPost.hidden {
@@ -392,7 +437,6 @@ ol {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
 }
 
 .delete-button {
@@ -400,6 +444,10 @@ ol {
     width: 25px;
     padding: 0;
     border: 0;
+}
+
+.delete-button:hover {
+    color: white;
 }
 
 .post-profile-picture {
@@ -448,6 +496,11 @@ ol {
     border-bottom: 1px solid grey;
 }
 
+.group-posts-title {
+    margin-bottom: 2rem;
+    font-size: 2.5em;
+}
+
 #group-creation {
     min-width: 50vw;
     max-width: 80vw;
@@ -466,7 +519,8 @@ ol {
 .chatName {
     font-size: xx-large;
     background-color: inherit;
-    margin-top: 0;
+    margin-top: 2rem;
+    border-bottom: 1px solid grey;
 }
 
 .chatWrapper {
@@ -482,6 +536,19 @@ ol {
 
 .aChat {
     flex-direction: column;
+}
+
+.aChat a {
+    display: flex;
+    justify-content: flex-end;
+    color: #543884;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.aChat a:hover {
+    color: white;
+    text-decoration: none;
 }
 
 #chat-top {
@@ -516,10 +583,11 @@ ol {
 }
 
 /***********************************************/
-/* Chat Page                       */
+/* Group Page                       */
 /***********************************************/
 .aGroup a {
     font-size: x-large;
+    color: #543884;
 }
 
 .aGroup h2 {
@@ -532,6 +600,18 @@ ol {
 
 .aGroup a.user-search-link {
     font-size: large;
+}
+
+#group-about {
+    margin-bottom: 4em;
+}
+
+#pending-text, #group-buttons form button {
+    color: #543884;
+}
+
+#group-buttons button:hover {
+    color: white;
 }
 /***********************************************/
 /* Profile Pages                       */
@@ -591,7 +671,6 @@ ol {
 #other-user-post-like {
     justify-content: flex-end;
 }
-
 
 /***********************************************/
 /* User Search Page                            */
