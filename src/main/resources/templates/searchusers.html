@@ -51,8 +51,10 @@
             criteria!</p>
     </div>
 
+    <section id="search">
+        <input id="myQuery" type="search" placeholder="&#128269; Filter users..." aria-label="search">
+    </section>
 
-    <!-- Ordered list of users -->
     <ol id="listofusers">
         <th:block th:each="user : ${users}">
             <li class="aRequest">
