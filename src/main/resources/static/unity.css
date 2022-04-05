@@ -33,7 +33,7 @@ nav {
     justify-content: space-around;
     text-align: center;
     flex-shrink: 0;
-    background-color: #181818;
+    background-color: #242526;
     overflow: auto;
     position: fixed;
     width: 100%;
@@ -52,7 +52,7 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #121212;
+    background-color: #3A3B3C;
     color: #666666;
     text-decoration: none;
 }
@@ -110,7 +110,7 @@ nav button:hover {
 }
 
 .aPost, .adminRecord, .aComment, .aGroup, .about, .aChat, .aMessage, .aRequest {
-    background-color: #181818
+    background-color: #242526;
 }
 #group-creation-form input, #group-creation-form select {
     width: 20vw;
@@ -157,7 +157,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: #121212;
+    background-color: #18191A;
 
 }
 
