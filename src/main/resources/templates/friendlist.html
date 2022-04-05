@@ -57,13 +57,20 @@
     <ol>
         <th:block th:each="friend : ${friends}">
             <li class="aRequest"
-                th:if="${friend.getAdded() == true && !friend.getUser().getEmail().equals(principal.getName())}">
-                <img th:src="${friend.user.getProfilePicture()}" class="post-profile-picture">
-                <article class="postText">
+                th:if="${friend.getAdded() == true}">
+
+                <img th:if="${!friend.getUser().getEmail().equals(principal.getName())}" th:src="${friend.user.getProfilePicture()}" class="post-profile-picture">
+                <article class="postText" th:if="${!friend.getUser().getEmail().equals(principal.getName())}">
                     <em><a class="user-search-link" th:href="@{profile+'/'+${friend.user.getId()}}"
                            th:text="${friend.user.getFullName()}"></a></em>
-                    <!--                        <p class="postDate" th:text="|${post.getPostDateTime}|"></p>-->
                 </article>
+
+                <img th:if="${!friend.getUsersFriend().getEmail().equals(principal.getName())}" th:src="${friend.usersFriend.getProfilePicture()}" class="post-profile-picture">
+                <article class="postText" th:if="${!friend.getUsersFriend().getEmail().equals(principal.getName())}">
+                    <em><a class="user-search-link" th:href="@{profile+'/'+${friend.usersFriend.getId()}}"
+                           th:text="${friend.usersFriend.getFullName()}"></a></em>
+                </article>
+
                 <div class="div-delete-button" sec:authorize="isAuthenticated()">
 
                     <form th:action="@{'/chat/createnewchat/{id}'(id=${friend.user.getId()})}" method="post">
