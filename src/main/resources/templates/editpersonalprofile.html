@@ -25,11 +25,15 @@
             <button type="submit"><i class="material-icons">search</i></button>
         </form>
 
-        <a href="/feed">Feed</a>
-        <a href="/groups">Groups</a>
-        <a href="/personalprofile">Profile</a>
-        <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal">Admin</a>
-        <a href="/logout">Log out</a>
+        <a href="/feed"><i id="feed-icon" class="material-icons 30">home</i> Feed</a>
+        <a sec:authorize="isAuthenticated()" href="/personalprofile" id="profile-anchor">
+            <img th:src="${#request.userPrincipal.principal.getProfilePicture}" alt="profile picture">Profile</a>
+        <a sec:authorize="isAuthenticated()" href="/messageinbox"><i id="inbox-icon" class="material-icons 30">email</i> Messages</a>
+        <a href="/groups"><i id="group-icon" class="material-icons 30">groups</i> Groups</a>
+        <a sec:authorize="hasAuthority('ADMIN')" href="/adminportal"><i id="admin-icon" class="material-icons 30">admin_panel_settings</i>Admin</a>
+        <a sec:authorize="!isAuthenticated()" href="/login"><i id="login-icon" class="material-icons 30">login</i> Log-in</a>
+        <a sec:authorize="!isAuthenticated()" href="/register"><i id="register-icon" class="material-icons 30">app_registration</i>Register</a>
+        <a sec:authorize="isAuthenticated()" href="/logout"><i id="logout-icon" class="material-icons 30">logout</i> Log out</a>
     </nav>
 </header>
 
