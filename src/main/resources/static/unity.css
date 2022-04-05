@@ -332,17 +332,16 @@ h1 {
     background-color: transparent;
     border-radius: 1em;
     text-align: center;
-    transition: background-color 0.3s;
     border: black;
     height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: color 0.5s;
 }
 
 .postButton {
     width: 15vw;
-    /*display: flex;*/
 }
 
 .sendButton {
