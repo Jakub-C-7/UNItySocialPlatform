@@ -392,6 +392,7 @@ ol {
 .delete-button {
     background-color: inherit;
     color: #543884;
+    transition: color 0.5s;
 }
 
 .aPost.hidden {
