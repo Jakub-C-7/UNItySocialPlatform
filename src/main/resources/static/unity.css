@@ -43,6 +43,9 @@ nav {
 }
 
 nav a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-shrink: 0;
     flex-grow: 1;
     color: white;
@@ -139,6 +142,11 @@ form input[type= "password"]:focus, form select:focus {
     background-color: #3A3B3C;
     color: white;
 }
+
+#feed-icon, #inbox-icon, #group-icon, #logout-icon, #admin-icon, #login-icon, #register-icon, #guest-icon, #li-guest-icon  {
+    color: dodgerblue;
+}
+
 
 /***********************************************/
 /* Homepage styles                                */
