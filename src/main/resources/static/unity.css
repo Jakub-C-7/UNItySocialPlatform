@@ -684,11 +684,13 @@ ol {
 }
 
 .about {
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-end;
     min-width: 50vw;
     max-width: 80vw;
-    width: 550px;
     padding: 1em;
-    margin: 1em auto;
+    margin: 1rem auto;
     text-align: left;
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
