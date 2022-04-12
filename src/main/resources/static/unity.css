@@ -690,6 +690,7 @@ ol {
     min-width: 50vw;
     max-width: 80vw;
     padding: 1em;
+    width: auto;
     margin: 1rem auto;
     text-align: left;
     border-top: 1px solid grey;
