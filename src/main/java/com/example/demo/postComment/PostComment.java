@@ -39,6 +39,11 @@ public class PostComment {
     private Long id;
 
     /**
+     * String containing the content of the comment.
+     */
+    private String commentContent;
+
+    /**
      * Pointer to the Post which has been commented on (uses post ID).
      */
     @ManyToOne
@@ -58,9 +63,6 @@ public class PostComment {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private AppUser commentAuthor;
-
-    private String commentContent;
-
 
     public PostComment(Post post, AppUser likeUser) {
         this.post = post;
