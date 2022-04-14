@@ -24,8 +24,6 @@ public class RegistrationService {
      * @param request The registration request parsed in through the request.
      */
     public void register(RegistrationRequest request) {
-//        boolean includeErrors;
-
          appUserService.signUpUser(
                 new AppUser(
                         request.getFirstName(),
