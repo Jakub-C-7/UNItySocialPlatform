@@ -15,7 +15,7 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    //SELECT * FROM post WHERE postAuthor = PARSED postAuthor
+    //SELECT * FROM post WHERE postAuthor matches
     @Query("SELECT p FROM Post p WHERE p.postUser.email = ?1")
     Optional<Post> findByEmail(String postAuthorEmail);
 
@@ -23,7 +23,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p ORDER BY p.postDateTime DESC")
     List<Post> findAllByDate();
 
-    //SELECT * FROM post ORDER BY postDateTime in DESCENDING order
+    //SELECT * FROM post WHERE userId matches ORDER BY postDateTime in DESCENDING order
     @Query("SELECT p FROM Post p WHERE p.postUser.id = ?1 ORDER BY p.postDateTime DESC")
     List<Post> findAllByAuthorIdSortedByDate(Long userId);
 
