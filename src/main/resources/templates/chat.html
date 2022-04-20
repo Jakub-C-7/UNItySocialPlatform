@@ -13,6 +13,7 @@
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="../unity.css" type="text/css"/>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -42,10 +43,10 @@
     <h1 class="chatName" th:text="${chat.getParticipantOne().getFirstName()} + ' and '
   + ${chat.getParticipantTwo().getFirstName()} + '\'s chat'"></h1>
 
-    <div class="chatWrapper">
+    <div id="chatWrapper" class="chatWrapper">
         <p class="alert alert-danger" th:unless="${messages} and ${messages.size()}"> There are currently no messages
             available</p>
-        <ol>
+        <ol id="chatWithMessages">
             <th:block th:each="message : ${messages}">
                 <li class="aMessage">
                     <img th:src="${message.getAuthor().getProfilePicture()}" class="post-profile-picture">
@@ -68,6 +69,8 @@
 </main>
 
 <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+
+<script type="text/javascript" src="/js/chat.js"></script>
 
 </body>
 </html>
