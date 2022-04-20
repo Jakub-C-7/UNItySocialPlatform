@@ -105,7 +105,7 @@ function loadFilteredPage() {
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
-    var scrollpos = sessionStorage.getItem('scrollpos');
+    let scrollpos = sessionStorage.getItem('scrollpos');
     if (scrollpos) window.scrollTo(0, scrollpos);
 });
 
