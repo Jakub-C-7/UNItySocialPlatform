@@ -5,6 +5,24 @@ html {
     padding: 0;
 }
 
+main, li {
+    animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 body, main {
     color: white;
     font-family: sans-serif;
