@@ -5,8 +5,12 @@ html {
     padding: 0;
 }
 
-main, li {
+main {
     animation: fadeIn 0.2s;
+}
+
+li {
+    animation: fadeIn 0.5s;
 }
 
 @keyframes fadeIn {
