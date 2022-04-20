@@ -39,7 +39,7 @@
     <h1>Edit Personal Post</h1>
 
     <form class="newPostBox" th:if="${!editingGroupPost}"
-          th:action="@{'/editpersonalpost/group{id}'(id=${post.getId()})}" method="post">
+          th:action="@{'/editpersonalpost/{id}'(id=${post.getId()})}" method="post">
         <p>
             <label for="postContent" class="sr-only">Post Content</label>
             <input class="createPost" type="text" id="postContent" name="postContent"
