@@ -40,7 +40,7 @@
     <div class="profile-header">
         <img th:src="${user.getProfilePicture}" class="profile-picture">
         <b><h1 th:text="${user.getFullName()}"></h1></b>
-        <form th:if="${areFriends && friendRecord.getAdded() == true}" th:action="@{'/chat/createnewchat/{id}'(id=${user.getId()})}" method="post">
+        <form sec:authorize="isAuthenticated()" th:if="${areFriends && friendRecord.getAdded() == true}" th:action="@{'/chat/createnewchat/{id}'(id=${user.getId()})}" method="post">
             <button sec:authorize="isAuthenticated()" class="delete-button" type="submit"><i class="material-icons 30">chat</i>
             </button>
         </form>
