@@ -1,12 +1,14 @@
 package com.example.demo.friend;
 
 import com.example.demo.appuser.AppUser;
+import com.example.demo.chat.Chat;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Friend represents an instance of a user's friend.
@@ -42,6 +44,15 @@ public class Friend {
     @ManyToOne
     @JoinColumn(name = "friend_id")
     private AppUser usersFriend;
+
+//    @OneToMany(mappedBy = "participantOne", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Chat> chats1;
+//
+//    @OneToMany(mappedBy = "participantTwo", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Chat> chats2;
+
+    @OneToMany(mappedBy = "friendshipRecord", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Chat> chats;
 
     private Boolean added;
 

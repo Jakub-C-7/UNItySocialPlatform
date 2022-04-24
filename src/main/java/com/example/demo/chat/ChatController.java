@@ -4,6 +4,8 @@ import com.example.demo.appuser.AppUser;
 import com.example.demo.appuser.AppUserRepository;
 import com.example.demo.chatMessage.ChatMessage;
 import com.example.demo.chatMessage.ChatMessageRepository;
+import com.example.demo.friend.Friend;
+import com.example.demo.friend.FriendRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +33,7 @@ public class ChatController {
     ChatRepository chatRepository;
     ChatService chatService;
     ChatMessageRepository chatMessageRepository;
+    FriendRepository friendRepository;
 
     @GetMapping
     public String defaultRoute (){
@@ -53,7 +56,7 @@ public class ChatController {
     }
 
     @PostMapping(path = "createnewchat/{id}")
-    public String newChat(@PathVariable Long id, Principal principal) {
+    public String newChat(@PathVariable Long id, Principal principal, Model model) {
 
         AppUser currentUser = appUserRepository.getById(
                 appUserRepository.findByEmail(principal.getName()).get().getId());
@@ -74,7 +77,18 @@ public class ChatController {
             return "redirect:/chat/" + chatId;
         }
 
-        chatService.createNewChat(currentUser, otherUser);
+        Friend friendRecord = new Friend();
+
+        if (!friendRepository.findByUserAndUsersFriend(currentUser, otherUser).isEmpty()){
+            friendRecord = friendRepository.findByUserAndUsersFriend(currentUser, otherUser).get(0);
+            model.addAttribute("friendRecord", friendRecord);
+
+        } else if (!friendRepository.findByUserAndUsersFriend(otherUser, currentUser).isEmpty()) {
+            friendRecord = friendRepository.findByUserAndUsersFriend(otherUser, currentUser).get(0);
+            model.addAttribute("friendRecord", friendRecord);
+        }
+
+        chatService.createNewChat(currentUser, otherUser, friendRecord);
 
         Long cid = chatRepository.findByParticipantOneAndParticipantTwo(currentUser, otherUser).get(0).getId();
 

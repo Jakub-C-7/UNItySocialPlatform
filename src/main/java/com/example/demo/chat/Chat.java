@@ -2,6 +2,7 @@ package com.example.demo.chat;
 
 import com.example.demo.appuser.AppUser;
 import com.example.demo.chatMessage.ChatMessage;
+import com.example.demo.friend.Friend;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,13 +43,16 @@ public class Chat {
     @JoinColumn(name = "participant_one_id")
     private AppUser participantOne;
 
-
     @ManyToOne
     @JoinColumn(name = "participant_two_id")
     private AppUser participantTwo;
 
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChatMessage> chatMessages;
+
+    @ManyToOne
+    @JoinColumn(name = "friendship_record")
+    private Friend friendshipRecord;
 
     public Chat(Long id, AppUser participantOne, AppUser participantTwo) {
         this.id = id;

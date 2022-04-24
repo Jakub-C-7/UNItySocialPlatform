@@ -1,6 +1,7 @@
 package com.example.demo.chat;
 
 import com.example.demo.appuser.AppUser;
+import com.example.demo.friend.Friend;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +28,11 @@ public class ChatService {
     /**
      * Function for creating a new chat.
      */
-    public void createNewChat(AppUser u1, AppUser u2){
+    public void createNewChat(AppUser u1, AppUser u2, Friend friendRecord){
         Chat chat = new Chat();
         chat.setParticipantOne(u1);
         chat.setParticipantTwo(u2);
+        chat.setFriendshipRecord(friendRecord);
 
         chatRepository.save(chat);
     }
