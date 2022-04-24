@@ -70,8 +70,7 @@
                            th:text="${friend.usersFriend.getFullName()}"></a></em>
                 </article>
 
-                <div class="div-delete-button" sec:authorize="isAuthenticated()">
-
+                <div th:if="${!friend.getUser().getEmail().equals(principal.getName())}" class="div-delete-button" sec:authorize="isAuthenticated()">
                     <form th:action="@{'/chat/createnewchat/{id}'(id=${friend.user.getId()})}" method="post">
                         <button sec:authorize="isAuthenticated()" class="delete-button" type="submit"><i
                                 class="material-icons 30">chat</i></button>
@@ -80,9 +79,19 @@
                     <form th:action="@{'removefriend/{id}'(id=${friend.getId()})}" method="post">
                         <button class="delete-button" type="submit"><i class="material-icons">close</i></button>
                     </form>
-                    <br>
-
                 </div>
+
+                <div th:if="${!friend.getUsersFriend().getEmail().equals(principal.getName())}" class="div-delete-button" sec:authorize="isAuthenticated()">
+                    <form th:action="@{'/chat/createnewchat/{id}'(id=${friend.getUsersFriend().getId()})}" method="post">
+                        <button sec:authorize="isAuthenticated()" class="delete-button" type="submit"><i
+                                class="material-icons 30">chat</i></button>
+                    </form>
+
+                    <form th:action="@{'removefriend/{id}'(id=${friend.getUsersFriend().getId()})}" method="post">
+                        <button class="delete-button" type="submit"><i class="material-icons">close</i></button>
+                    </form>
+                </div>
+
             </li>
         </th:block>
     </ol>
