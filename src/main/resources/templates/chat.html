@@ -61,9 +61,9 @@
     </div>
 
     <!-- Form to create and send a new message -->
-    <form class="createMessageWrapper" th:action="@{'/createnewchatmessage/{id}'(id=${chat.getId()})}" method="post">
+    <form id="createMessageWrapper" class="createMessageWrapper" th:action="@{'/createnewchatmessage/{id}'(id=${chat.getId()})}" method="post">
         <input class="createMessage" type="text" id="messageContent" name="messageContent"
-               placeholder="Message content..." maxlength="255" required>
+               placeholder="Message content..." maxlength="255" required autofocus>
         <button class="sendButton" type="submit"><i class="material-icons">send</i></button>
     </form>
 </main>
