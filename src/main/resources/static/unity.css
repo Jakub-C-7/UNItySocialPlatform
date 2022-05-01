@@ -239,7 +239,7 @@ body {
 }
 
 #login-page main {
-    height: 65vh;
+    height: 75vh;
     display: flex;
     flex-direction: column;
 }
@@ -743,7 +743,7 @@ ol {
 /* Sign-in styles                              */
 /***********************************************/
 #login-page {
-    margin-top: 20vh;
+    margin-top: 10vh;
 }
 
 .form-signin {

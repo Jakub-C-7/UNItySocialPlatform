@@ -14,12 +14,6 @@ if (form.addEventListener){
     form.addEventListener("submit", clearChatBox, false);
 }
 
-window.onbeforeunload = function(e) {
-    let chatId = window.location.href;
-    sessionStorage.setItem('chatscrollpos' + chatId, $('#chatWrapper').scrollTop());
-    sessionStorage.setItem('chatmessage' + chatId, $('#messageContent').val());
-};
-
 $(document).ready(function () {
     setInterval(reloadMessages, 10000);
 
@@ -42,3 +36,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let chatmessage = sessionStorage.getItem('chatmessage' + chatId);
     if (chatmessage) $('#messageContent').val(chatmessage);
 });
+
+window.onbeforeunload = function(e) {
+    let chatId = window.location.href;
+    sessionStorage.setItem('chatscrollpos' + chatId, $('#chatWrapper').scrollTop());
+    sessionStorage.setItem('chatmessage' + chatId, $('#messageContent').val());
+};

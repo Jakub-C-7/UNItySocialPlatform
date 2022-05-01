@@ -32,14 +32,9 @@
     <form class="form-signin" method="post" action="/register">
 
         <!-- success and failure messages -->
-        <div th:if="${param.error}">
-            <div class="alert alert-danger">Oops, there is already an account with that email address</div>
-        </div>
-        <div th:if="${param.success}">
-            <div class="alert alert-info">You've successfully registered
-                to UNIty!
-            </div>
-        </div>
+        <div id="registration-failure" th:if="${param.error}" class="alert alert-danger">Oops, there is already an account with that email address</div>
+
+        <div th:if="${param.success}" class="alert alert-info">You've successfully registered! </div>
 
         <h2 class="form-signin-heading">Registration</h2>
         <!-- form fields-->
@@ -77,6 +72,8 @@
 
         <p class="already-have-text">Already have an account? <a href="/login">Sign-in</a></p>
     </form>
+
+
 </main>
 
 <footer>&copy;Copyright 2022 Jakub Chamera</footer>
