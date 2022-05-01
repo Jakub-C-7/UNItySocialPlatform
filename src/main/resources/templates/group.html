@@ -70,19 +70,16 @@
             <form method="get" th:action="@{'/memberlist/{id}'(id=${group.getId()})}">
                 <button class="postButton" type="submit"><i class="material-icons 30">contact_page</i> Member List</button>
             </form>
-            <br>
 
             <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get"
                   th:action="@{'/groupadmininbox/{id}'(id=${group.getId()})}">
                 <button class="postButton" type="submit"><i class="material-icons 30">inbox</i> Admin Inbox</button>
             </form>
-            <br>
 
             <form sec:authorize="isAuthenticated()" th:if="${isAdmin == true}" method="get"
                   th:action="@{'/editgroup/{id}'(id=${group.getId()})}">
                 <button class="postButton" type="submit"><i class="material-icons 30">edit</i> Edit Group</button>
             </form>
-            <br>
         </div>
     </section>
 
