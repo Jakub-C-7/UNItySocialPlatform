@@ -76,16 +76,16 @@
                     <form th:if="${member.getRole() == user}"
                           th:action="@{'/group/promotemember/{id}/{groupId}'(id=${member.getId()}, groupId=${member.group.getId()})}"
                           method="post">
-                        <button class="delete-button" type="submit"><i class="material-icons">supervisor_account</i>Promote
-                        </button>
+                        <button class="delete-button" type="submit"><i class="material-icons">supervisor_account</i></button>
+                        <p>Promote</p>
                     </form>
                     <br>
 
                     <form th:if="${member.getRole() == admin}"
                           th:action="@{'/group/demotemember/{id}/{groupId}'(id=${member.getId()}, groupId=${member.group.getId()})}"
                           method="post">
-                        <button class="delete-button" type="submit"><i class="material-icons">supervisor_account</i>Demote
-                        </button>
+                        <button class="delete-button" type="submit"><i class="material-icons">supervisor_account</i></button>
+                        <p>Demote</p>
                     </form>
                     <br>
 
