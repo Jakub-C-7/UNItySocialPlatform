@@ -53,7 +53,7 @@
     <p class="alert alert-danger" th:unless="${friends} and ${friends.size()}"> There are currently no friend requests
         available</p>
 
-    <!-- Ordered list of friend requests. Ordered from newest to oldest in descending order -->
+    <!-- Ordered list of friend requests -->
     <ol id="itemlist">
         <th:block th:each="friend : ${friends}">
             <li class="aRequest" th:if="${friend.getAdded() == false}">
@@ -63,6 +63,7 @@
                            th:text="${friend.user.getFullName()}"></a></em>
                     <p th:text="${friend.user.getAcademicCourse()}"></p>
                 </article>
+
                 <div class="div-delete-button" sec:authorize="isAuthenticated()">
 
                     <form th:action="@{'acceptfriendrequest/{id}'(id=${friend.getId()})}" method="POST">
