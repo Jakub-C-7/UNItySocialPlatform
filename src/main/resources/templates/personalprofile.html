@@ -84,7 +84,7 @@
                     <div class="div-delete-button" th:if="${post.postUser.getEmail() == principal.getName()}">
 
                         <div class="div-delete-button-top">
-                            <form th:action="@{'/feed/deletepost/{id}'(id=${post.getId()})}" method="POST">
+                            <form th:action="@{'/feed/deletepost/toprofile/{id}'(id=${post.getId()})}" method="POST">
                                 <input type="hidden" name="_method" value="DELETE"/>
                                 <button class="delete-button" type="submit" value="delete"><i
                                         class="material-icons">clear</i></button>

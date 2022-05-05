@@ -83,6 +83,13 @@ public class FeedController {
         return "redirect:/feed";
     }
 
+    @PostMapping(path = "/deletepost/toprofile/{id}")
+    public String deletePostPersonalProfile(@PathVariable Long id) {
+        postService.deletePost(id);
+
+        return "redirect:/personalprofile";
+    }
+
     @PostMapping(path = "/likepost/{id}")
     public String likePost(@PathVariable Long id, Principal principal) {
         Post post = postRepository.getById(id);
