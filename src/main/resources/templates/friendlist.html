@@ -53,7 +53,7 @@
         available</p>
 
     <!-- Ordered list of friends. Ordered alphabetically-->
-    <ol>
+    <ol id="itemlist">
         <th:block th:each="friend : ${friends}">
             <li class="aRequest"
                 th:if="${friend.getAdded() == true}">
@@ -102,9 +102,17 @@
         </form>
     </div>
 
+    <span id="pagination">
+            <button id="prev">&lt;</button>
+            <span id="pageIndicator">0</span> of <span id="nPages">0</span>
+            <button id="next">&gt;</button>
+    </span>
+
 </main>
 
 <footer>&copy;Copyright 2022 Jakub Chamera</footer>
+
+<script type="text/javascript" src="js/pagination.js"></script>
 
 </body>
 </html>
