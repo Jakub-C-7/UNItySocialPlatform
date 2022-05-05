@@ -87,7 +87,7 @@
                                 class="material-icons 30">chat</i></button>
                     </form>
 
-                    <form th:action="@{'removefriend/{id}'(id=${friend.getUsersFriend().getId()})}" method="post">
+                    <form th:action="@{'removefriend/{id}'(id=${friend.getId()})}" method="post">
                         <button class="delete-button" type="submit"><i class="material-icons">close</i></button>
                     </form>
                 </div>
