@@ -18,7 +18,7 @@ function loadPosts(){
 
 function loadPage() {
     clearResults();
-    nPages.textContent = Math.ceil(objects.length / pageSize);
+    nPages.textContent = Math.max(1, Math.ceil(objects.length / pageSize));
     const currentObject = objects.slice((currentPage - 1) * pageSize, currentPage * pageSize);
     insertPosts(currentObject);
     pageIndicator.textContent = currentPage;
